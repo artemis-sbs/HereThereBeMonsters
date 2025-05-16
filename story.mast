@@ -6,15 +6,65 @@ import map_art.mast
 " Here there be Monster
 
 
-    # Draw the skull and cross bones
+
+# 
+# Random stations, Add these first
+#
+# This layer is 25_000 x 25_000 grid i.e. 4 x 4 
+    tile_map = maps_tile_map_create(-50_000, 50_000, 25_000) 
+
+# Future the station deck could have a budget
+# to balance out the station that are spawned
+#
+# Using stations as cards in a deck
+    station_deck = maps_deck_create()
+    station_deck.add_card(prefab_station_command)
+    station_deck.add_card(prefab_station_civil)
+    station_deck.add_card(prefab_station_industry)
+    station_deck.add_card(prefab_station_science)
+    
+# create a string that is  values
+# . means empty space
+    station_string = "s"* 4 + "."* 12
+# shuffle sting randomize it
+    station_string = shuffle_string(station_string)
+# Place them on the grid 
+    tile_map.map_deck("s", station_deck)
+    tile_map.fill(station_string, x_count=4)
+    
+
+
+# A tile map can be any size of the map
+# and you can use it to fill 
+    tile_map = maps_tile_map_create(-50_000, 50_000, 1_000) 
+
+# Using nebula as cards in a deck
     nebula_deck = maps_deck_create()
     nebula_deck.add_card(prefab_terrain_nebula_sphere, {"cluster_color": 1})
-
-    tile_map = maps_tile_map_create(-50_000, 50_000, 1_000)
+# Draw the skull and cross bones    
     tile_map.map_deck("n", nebula_deck)
-
-
+# This will draw the art as is
     tile_map.fill(map_art, x_count=100)
+
+
+#
+# Random asteroids
+#
+# This layer is 10_000 x 10_0000 grid
+    tile_map = maps_tile_map_create(-50_000, 50_000, 10_000) 
+# Using asteroid as cards in a deck
+    asteroid_deck = maps_deck_create()
+    asteroid_deck.add_card(prefab_terrain_asteroid_sphere)
+# create a string that is 100 values
+# . means empty space
+    asteroid_string = "a"* 50 + "."* 50
+# shuffle sting randomize it
+    asteroid_string = shuffle_string(asteroid_string)
+# Place them on the grid 
+    tile_map.map_deck("a", asteroid_deck)
+    tile_map.fill(asteroid_string, x_count=10)
+
+
     task_schedule(spawn_players)
 
 

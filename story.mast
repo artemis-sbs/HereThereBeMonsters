@@ -1,3 +1,20 @@
+import map_art.mast
+
+
 # Use for startup logic
-@map/first_map "Hello Cosmos"
-" This is my first map.
+@map/here_there_be_monsters "Here there be Monsters"
+" Here there be Monster
+
+
+    # Draw the skull and cross bones
+    nebula_deck = maps_deck_create()
+    nebula_deck.add_card(prefab_terrain_nebula_sphere, {"cluster_color": 1})
+
+    tile_map = maps_tile_map_create(-50_000, 50_000, 1_000)
+    tile_map.map_deck("n", nebula_deck)
+
+
+    tile_map.fill(map_art, x_count=100)
+    task_schedule(spawn_players)
+
+

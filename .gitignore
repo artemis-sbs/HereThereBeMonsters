@@ -1,0 +1,11 @@
+/lib/
+**/__pycache__/**
+.vscode/
+/sphinx/_build/
+*.sbslib
+*.mastlib
+/typings/
+/mkdocs/site/
+/.vs
+/addons/
+/.addons/

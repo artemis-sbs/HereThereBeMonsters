@@ -22,6 +22,8 @@ import map_art.mast
     station_deck.add_card(prefab_station_civil)
     station_deck.add_card(prefab_station_industry)
     station_deck.add_card(prefab_station_science)
+
+    
     
 # create a string that is  values
 # . means empty space
@@ -30,7 +32,12 @@ import map_art.mast
     station_string = shuffle_string(station_string)
 # Place them on the grid 
     tile_map.map_deck("s", station_deck)
-    tile_map.fill(station_string, x_count=4)
+# Prefabs sometimes will set the results as 
+# an ID or set of IDs of important things created
+# fill will collect all these and have a set of all these
+# fill returns a promise so it needs to await the results
+    test = await tile_map.fill(station_string, x_count=4)
+# So test has all the stations created
     
 
 

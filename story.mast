@@ -3,12 +3,25 @@ import map_art.mast
 # This script defines the player ship
 PLAYER_CREATE_DEFAULT = False
 shared artemis_id = None
+
+
+shared whale_watcher_face = random_arvonian()
+shared whale_watcher_id = None
+shared whale_watcher_name = "Distress Signal"
+shared fred = 0
+
+shared ensign_rachel = random_terran_female()
+shared ensign_rachel_title = "Ensign Rachel Reporting"
+
+shared medical_bay_doctor_face = random_terran_male()
+shared medical_bay_doctor_title = "Doctor Grison Reporting"
+
 shared command_face = random_terran()
-shared ensign_rachel = random_terran()
+shared command_title = "TSN Command"
 
 
 # Mission setting for playing audio files
-HTBM_AUDIO_FILE_ENABLED = False #True
+HTBM_AUDIO_FILE_ENABLED = True
 
 //shared/signal/create_player_ships
 # Script creates the player ships
@@ -93,24 +106,28 @@ HTBM_AUDIO_FILE_ENABLED = False #True
     tile_map.map_deck("a", asteroid_deck)
     tile_map.fill(asteroid_string, x_count=10)
 
-
-    task_schedule(spawn_players)
-    sub_task_schedule(scene_mission_briefing_start)
+    #task_schedule(spawn_players)
     
-
 
 /*  Mission structure
 
 - Mission Briefing
+
 - Systems check in
-- Distress call
 
+- Distress call One
+-- arrive at luxury liner
+-- retrieve recording
+-- retrieve shuttle
+-- medical bay one
+-- Update TSN Command
 
-
+- medical bay two (escape)
 */
 
-
-=== scene_mission_briefing_start
+#######################################
+# === scene_mission_briefing_start
+#######################################    
     
 --- need_comms_console
 
@@ -125,21 +142,33 @@ HTBM_AUDIO_FILE_ENABLED = False #True
     cc = gui_console_clients("comms")
     jump send_comms_console_message if len(cc)==0
 
-# Debug lets yu jump directly to 
-# a different scene just change the false to True
-    jump distress_call if False
+# Debug area this lets you jump directly to 
+# a different scene just uncomment 
+# to skip to that part of the script
+#
+#    jump scene_distress_call
 
-    for cid in cc:
-        gui_info_panel_send_message(cid, message="Message from TSN Command", banner="Incoming message", button="Play message", button_label=play_message_C070, history=False, time=0)
-## TODO: This is confusing
-## doing and ->END here kills the task
-## The button later tries to run and the delay_sim gets stuck?
-    yield idle
-    
+    jump medical_bay_update_one
+
+
+    with comms_override(artemis_id, artemis_id,command_face, "TSN Command"):
+        comms_receive("See the message Panel to play message", "Incoming Message")
+#Display a Message 
+
+    choice = gui_info_panel_send_message(cc, message="Message from TSN Command", banner="Incoming message", button="Play message",  history=False, time=0)
+
+# The variable choice is a "Promise" that will
+# get a result when the button is pressed
+# 
+    pressed = await choice
+    print(pressed.value)
+    print(pressed.client_id)
 #
 # This is triggered by a message button in the info panel on COMMS
 #
-=== play_message_C070
+#######################################
+#--- mission_briefing_message
+#######################################
     message = """This is the "Skulls Refuge Nebula" and looks like you've drawn the short straw for tonights patrol. You are on the outskirts of Terran space, and the twin black holes cause havoc with our long range sensors so we don't know much about this sector.  Several ships traversing this sector have gone missing the last few months. Be on alert and find out whats happen to our ships."""
 
     with comms_override(artemis_id, artemis_id,command_face, "TSN Command"):
@@ -147,9 +176,8 @@ HTBM_AUDIO_FILE_ENABLED = False #True
 
 # Clear the info panel message on comms
     cc = gui_console_clients("comms")
-    for cid in cc:
-        gui_info_panel_send_message(cid,path="message")
-        gui_info_panel_send_message(cid,path="ship_data", time=0)
+    gui_info_panel_send_message(cc,path="message")
+    gui_info_panel_send_message(cc,path="ship_data", time=0)
 
 # show message on the mains screens
     main_screen = gui_console_clients(artemis_id, "mainscreen")
@@ -157,47 +185,169 @@ HTBM_AUDIO_FILE_ENABLED = False #True
     gui_info_panel_send_message(main_screen, message=message, face=command_face, history=False, time=32)
 # play Audio file
     if HTBM_AUDIO_FILE_ENABLED:
-        sbs.play_audio_file(0, get_mission_audio_file("audio/SD01C070"), 1.0,1.0)
+        sbs.play_audio_file(0, get_mission_audio_file("audio/SD01C0070"), 1.0,1.0)
 
+##########################################################################################
+# Distress Call One
 
-
-=== scene_distress_call
+# delay until the next scene
     await delay_sim(60)
+#######################################
+--- scene_distress_call
+#######################################
     
 # Create a luxury liner
-    ll_id = to_id(npc_spawn(90_000, 10, 60_000, "Whale Watcher 1", "arvonian", "luxury_liner", "behav_do_nothing"))
-    set_face(ll_id, random_arvonian())
+    shared whale_watcher_id = to_id(npc_spawn(90_000, 10, 60_000, whale_watcher_name, "arvonian", "luxury_liner", "behav_do_nothing"))
+    set_face(whale_watcher_id, whale_watcher_face)
 # Let us see it?
-    link(artemis_id,"extra_scan_source" ,ll_id)
+    link(artemis_id,"extra_scan_source" ,whale_watcher_id)
 
     # message = """This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
 
-    with comms_override(artemis_id, ll_id):
+    with comms_override(artemis_id, whale_watcher_id):
         <<[red] "Distress Call!"
             " This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!.....
---- approach
-    await delay_sim(3)
-    ->END if to_object(artemis_id) is None or to_object(ll_id) is None
-    d = sbs.distance_id(artemis_id, ll_id)
+#######################################
+# --- approach_whale_watcher
+#######################################
+    d = 100_000
+    for x while d>6000:
+        ->END if to_object(artemis_id) is None or to_object(whale_watcher_id) is None
+        d = sbs.distance_id(artemis_id, whale_watcher_id)
+        await delay_sim(3)
 # Keep waiting until artemis is close to the luxury liner    
-    jump approach if d > 6000
+    #jump approach if d > 6000
 # It is now close enough
 
     #<create type="genericMesh" x="90000.0" y="0.0" z="61000.0" name="Damaged Shuttle" meshFileName="dat\TSNShuttle.dxs" textureFileName="dat\LightCruiser_Diffuse.png"/>
-    npc_spawn(90000.0,0.0,61000.0, "Damaged Shuttle", "arvonian", "tsn_shuttle", "npc_no_nothing")
+    shared damaged_shuttle_id = to_id(npc_spawn(90000.0,0.0,61000.0, "Damaged Shuttle", "arvonian", "tsn_shuttle", "npc_no_nothing"))
+    whale_watcher_name = "Whale Watcher 1"
+    ww = to_object(whale_watcher_id)
+    if ww is not None:
+        ww.name = whale_watcher_name
 
-# 
+    message = "Damaged Shuttle located. One life sign onboard. Vitals are weak."
+    with comms_override(artemis_id, artemis_id, ensign_rachel, ensign_rachel_title):
+        comms_receive(message)
+
+# This goes to all consoles
     consoles = linked_to(artemis_id, "consoles")
-    gui_info_panel_send_message(consoles, "Ensign Rachel Reporting: Damaged Shuttle located. One life sign onboard. Vitals are weak.", face = ensign_rachel, time = 20)
+    gui_info_panel_send_message(consoles, message, title=ensign_rachel_title,face = ensign_rachel, time = 20)
     await delay_sim(20)
 
-    #<incoming_comms_text from="Ensign Rachel Reporting">We scanned the ship and were able to salvage a captains log recording from the wreckage  </incoming_comms_text>
-    
-    consoles = linked_to(artemis_id, "consoles") & all_roles("console, comms")
-    gui_info_panel_send_message(consoles, "Ensign Rachel Reporting: Damaged Shuttle located. One life sign onboard. Vitals are weak.", button="Recover Recording", button_label=retrieve_recording, time=20)
-    #<set_comms_button text="Recovered Whale Watcher 1 Recording" sideValue="2"/>
-    yield idle
+# Engin Rachel reports recovery
+    message = "We scanned the ship and were able to salvage a captains log recording from the wreckage"
+    with comms_override(artemis_id, artemis_id, ensign_rachel, ensign_rachel_title):
+        comms_receive(message)
 
-=== retrieve_recording
-    print("RECORDING ")
+    # This goes to just comms
+    consoles = linked_to(artemis_id, "consoles") & all_roles("console, comms")
+    choice = gui_info_panel_send_message(consoles, message , title=ensign_rachel_title, face=ensign_rachel, button="Recover Recording", time=20)
+
+    pressed = await choice
+#######################################
+#--- retrieve_recording
+#######################################
+    message = "Such a wondrous sight these space whales are so majestic. <static>  You there I don't believe we met."
+    with comms_override(artemis_id, whale_watcher_id, from_name=whale_watcher_name):
+        comms_receive(message)
+            
     
+    if ww is not None:
+        consoles = linked_to(artemis_id, "consoles")
+        gui_info_panel_send_message(consoles, message, title=whale_watcher_name,face = whale_watcher_face, time = 12)
+# play Audio file
+    if HTBM_AUDIO_FILE_ENABLED:
+        sbs.play_audio_file(0, get_mission_audio_file("audio/SD01C0135"), 1.0,1.0)
+    
+    await delay_sim(10)
+    message = "We scanned the ship and were able to salvage a captains log recording from the wreckage"
+    with comms_override(artemis_id, artemis_id, ensign_rachel, ensign_rachel_title):
+        comms_receive(message)
+# This goes to just comms
+    consoles = linked_to(artemis_id, "consoles") & all_roles("console, comms")
+    choice = gui_info_panel_send_message(consoles, message, title=ensign_rachel_title, face=ensign_rachel, button="Contact TSN Command", time=20)
+
+# Wait for button press
+    pressed = await choice
+
+# Delay the response from TSN Command
+    await delay_sim(10)
+#######################################
+#--- contact_tsn_command_recording
+#######################################
+    message = "Such a shame Tourism is very risky in this sector of space. Retrieve the shuttle and check for Survivors."
+    with comms_override(artemis_id, artemis_id,command_face, "TSN Command"):
+        comms_receive(message)
+
+#######################################
+#--- retrieve_shuttle
+#######################################
+    cc = gui_console_clients("comms")
+    gui_info_panel_send_message(cc,path="message")
+    gui_info_panel_send_message(cc,path="ship_data", time=0)
+    d = 2000
+## scene_pick up shuttle
+## This should maybe be enhanced to have Weapons tractor beam the shuttle
+### That would be a cool element
+# Wait for artemis to get close to the shuttle
+    for x while d > 1000:
+        await delay_sim(4)
+        if to_object(artemis_id) is None or to_object(damaged_shuttle_id) is None:
+            # Probably signal end of game
+            ->END
+
+        d = sbs.distance_id(artemis_id, damaged_shuttle_id)
+
+# OK now the shuttle is close, take it off the board
+    shuttle = to_object(damaged_shuttle_id)
+    if shuttle is not None:
+        shuttle.delete_object()
+
+# Show medical bay update        
+    await delay_sim(10)
+#############################    
+--- medical_bay_update_one
+#############################
+# This goes to just comms
+    message = "Incoming message from medical bay"
+    with comms_override(artemis_id, artemis_id,medical_bay_doctor_face, medical_bay_doctor_title):
+        comms_receive(message + " see info panel for interaction.")
+
+    consoles = linked_to(artemis_id, "consoles") & all_roles("console, comms")
+    choice = gui_info_panel_send_message(consoles, message, title=medical_bay_doctor_title, face=medical_bay_doctor_face, button="Accept Message", time=12)
+
+# Wait for button press
+    pressed = await choice
+# medical bay update 1
+    message = "We have retrieved 1 Arvonian surviver from the Escape Pod.  They are undergoing medical treatment now. "
+    with comms_override(artemis_id, artemis_id, medical_bay_doctor_face, medical_bay_doctor_title):
+        comms_receive(message)
+# All Stations
+    consoles = linked_to(artemis_id, "consoles")
+    choice = gui_info_panel_send_message(consoles, message, title=medical_bay_doctor_title, face=medical_bay_doctor_face, time=12)
+
+# play Audio file
+    if HTBM_AUDIO_FILE_ENABLED:
+        sbs.play_audio_file(0, get_mission_audio_file("audio/SD02C0166"), 1.0,1.0)
+
+    await delay_sim(13)
+
+    consoles = linked_to(artemis_id, "consoles") & all_roles("console, comms")
+    message = "Update TSN Command about the Arvonian survivor."
+    choice = gui_info_panel_send_message(consoles, message, title="Next steps", icon_index=1, button="Update TSN Command", time=0)
+        
+    pressed = await choice
+## Clear message panel    
+    cc = gui_console_clients("comms")
+    gui_info_panel_send_message(cc,path="message")
+    gui_info_panel_send_message(cc,path="ship_data", time=0)
+
+    await delay_sim(10)
+# TSN Update survivor
+    message = "Good Work. At least we saved one poor soul. Keep a look out try and find out what happen. "
+    with comms_override(artemis_id, artemis_id, command_face, command_title):
+        comms_receive(message)
+
+##########################################################################################
+# Distress Call Two

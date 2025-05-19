@@ -1,0 +1,1759 @@
+<mission_data version="1.0" background_id_arme="b8e00cf0-c7f0-4a1c-b082-1907bb10e8c2" playerShipNames_arme="Artemis\Intrepid\Aegis\Horatio\Excalibur\Hera\Ceres\Diana">
+  <mission_description>  Investigate a remote sector of space with no station support in a TSN Light Cruiser. Ships have gone missing here and you were sent to investigate. Keep an eye out and find out whats happening to those ships. </mission_description>
+  <start id_arme="b8e00cf0-c7f0-4a1c-b082-1907bb10e8c2">
+    <set_variable name="Escape_Pod" value="1.0"/>
+    <create type="player" player_slot="0" x="98000.0" y="0" z="98000.0" name="Artemis" raceKeys="TSN player" hullKeys="Light Cruiser" warp="yes"/>
+    <create count="400" type="nebulas" startX="50000.0" startY="0.0" startZ="35000.0" radius="22000" randomRange="15000" randomSeed="20"/>
+    <create count="150" type="nebulas" startX="10000.0" startY="0.0" startZ="60000.0" endX="90000.0" endY="0.0" endZ="90000.0" randomRange="5000" randomSeed="30"/>
+    <create count="150" type="nebulas" startX="10000.0" startY="0.0" startZ="90000.0" endX="90000.0" endY="0.0" endZ="60000.0" randomRange="5000" randomSeed="30"/>
+    <create type="blackHole" x="65000.0" y="0.0" z="28000.0" name="Twin1"/>
+    <create type="blackHole" x="32000.0" y="0.0" z="28000.0" name="Twin2"/>
+    <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="0.0" z="40000.0" angle="120"/>
+    <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="100.0" z="40000.0" angle="120"/>
+    <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="0.0" z="41000.0" angle="120"/>
+    <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="100.0" z="41000.0" angle="120"/>
+    <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="100.0" z="42000.0" angle="120"/>
+    <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="0.0" z="42000.0" angle="120"/>
+    <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="0.0" z="42100.0" angle="120"/>
+    <create count="40" type="asteroids" startX="70000.0" startY="30.0" startZ="60000.0" endX="30000.0" endY="-30.0" endZ="60000.0" randomRange="2000"/>
+    <create type="monster" monsterType="3" x="70000.0" y="0.0" z="10000.0" name="The Beheader"/>
+    <create type="monster" monsterType="3" x="70000.0" y="10.0" z="20000.0" name="Kracon"/>
+    <create type="monster" monsterType="4" podnumber="2" x="30000.0" y="0.0" z="45000.0" name="Piranha "/>
+    <create type="monster" monsterType="4" podnumber="2" x="31000.0" y="0.0" z="45000.0" name="Piranha  "/>
+    <create type="monster" monsterType="4" podnumber="2" x="32000.0" y="0.0" z="45000.0" name="Piranha   "/>
+    <create type="monster" monsterType="4" podnumber="2" x="30000.0" y="100.0" z="45000.0" name="Piranha    "/>
+    <create type="monster" monsterType="4" podnumber="2" x="31000.0" y="100.0" z="45000.0" name="Piranha     "/>
+    <create type="monster" monsterType="4" podnumber="2" x="31000.0" y="-100.0" z="45000.0" name="Piranha      "/>
+    <create type="monster" monsterType="4" podnumber="2" x="32000.0" y="100.0" z="45000.0" name="Piranha       "/>
+    <create type="monster" monsterType="2" x="20000.0" y="1.0" z="70000.0" name="Bruce"/>
+    <create type="monster" monsterType="2" x="80000.0" y="1.0" z="50000.0" name="Saber"/>
+    <create type="monster" monsterType="7" x="70000.0" y="0.0" z="75000.0"/>
+    <create type="monster" monsterType="6" x="10000.0" y="0.0" z="40000.0" name="Hornet"/>
+    <create type="monster" monsterType="6" x="70000.0" y="10.0" z="40000.0" name="Wasp"/>
+    <create type="monster" monsterType="5" x="20000.0" y="0.0" z="90000.0" name="Doom"/>
+    <create type="monster" monsterType="8" x="50000.0" y="0.0" z="75000.0"/>
+    <create type="monster" monsterType="8" x="60000.0" y="0.0" z="80000.0"/>
+    <create type="monster" monsterType="8" x="50000.0" y="0.0" z="55000.0"/>
+    <create type="monster" monsterType="8" x="50000.0" y="0.0" z="80000.0"/>
+    <create type="monster" monsterType="8" x="20000.0" y="0.0" z="80000.0"/>
+    <create type="monster" monsterType="8" x="20000.0" y="0.0" z="30000.0"/>
+    <create type="monster" monsterType="8" x="20500.0" y="0.0" z="30500.0"/>
+    <create type="monster" monsterType="8" x="70000.0" y="0.0" z="55000.0"/>
+    <create type="enemy" x="50000.0" y="2.0" z="59000.0" raceKeys="BioMech" hullKeys="Stage 1"/>
+    <create type="enemy" x="50000.0" y="2.0" z="59000.0" raceKeys="BioMech" hullKeys="Stage 1"/>
+    <set_difficulty_level value="5"/>
+    <set_skybox_index index="13"/>
+    <set_object_property property="nebulaIsOpaque" value="0"/>
+    <set_object_property property="sensorSetting" value="4"/>
+    <set_object_property property="nonPlayerSpeed" value="100"/>
+    <set_object_property property="nonPlayerShield" value="200"/>
+    <set_object_property property="nonPlayerWeapon" value="100"/>
+    <set_object_property property="playerWeapon" value="100"/>
+    <set_object_property property="playerShields" value="100"/>
+    <big_message title="Here There Be Monsters" subtitle1="by Paul Rockwell" subtitle2="A Cannonical Battle For Artemis Armada III"/>
+    <set_variable name="Mission_Brief" value="1.0"/>
+    <set_timer name="Mission Briefing" seconds="15"/>
+    <set_variable name="Station" value="1.0"/>
+    <set_variable name="Wolf_Spider_Introduction" value="1.0"/>
+    <set_variable name="Wolf Spider" value="1.0"/>
+    <set_variable name="Wolf_Spider_Health" value="1.0"/>
+    <set_variable name="Attrition" value="1.0"/>
+    <set_variable name="Station_Defense" value="1.0"/>
+    <set_variable name="Hostage_Message" value="1.0"/>
+    <set_variable name="Hostage_Mission" value="0.0"/>
+    <set_variable name="Marine_Location" value="0.0"/>
+    <set_variable name="Surrender" value="1.0"/>
+    <set_variable name="Info_Strange_Object" value="1.0"/>
+    <set_variable name="Hack_Beacon" value="1.0"/>
+    <set_variable name="Mission_Complete" value="1.0"/>
+    <create type="Anomaly" pickupType="0" x="95000.0" y="10.0" z="50000.0"/>
+    <create type="Anomaly" pickupType="0" x="3000.0" y="10.0" z="50000.0"/>
+    <create type="Anomaly" pickupType="0" x="50000.0" y="10.0" z="65000.0"/>
+    <create type="Anomaly" pickupType="0" x="70000.0" y="10.0" z="77000.0"/>
+    <create type="Anomaly" pickupType="0" x="20000.0" y="10.0" z="77000.0"/>
+    <create type="Anomaly" pickupType="0" x="80000.0" y="10.0" z="20000.0"/>
+    <create type="Anomaly" pickupType="0" x="75000.0" y="10.0" z="55000.0"/>
+    <create type="Anomaly" pickupType="0" x="24000.0" y="10.0" z="33000.0"/>
+    <create type="Anomaly" pickupType="0" x="10000.0" y="10.0" z="90000.0"/>
+    <create type="Anomaly" pickupType="0" x="50000" y="10.0" z="90000.0"/>
+    <create type="Anomaly" pickupType="1" x="60000" y="10.0" z="85000.0"/>
+    <create type="Anomaly" pickupType="1" x="5000" y="10.0" z="5500.0"/>
+    <create type="Anomaly" pickupType="1" x="5000" y="10.0" z="91000.0"/>
+    <create type="Anomaly" pickupType="1" x="10000" y="10.0" z="55000.0"/>
+    <create type="Anomaly" pickupType="4" x="30000" y="10.0" z="5500.0"/>
+    <set_timer name="start_mission_timer_1" seconds="10"/>
+  </start>
+  <event name="Mission Briefing" id_arme="a07cbb8c-26f0-4f9a-8a2c-f59d761a491b">
+    <if_timer_finished name="Mission Briefing"/>
+    <if_variable name="Mission_Brief" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Mission_Brief" value="2.0"/>
+    <set_comms_button text="Message from TSN Command" sideValue="2"/>
+    <clear_ai name="Bruce"/>
+    <clear_ai name="The Beheader"/>
+    <clear_ai name="Kracon"/>
+    <clear_ai name="Saber"/>
+    <clear_ai name="Hornet"/>
+    <clear_ai name="Wasp"/>
+    <clear_ai name="Doom"/>
+    <clear_ai name="Wasp"/>
+    <clear_ai name="Piranha "/>
+    <clear_ai name="Piranha  "/>
+    <clear_ai name="Piranha   "/>
+    <clear_ai name="Piranha    "/>
+    <clear_ai name="Piranha     "/>
+    <clear_ai name="Piranha      "/>
+    <clear_ai name="Piranha       "/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Bruce"/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="The Beheader"/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Kracon"/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Saber"/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Hornet"/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Wasp"/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Doom"/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Wasp"/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Piranha "/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Piranha  "/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Piranha   "/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Piranha    "/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Piranha     "/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Piranha      "/>
+    <add_ai type="CHASE_PLAYER" value1="10000" value2="5000" name="Piranha       "/>
+    <add_ai type="ATTACK" targetName="Bruce" value1="1.0" name="Hornet"/>
+    <add_ai type="ATTACK" targetName="Kracon" value1="1.0" name="Wasp"/>
+  </event>
+  <event name="Mission Briefing Video" id_arme="72b83f60-9388-4e4f-a422-dcb30fcd4244">
+    <if_comms_button text="Message from TSN Command"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Message from TSN Command"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0070" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0070.mp4"/>
+    <set_timer name="Music" seconds="35"/>
+    <set_variable name="Music" value="1.0"/>
+    <set_timer name="Distress_Call" seconds="60"/>
+    <incoming_comms_text from="TSN Command">This is the "Skulls Refuge Nebula" and looks like you've drawn the short straw for tonights patrol. You are on the outskirts of Terran space, and the twin black holes cause havoc with our long range sensors so we don't know much about this sector.  Several ships traversing this sector have gone missing the last few months. Be on alert and find out whats happen to our ships.   </incoming_comms_text>
+  </event>
+  <event name="Music Back" id_arme="674fd804-cc0f-49de-b1ef-a9700a89bc5d">
+    <if_variable name="Music" comparator="EQUALS" value="1.0"/>
+    <if_timer_finished name="Music"/>
+    <set_variable name="Music" value="0.0"/>
+    <set_object_property property="musicObjectMasterVolume" value="0.4"/>
+  </event>
+  <event name="Distress Call 1" id_arme="e8c69f16-80d1-49a4-ba42-3742abcb810e">
+    <if_variable name="Mission_Brief" comparator="EQUALS" value="2.0"/>
+    <if_timer_finished name="Distress_Call"/>
+    <create type="genericMesh" x="90000.0" y="10.0" z="60000.0" angle="43" name="Distress Call" meshFileName="dat\luxury-vessel.dxs" textureFileName="dat\leisure_vessel_color.png" hullRace="Arvonian" hullType="Luxury Liner"/>
+    <set_variable name="Mission_Brief" value="0.0"/>
+    <set_comms_button text="Distress Call" sideValue="2"/>
+    <set_variable name="Distress_Call" value="1"/>
+    <set_comms_button text="All Stations Report in!" sideValue="2"/>
+  </event>
+  <event name="All Stations Report in!" id_arme="9123aef7-5684-4d69-b75a-6f3f04b4e05a">
+    <if_comms_button text="All Stations Report in!"/>
+    <clear_comms_button text="All Stations Report in!"/>
+    <warning_popup_message message="Sensor Array: Ensign Rachel reporting in all systems are go" consoles="S" player_slot="0"/>
+    <warning_popup_message message="Weapons Control: Ensign Barak reporting in all systems are go" consoles="W" player_slot="0"/>
+    <warning_popup_message message="Communications Array: Ensign Sadie reporting in all systems are go" consoles="C" player_slot="0"/>
+    <warning_popup_message message="Warp Core: Ensign Jonas reporting in all systems are go" consoles="H" player_slot="0"/>
+    <warning_popup_message message="Shield Generators: Ensign Caboose reporting in all systems are go?" consoles="E" player_slot="0"/>
+  </event>
+  <event name="Distress Call 1 Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Distress Call"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Distress_Call" comparator="EQUALS" value="1.0"/>
+    <clear_comms_button text="Distress Call"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0139" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0139.mp4"/>
+    <set_timer name="Music" seconds="13"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Distress Call ">This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!.....</incoming_comms_text>
+  </event>
+  <event name="Luxury Liner Investigation" id_arme="675d9219-ea7e-4030-8c0f-517dd89616bf">
+    <if_variable name="Escape_Pod" comparator="EQUALS" value="1.0"/>
+    <if_distance name1="Artemis" name2="Distress Call" comparator="LESS_EQUAL" value="6000.0"/>
+    <destroy name="Distress Call"/>
+    <create type="genericMesh" x="90000.0" y="5.0" z="60000.0" angle="43" name="Whale Watcher 1" meshFileName="dat\luxury-vessel.dxs" textureFileName="dat\leisure_vessel_color.png" hullRace="Arvonian" hullType="Luxury Liner"/>
+    <set_ship_text name="Whale Watcher 1" race="Arvonian" class="Luxury Liner" desc="Arvonian Luxury Liner" scan_desc="Ship is Severily Damaged. Engines are offline. Shuttles have been launched. No life signs aboard" hailtext=":Automated Distress Call: Engines are Disabled, Crew is incapacitated. We require immediated assistance "/>
+    <create type="genericMesh" x="90000.0" y="0.0" z="61000.0" name="Damaged Shuttle" meshFileName="dat\TSNShuttle.dxs" textureFileName="dat\LightCruiser_Diffuse.png"/>
+    <set_variable name="Escape_Pod" value="2.0"/>
+    <warning_popup_message message="Ensign Rachel Reporting: Damaged Shuttle located. One life sign onboard. Vitals are weak." consoles="S" player_slot="0"/>
+    <create type="Anomaly" pickupType="2" x="90000.0" y="100.0" z="60000.0"/>
+    <create type="Anomaly" pickupType="0" x="90500.0" y="0.0" z="60500.0"/>
+    <set_ship_text name="Damaged Shuttle" desc="Luxury Liner Damaged Shuttle" scan_desc="1 Life sign onboard"/>
+    <set_object_property property="pushRadius" value="0.0" name="Damaged Shuttle"/>
+    <set_object_property property="rollDelta" value="0.1" name="Whale Watcher 1"/>
+    <set_object_property property="angleDelta" value="0.05" name="Whale Watcher 1"/>
+    <set_object_property property="pitchDelta" value="0.05" name="Whale Watcher 1"/>
+    <set_object_property property="artScale" value="0.4" name="Whale Watcher 1"/>
+    <set_object_property property="artScale" value="0.2" name="Damaged Shuttle"/>
+    <set_object_property property="rollDelta" value="0.1" name="Damaged Shuttle"/>
+    <incoming_comms_text from="Ensign Rachel Reporting">We scanned the ship and were able to salvage a captains log recording from the wreckage  </incoming_comms_text>
+    <set_comms_button text="Recovered Whale Watcher 1 Recording" sideValue="2"/>
+  </event>
+  <event name="Whale Watcher 1 Recording" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Recovered Whale Watcher 1 Recording"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Recovered Whale Watcher 1 Recording"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0135" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0135.mp4"/>
+    <set_timer name="Music" seconds="7"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Whale Watcher 1 Recording ">Such a wonderous sight these space whales are so majestic.  You there I don't believe we met. </incoming_comms_text>
+    <set_comms_button text="Contact TSN Command about Whale Watcher 1" sideValue="2"/>
+  </event>
+  <event name="Mission Update Whale Watcher 1" id_arme="1042d776-647a-4a3e-8300-9c650bcb12d7">
+    <if_comms_button text="Contact TSN Command about Whale Watcher 1"/>
+    <clear_comms_button text="Contact TSN Command about Whale Watcher 1"/>
+    <incoming_comms_text from="TSN Command">Such a shame Tourism is very risky in this sector of space. Check for Survivors. </incoming_comms_text>
+  </event>
+  <event name="Pick Up Damaged Shuttle" id_arme="99130e53-9276-481e-b97e-881a2318c558">
+    <if_distance name1="Damaged Shuttle" name2="Artemis" comparator="LESS_EQUAL" value="100.0"/>
+    <if_variable name="Escape_Pod" comparator="EQUALS" value="2.0"/>
+    <destroy name="Damaged Shuttle"/>
+    <set_variable name="Medical_Bay" value="1.0"/>
+    <set_comms_button text="Medical Bay" sideValue="2"/>
+  </event>
+  <event name="Medical Bay 1" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Medical Bay"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Medical_Bay" comparator="EQUALS" value="1.0"/>
+    <clear_comms_button text="Medical Bay"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD02C0166" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD02C0166.mp4"/>
+    <set_timer name="Music" seconds="10"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Medical Bay">We have retrieved 1 Arvonian surviver from the Escape Pod.  They are undergoing medical treatment now. </incoming_comms_text>
+    <set_variable name="Escape_Pod" value="0.0"/>
+    <set_timer name="Saboteur" seconds="220"/>
+    <set_variable name="Sabotuer" value="1.0"/>
+    <set_timer name="Distress_Call" seconds="200"/>
+    <set_variable name="Mission_Brief" value="3.0"/>
+    <set_variable name="AT_Large" value="1.0"/>
+    <set_variable name="Marine_Active" value="1.0"/>
+    <set_variable name="Medical_Bay" value="0.0"/>
+    <set_comms_button text="Contact TSN Command about Survivor" sideValue="2"/>
+  </event>
+  <event name="Mission Update Survivor" id_arme="b1642ede-fec6-4b87-a018-cadc6d1ffab2">
+    <if_comms_button text="Contact TSN Command about Survivor"/>
+    <clear_comms_button text="Contact TSN Command about Survivor"/>
+    <incoming_comms_text from="TSN Command">Good Work. At least we saved one poor soul. Keep a look out try and find out what happen.</incoming_comms_text>
+  </event>
+  <event name="Distress Call 2" id_arme="7467b8b6-da4a-4bcc-8119-5cfa2d71a69e">
+    <if_timer_finished name="Distress_Call"/>
+    <if_variable name="Mission_Brief" comparator="EQUALS" value="3.0"/>
+    <create type="genericMesh" x="48000.0" y="10.0" z="70000.0" name="Distress Call" meshFileName="dat\cargo_vessel.dxs" textureFileName="dat\cargo_vessel_glow.png"/>
+    <set_variable name="Mission_Brief" value="4.0"/>
+    <set_variable name="Distress_Call" value="2"/>
+    <set_comms_button text="Distress Call" sideValue="2"/>
+  </event>
+  <event name="Distress Call 2 Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Distress Call"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Distress_Call" comparator="EQUALS" value="2.0"/>
+    <clear_comms_button text="Distress Call"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0037" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0037.mp4"/>
+    <set_timer name="Music" seconds="14"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Distress Call">This is the Terran Bulk Cargo "Dauntless".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!.....</incoming_comms_text>
+  </event>
+  <event name="Dauntless Investigation" id_arme="23469071-72f7-49e1-b96e-47d48a5a9469">
+    <if_variable name="Mission_Brief" comparator="EQUALS" value="4.0"/>
+    <if_distance name1="Artemis" name2="Distress Call" comparator="LESS_EQUAL" value="6000.0"/>
+    <destroy name="Distress Call"/>
+    <create type="genericMesh" x="48000.0" y="200.0" z="70000.0" name="Dauntless" meshFileName="dat\cargo_vessel.dxs" textureFileName="dat\cargo_vessel_glow.png"/>
+    <set_ship_text name="Dauntless" race="Terran" class="Bulk Cargo" desc="Terran Bulk Cargo" scan_desc="Ship is Severily Damaged. Engines are offline. Shuttles have been launched. No life signs aboard" hailtext=":Automated Distress Call: Engines are Disabled, Crew is incapacitated. We require immediated assistance "/>
+    <create type="Anomaly" pickupType="2" x="49000.0" y="50.0" z="70000.0"/>
+    <create type="Anomaly" pickupType="0" x="47000.0" y="-50.0" z="70000.0"/>
+    <set_variable name="Mission_Brief" value="5.0"/>
+    <set_timer name="Distress_Call" seconds="210"/>
+    <set_object_property property="angleDelta" value="0.05" name="Dauntless"/>
+    <set_object_property property="rollDelta" value="0.1" name="Dauntless"/>
+    <set_object_property property="pitch" value="120.0" name="Dauntless"/>
+    <set_object_property property="artScale" value="0.4" name="Dauntless"/>
+    <incoming_comms_text from="Ensign Rachel Reporting">We scanned the ship and were able to salvage a recording from the wreckage  </incoming_comms_text>
+    <set_comms_button text="Recovered Dauntless Bridge Log" sideValue="2"/>
+    <create type="genericMesh" x="48500.0" y="150.0" z="69500.0" name="Strange Object" meshFileName="dat\stationTower.dxs" textureFileName="dat\stationA_tower_diffuse.png"/>
+    <set_object_property property="angleDelta" value="0.05" name="Strange Object"/>
+    <set_object_property property="artScale" value="0.2" name="Strange Object"/>
+    <set_object_property property="pitch" value="20.0" name="Strange Object"/>
+    <warning_popup_message message="Ensign Rachel Reporting: That Strange Object could give us clues to what happen to the Dauntless" consoles="S" player_slot="0"/>
+  </event>
+  <event name="Dauntless Recording" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Recovered Dauntless Bridge Log"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Recovered Dauntless Bridge Log"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0035" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0035.mp4"/>
+    <set_timer name="Music" seconds="25"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Dauntless Bridge Log">What is it? Not sure sir it looks like a beacon of some sort. Take us in for a closer look, there might be some salvage worth gathering?. Engineering, why did we lose power to engines? Captain, unknown vessel appeared behind us. Get us out of here! Can?t sir, something is draining our engines. </incoming_comms_text>
+  </event>
+  <event name="Investigate Strange Object" id_arme="99130e53-9276-481e-b97e-881a2318c558">
+    <if_distance name1="Strange Object" name2="Artemis" comparator="LESS_EQUAL" value="1000.0"/>
+    <if_variable name="Info_Strange_Object" comparator="EQUALS" value="1.0"/>
+    <warning_popup_message message="Ensign Rachel Reporting: Upon further study this Beacon is some sort of Warp field disruptor. We call it a Web Generator. You cannot travel at warp near it but impulse power should be unaffected" consoles="S" player_slot="0"/>
+    <set_variable name="Info_Strange_Object" value="0.0"/>
+    <set_comms_button text="Contact TSN Command about the Web Generator" sideValue="2"/>
+  </event>
+  <event name="Mission Update Web Generator" id_arme="2fa0144f-a3f0-48f6-ba48-4853c0561b3f">
+    <if_comms_button text="Contact TSN Command about the Web Generator"/>
+    <clear_comms_button text="Contact TSN Command about the Web Generator"/>
+    <incoming_comms_text from="TSN Command">Intriguing. It seems like the local wildlife must not be the root cause of all these ships disappearing. And someone is in posession of some unique technology. Continue searching the sector we need more information.</incoming_comms_text>
+  </event>
+  <event name="Distress Call 3" id_arme="6d488aae-8376-48db-a470-2df8413987e5">
+    <if_timer_finished name="Distress_Call"/>
+    <if_variable name="Mission_Brief" comparator="EQUALS" value="5.0"/>
+    <create type="genericMesh" x="20000.0" y="10.0" z="50000.0" name="Distress Call" meshFileName="dat\mine.dxs" textureFileName="dat\asteroidTexture.png"/>
+    <set_variable name="Mission_Brief" value="6.0"/>
+    <set_variable name="Distress_Call" value="3"/>
+    <set_comms_button text="Distress Call." sideValue="2"/>
+  </event>
+  <event name="Distress Call 3 Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Distress Call."/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Distress_Call" comparator="EQUALS" value="3.0"/>
+    <clear_comms_button text="Distress Call."/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD02C0165" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD02C0165.mp4"/>
+    <set_timer name="Music" seconds="10"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Distress Call">This is the Terran Science Vessel "Odessa".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!.....</incoming_comms_text>
+  </event>
+  <event name="Odessa Investigation" id_arme="0da36884-b464-4d57-9944-be8249eca505">
+    <if_variable name="Mission_Brief" comparator="EQUALS" value="6.0"/>
+    <if_distance name1="Artemis" name2="Distress Call" comparator="LESS_EQUAL" value="6000.0"/>
+    <destroy name="Distress Call"/>
+    <create type="genericMesh" x="20000.0" y="-200.0" z="50000.0" name="Odessa" meshFileName="dat\science-vessel.dxs" textureFileName="dat\Science_Vessel_glow.png"/>
+    <set_ship_text name="Odessa" race="Terran" class="Science Vessel" desc="Terran Science Vessel" scan_desc="Ship is Severily Damaged. Engines are offline. Shuttles have been launched. No life signs aboard" hailtext=":Automated Distress Call: Engines are Disabled, Crew is incapacitated. We require immediated assistance "/>
+    <create type="Anomaly" pickupType="2" x="21000.0" y="10.0" z="50000.0"/>
+    <create type="Anomaly" pickupType="0" x="19000.0" y="-50.0" z="50000.0"/>
+    <set_variable name="Mission_Brief" value="7.0"/>
+    <set_object_property property="angleDelta" value="0.05" name="Odessa"/>
+    <set_object_property property="rollDelta" value="0.1" name="Odessa"/>
+    <set_object_property property="pitch" value="10.0" name="Odessa"/>
+    <set_object_property property="artScale" value="0.32" name="Odessa"/>
+    <incoming_comms_text from="Ensign Rachel Reporting">We scanned the ship and were able to salvage a recording from the wreckage  </incoming_comms_text>
+    <set_comms_button text="Recovered Odessa Science Log" sideValue="2"/>
+  </event>
+  <event name="Odessa Recording" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Recovered Odessa Science Log"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Recovered Odessa Science Log"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD02C0164" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD02C0164.mp4"/>
+    <set_timer name="Music" seconds="35"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Odessa Science Log">Science officer?s log 76.2. This sector of space has an unusually high concentration of stellar creatures. It is an ideal place to study their behaviors in more details.  The Piranhas in this sector have been exhibiting aggressive behavior.  More so than has ever been reported. I think this might be a breeding ground. There is not much known about the breeding habits of these piranhas. </incoming_comms_text>
+    <incoming_comms_text from="Odessa Science Log"> This is an excellent opportunity for research but I still need to convince the captain to let us take a closer look.   The last run in left our long range communication array slightly chewed. </incoming_comms_text>
+    <set_timer name="Web" seconds="100"/>
+    <set_comms_button text="Contact TSN Command about Odessa" sideValue="2"/>
+  </event>
+  <event name="Mission Update Odessa" id_arme="5843fe9d-a090-4ed2-b658-519c4e5d8aeb">
+    <if_comms_button text="Contact TSN Command about Odessa"/>
+    <clear_comms_button text="Contact TSN Command about Odessa"/>
+    <incoming_comms_text from="TSN Command">Piranhas are a fearsome creature. But it doesn't look like Piranhas doomed the Odessa. Find out whats happening to these ships.</incoming_comms_text>
+  </event>
+  <event name="Web Trap" id_arme="9ac33670-1d16-4ea0-96c3-ebfde5cd9993">
+    <if_timer_finished name="Web"/>
+    <if_variable name="Mission_Brief" comparator="EQUALS" value="7.0"/>
+    <create type="genericMesh" x="22000.0" y="0.0" z="25000.0" name="Distress Call" meshFileName="dat\stationTower.dxs" textureFileName="dat\stationA_tower_illum.png"/>
+    <set_variable name="Mission_Brief" value="8.0"/>
+    <set_timer name="Hostage_Message" seconds="180"/>
+  </event>
+  <event name="Trap Sprung" id_arme="7102410a-df3c-4b09-b2f5-157846137e19">
+    <if_variable name="Mission_Brief" comparator="EQUALS" value="8.0"/>
+    <if_distance name1="Artemis" name2="Distress Call" comparator="LESS_EQUAL" value="1800.0"/>
+    <destroy name="Distress Call"/>
+    <create type="genericMesh" x="22000.0" y="10.0" z="25000.0" name="Web Generator" meshFileName="dat\stationTower.dxs" textureFileName="dat\stationA_tower_illum.png"/>
+    <set_variable name="Web" value="3.0"/>
+    <set_variable name="Mission_Brief" value="9.0"/>
+    <direct name="Web Generator" targetName="Artemis" scriptThrottle="0.0"/>
+    <set_comms_button text="Call For Help" sideValue="2"/>
+    <warning_popup_message message="Ensign Rachel Reporting: It's a Web Generator!! You cannot travel at warp near it but impulse power should be unaffected" consoles="S" player_slot="0"/>
+  </event>
+  <event name="Web stuck" id_arme="bfc9ecff-643d-4569-8a86-3127cd3eccc9">
+    <if_variable name="Web" comparator="EQUALS" value="3.0"/>
+    <if_distance name1="Web Generator" name2="Artemis" comparator="LESS_EQUAL" value="2000.0"/>
+    <if_object_property property="warpState" name="Artemis" comparator="GREATER_EQUAL" value="1.0"/>
+    <direct name="Web Generator" targetName="Artemis" scriptThrottle="0.0"/>
+    <set_relative_position name2="Artemis" distance="350" angle="0" name1="Web Generator"/>
+  </event>
+  <event name="Taunt Web" id_arme="cf3c23fd-fd2b-4554-9d1d-5cf9ddd8e2ad">
+    <if_comms_button text="Call For Help"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Call For Help"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0110" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0110.mp4"/>
+    <set_timer name="Music" seconds="10"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Wolf Spider">Look who has stumbled into my little trap I'll be there soon to help you out</incoming_comms_text>
+  </event>
+  <event name="Radio Signal" id_arme="b25ef1d0-4471-414d-852f-5d0dd1c09dfd">
+    <if_timer_finished name="Hostage_Message"/>
+    <if_variable name="Hostage_Message" comparator="EQUALS" value="1.0"/>
+    <create type="genericMesh" x="50000.0" y="15000.0" z="30000.0" name="Radio Signal" meshFileName="dat\mine.dxs" textureFileName="dat\mine1.png"/>
+    <set_comms_button text="Radio Signal" sideValue="2"/>
+    <set_variable name="Hostage_Message" value="0.0"/>
+    <set_object_property property="pushRadius" value="0.0" name="Radio Signal"/>
+  </event>
+  <event name="Radio Signal Audio" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Radio Signal"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Radio Signal"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <incoming_comms_text from="Radio Signal">Is there anyone out there? Help us they have us trapped here waiting for ransom.  And if no one pays we will be forced to work in the mines.</incoming_comms_text>
+    <play_sound_now filename=".\dat\Missions\MISS_HereThereBeMonsters\A0001.wav"/>
+    <set_timer name="Music" seconds="8"/>
+    <set_variable name="Music" value="1.0"/>
+    <set_comms_button text="Contact TSN Command about the Radio Signal" sideValue="2"/>
+  </event>
+  <event name="Mission Update Radio Signal" id_arme="ca8c820b-6e4c-403c-93d0-2f348eed68da">
+    <if_comms_button text="Contact TSN Command about the Radio Signal"/>
+    <if_variable name="Launch_Marine_One_Button" comparator="NOT" value="1.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="0.0"/>
+    <clear_comms_button text="Contact TSN Command about the Radio Signal"/>
+    <incoming_comms_text from="TSN Command">A hostage situation! It is imperative that you rescue those hostages. Find where the hostages are located and launch marines to retrieve them.</incoming_comms_text>
+    <set_comms_button text="Message from Sgt. Stone" sideValue="2"/>
+  </event>
+  <event name="Mission Update Radio Signal 2nd" id_arme="ca8c820b-6e4c-403c-93d0-2f348eed68da">
+    <if_comms_button text="Contact TSN Command about the Radio Signal"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="1.0"/>
+    <clear_comms_button text="Contact TSN Command about the Radio Signal"/>
+    <incoming_comms_text from="TSN Command">A hostage situation! It is imperative that you rescue those hostages. Find where the hostages are located and launch marines to retrieve them.</incoming_comms_text>
+  </event>
+  <event name="Message from Sgt. Stone" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Message from Sgt. Stone"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Message from Sgt. Stone"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0120" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0120.mp4"/>
+    <incoming_comms_text from="Sgt. Stone">Let us know when you want us to launch in our shuttle "Marine One." We'll go save those hostages. Just get us closer to the station</incoming_comms_text>
+    <set_timer name="Music" seconds="8"/>
+    <set_variable name="Music" value="1.0"/>
+    <set_variable name="Hostage_Mission" value="1.0"/>
+    <set_comms_button text="Launch Marine One" sideValue="2"/>
+    <set_variable name="Launch_Marine_One_Button" value="1.0"/>
+    <set_timer name="Launch_Marine_One_Button" seconds="15"/>
+  </event>
+  <event name="Refresh Launch Marine One Button" id_arme="869a4d81-78ab-4cce-b865-8f9e15a3758c">
+    <if_variable name="Launch_Marine_One_Button" comparator="EQUALS" value="1.0"/>
+    <if_timer_finished name="Launch_Marine_One_Button"/>
+    <set_comms_button text="Launch Marine One" sideValue="2"/>
+    <set_timer name="Launch_Marine_One_Button" seconds="15"/>
+  </event>
+  <event name="Station Found" id_arme="fb69f2c1-1509-40fe-b995-ad4fd0717116">
+    <if_inside_sphere name="Artemis" centerX="50000.0" centerY="0.0" centerZ="30000.0" radius="5000"/>
+    <if_variable name="Station" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Station" value="2.0"/>
+    <create type="station" x="50000.0" y="0.0" z="30000.0" name="Death's End Station" raceKeys="Terran" hullKeys="Civilian Base base" sideValue="1"/>
+    <set_comms_button text="Radio Signal" sideValue="2"/>
+    <set_variable name="Hostage_Message" value="0.0"/>
+    <create type="genericMesh" x="50000.0" y="10000" z="30000.0" name="Radio Signal" meshFileName="dat\mine.dxs" textureFileName="dat\mine1.png"/>
+    <set_timer name="Station_Defense" seconds="15"/>
+    <warning_popup_message message="Ensign Rachel Reporting: It's a Web Generator!! You cannot travel at warp within 2000 of it but impulse power should be unaffected" consoles="S" player_slot="0"/>
+    <create type="genericMesh" x="49000.0" y="10.0" z="30500.0" name="Web Generator" meshFileName="dat\stationTower.dxs" textureFileName="dat\stationA_tower_illum.png"/>
+    <create type="genericMesh" x="51000.0" y="10.0" z="29500.0" name="Web Generator" meshFileName="dat\stationTower.dxs" textureFileName="dat\stationA_tower_illum.png"/>
+    <direct name="Web Generator" targetName="Artemis" scriptThrottle="0.0"/>
+    <set_variable name="Web" value="3.0"/>
+    <set_comms_button text="Contact TSN Command about Death's End Station" sideValue="2"/>
+    <set_object_property property="shieldState" value="1000.0" name="Death's End Station"/>
+  </event>
+  <event name="Mission Update Death's End Station" id_arme="28008468-6361-439f-88f5-1adff882afdb">
+    <if_comms_button text="Contact TSN Command about Death's End Station"/>
+    <clear_comms_button text="Contact TSN Command about Death's End Station"/>
+    <incoming_comms_text from="TSN Command">A pirate outpost! This outpost must be taken care of but you are in just a patrol ship. Find out more information before attempting to destroy it.</incoming_comms_text>
+  </event>
+  <event name="Saboteur Medical Bay Escape" id_arme="d497b927-9a45-415e-b97c-c6f979e57297">
+    <if_timer_finished name="Saboteur"/>
+    <if_variable name="Sabotuer" comparator="EQUALS" value="1.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Sabotuer" value="2.0"/>
+    <set_variable name="Medical_Bay" value="2.0"/>
+    <set_comms_button text="Medical Bay" sideValue="2"/>
+  </event>
+  <event name="Medical Bay 2" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Medical Bay"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Medical_Bay" comparator="EQUALS" value="2.0"/>
+    <clear_comms_button text="Medical Bay"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD02C0167" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD02C0167.mp4"/>
+    <set_timer name="Music" seconds="10"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Medical Bay">There was an incident in the Medbay and the Arvonian Survivor is missing!</incoming_comms_text>
+    <set_comms_button text="Investigate Sensor Array" sideValue="2"/>
+    <set_variable name="Medical_Bay" value="0.0"/>
+    <incoming_comms_text from="Sgt Stone">There was a commotion by the Sensor Array console!</incoming_comms_text>
+  </event>
+  <event name="Investigate Sensor Array" id_arme="fcb8a3d3-d847-4698-97d3-f9938a54741c">
+    <if_comms_button text="Investigate Sensor Array"/>
+    <clear_comms_button text="Investigate Sensor Array"/>
+    <set_variable name="Investigate" value="1.0"/>
+    <set_timer name="Investigate" seconds="60"/>
+    <incoming_comms_text from="Sgt Stone">There was a commotion by the Sensor Array console! We are on our way to investigate!  </incoming_comms_text>
+  </event>
+  <event name="Sgt Stone Report!" id_arme="2dcbff8b-ee9d-4ef9-ad85-cb163b940076">
+    <if_timer_finished name="Investigate"/>
+    <if_variable name="Investigate" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Investigate" value="0.0"/>
+    <set_comms_button text="Sgt Stone Report!" sideValue="2"/>
+  </event>
+  <event name="Saboteur Tactical" id_arme="339e1085-4127-47a0-b520-d9858d104185">
+    <if_timer_finished name="Saboteur"/>
+    <if_variable name="Sabotuer" comparator="EQUALS" value="2.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="3" systemType="systemTactical" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="2" systemType="systemTactical" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="1" systemType="systemTactical" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="0" systemType="systemTactical" countFrom="front"/>
+    <set_timer name="Saboteur" seconds="100"/>
+    <set_variable name="Sabotuer" value="3.0"/>
+    <play_sound_now filename=".\dat\Missions\MISS_HereThereBeMonsters\hullHit.wav"/>
+    <warning_popup_message message="Report from the Sensor Array: Someone has overloaded the forward Sensor Array. It's damaged now!" consoles="S" player_slot="0"/>
+    <set_variable name="Weapons_Warning" value="1.0"/>
+    <set_timer name="Weapons_Warning" seconds="15"/>
+  </event>
+  <event name="Weapons Warning" id_arme="75adb502-c7b7-4e74-9de9-58f89f038b6d">
+    <if_timer_finished name="Weapons_Warning"/>
+    <if_variable name="Weapons_Warning" comparator="EQUALS" value="1.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Weapons_Warning" value="0.0"/>
+    <warning_popup_message message="Report from Weapons Control: Unauthorized work in progress on the forward beam emmiters." consoles="W" player_slot="0"/>
+  </event>
+  <event name="Saboteur Beams" id_arme="1bc99f5b-78cc-40d9-bd40-7c0646e8852d">
+    <if_timer_finished name="Saboteur"/>
+    <if_variable name="Sabotuer" comparator="EQUALS" value="3.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_timer name="Saboteur" seconds="100"/>
+    <set_variable name="Sabotuer" value="4.0"/>
+    <play_sound_now filename=".\dat\Missions\MISS_HereThereBeMonsters\hullHit.wav"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="3" systemType="systemBeam" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="2" systemType="systemBeam" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="1" systemType="systemBeam" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="0" systemType="systemBeam" countFrom="front"/>
+    <warning_popup_message message="Report from Weapons Control: The Forward Beam power regulators just blew. Someone bypassed the safeties" consoles="W" player_slot="0"/>
+    <set_variable name="Comms_Warning" value="1.0"/>
+    <set_timer name="Comms_Warning" seconds="15"/>
+  </event>
+  <event name="Comms Warning" id_arme="0d9ead8e-3cb4-4e28-95f8-25ac47edc58a">
+    <if_timer_finished name="Comms_Warning"/>
+    <if_variable name="Comms_Warning" comparator="EQUALS" value="1.0"/>
+    <if_not_exists name="Location Broadcast"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Comms_Warning" value="0.0"/>
+    <warning_popup_message message="Report from Communications Array: Unauthorized Access to long range communications in progress" consoles="C" player_slot="0"/>
+  </event>
+  <event name="Helm_Warning Beacon on" id_arme="b41a158f-e6c7-405a-9f46-c7eefcaf6419">
+    <if_timer_finished name="Comms_Warning"/>
+    <if_variable name="Comms_Warning" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Location Broadcast"/>
+    <if_variable name="Sabotuer" comparator="EQUALS" value="4.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Comms_Warning" value="0.0"/>
+    <warning_popup_message message="Report from the Warp Core: Unauthorize maintainance to the warp and impulse regulators in progress " consoles="H" player_slot="0"/>
+    <set_variable name="Sabotuer" value="5.0"/>
+  </event>
+  <event name="Saboteur Comms" id_arme="0e46f7f3-31d4-41a2-a630-e4285c23042e">
+    <if_not_exists name="Location Broadcast"/>
+    <if_timer_finished name="Saboteur"/>
+    <if_variable name="Sabotuer" comparator="EQUALS" value="4.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_timer name="Saboteur" seconds="100"/>
+    <set_variable name="Sabotuer" value="5.0"/>
+    <incoming_comms_text from="Artemis">Location Broadcast...To vessels in the area this is Artemis location.</incoming_comms_text>
+    <create type="genericMesh" x="0.0" y="10000.0" z="0.0" name="Location Broadcast" meshFileName="dat\mine.dxs" textureFileName="dat\asteroidTexture.png"/>
+    <set_variable name="Helm_Warning" value="1.0"/>
+    <set_timer name="Helm_Warning" seconds="15"/>
+  </event>
+  <event name="Helm_Warning" id_arme="7aef44cf-edfd-4400-af5c-3eb5d849a8f8">
+    <if_timer_finished name="Helm_Warning"/>
+    <if_variable name="Helm_Warning" comparator="EQUALS" value="1.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Helm_Warning" value="0.0"/>
+    <warning_popup_message message="Report from the Warp Core: Unauthorize maintainance in progress to the warp and impulse regulators" consoles="H" player_slot="0"/>
+  </event>
+  <event name="Saboteur Engines" id_arme="f0e5de66-7efa-44eb-9289-105ee3a9cb33">
+    <if_timer_finished name="Saboteur"/>
+    <if_variable name="Sabotuer" comparator="EQUALS" value="5.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Sabotuer" value="6.0"/>
+    <play_sound_now filename=".\dat\Missions\MISS_HereThereBeMonsters\hullHit.wav"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="3" systemType="systemWarp" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="2" systemType="systemWarp" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="1" systemType="systemWarp" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="0" systemType="systemWarp" countFrom="front"/>
+    <set_player_grid_damage value="0.5" player_slot="0" index="3" systemType="systemImpulse" countFrom="front"/>
+    <set_player_grid_damage value="0.5" player_slot="0" index="2" systemType="systemImpulse" countFrom="front"/>
+    <set_player_grid_damage value="0.5" player_slot="0" index="1" systemType="systemImpulse" countFrom="front"/>
+    <set_player_grid_damage value="0.5" player_slot="0" index="0" systemType="systemImpulse" countFrom="front"/>
+    <set_timer name="Saboteur" seconds="100"/>
+    <warning_popup_message message="Report from the Warp Core: The Impulse Regulator was crossed with the warp power converter causing an overload." consoles="H" player_slot="0"/>
+    <set_variable name="Engr_Warning" value="1.0"/>
+    <set_timer name="Engr_Warning" seconds="15"/>
+  </event>
+  <event name="Engr_Warning" id_arme="c42b9b1d-5eaa-4925-bd51-80b65ce19b84">
+    <if_timer_finished name="Engr_Warning"/>
+    <if_variable name="Engr_Warning" comparator="EQUALS" value="1.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Engr_Warning" value="0.0"/>
+    <warning_popup_message message="Report from the Shield Generators: Unscheduled Maintainance to rear shield deflector control in progress" consoles="E" player_slot="0"/>
+  </event>
+  <event name="Saboteur Shields" id_arme="47bfa24c-2b37-4b02-84ed-47a96549e43b">
+    <if_timer_finished name="Saboteur"/>
+    <if_variable name="Sabotuer" comparator="EQUALS" value="6.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Sabotuer" value="2.0"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="3" systemType="systemBackShield" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="2" systemType="systemBackShield" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="1" systemType="systemBackShield" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="0" systemType="systemBackShield" countFrom="front"/>
+    <set_timer name="Saboteur" seconds="100"/>
+    <play_sound_now filename=".\dat\Missions\MISS_HereThereBeMonsters\hullHit.wav"/>
+    <warning_popup_message message="Report from the Shield Generators: Oh Dear the rear shield emitters just shorted out." consoles="E" player_slot="0"/>
+    <set_variable name="Sci_Warning" value="1.0"/>
+    <set_timer name="Sci_Warning" seconds="15"/>
+  </event>
+  <event name="Sci_Warning" id_arme="58929451-9fc6-4bbd-ac3a-63089f1e9f96">
+    <if_timer_finished name="Sci_Warning"/>
+    <if_variable name="Sci_Warning" comparator="EQUALS" value="1.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Sci_Warning" value="0.0"/>
+    <warning_popup_message message="Report from the Sensor Array: Unauthorized access to long range sensors power modulator in progress." consoles="S" player_slot="0"/>
+  </event>
+  <event name="This Was Sabotage" id_arme="1dcc2298-4138-40d4-8a9b-8471bd0c5c7a">
+    <if_comms_button text="Sgt Stone Report!"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Sgt Stone Report!"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0115" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0115.mp4"/>
+    <set_timer name="Music" seconds="10"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Sgt. Stone">Captain, This was not defective wiring. This was Sabotage! The Arvonian Survivor must have been a Pirate plant. Keep an eye out for unusual activity. Dispatch Security to locations you think he might be.</incoming_comms_text>
+    <set_variable name="Dispatch_Marine" value="1.0"/>
+  </event>
+  <event name="Weapons Fire" id_arme="4aa3bf58-14ae-4bcc-bb2a-2f29fdb484b9">
+    <if_variable name="Sabotuer" comparator="EQUALS" value="Marine_Location"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <if_variable name="Marine_Report" comparator="EQUALS" value="1.0"/>
+    <if_timer_finished name="Delay"/>
+    <set_variable name="Marine_Report" value="0.0"/>
+    <set_variable name="AT_Large" value="0.0"/>
+    <set_variable name="Delay" value="1.0"/>
+  </event>
+  <event name="Nothing Here" id_arme="4aa3bf58-14ae-4bcc-bb2a-2f29fdb484b9">
+    <if_variable name="Sabotuer" comparator="NOT" value="Marine_Location"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <if_variable name="Marine_Report" comparator="EQUALS" value="1.0"/>
+    <if_timer_finished name="Delay"/>
+    <set_variable name="Marine_Report" value="0.0"/>
+    <set_variable name="Delay" value="2.0"/>
+  </event>
+  <event name="Delay Nothing" id_arme="7fbbd3d8-a380-467c-8ab1-e441e67361db">
+    <if_variable name="Delay" comparator="EQUALS" value="2.0"/>
+    <set_variable name="Delay" value="0.0"/>
+    <set_comms_button text="Lt. Rockwell Report." sideValue="2"/>
+  </event>
+  <event name="Delay Something" id_arme="00cb6a1d-9fe8-4dcc-b0f2-7d268120df11">
+    <if_variable name="Delay" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Delay" value="0.0"/>
+    <set_comms_button text="Lt. Rockwell Report!" sideValue="2"/>
+  </event>
+  <event name="Weapons Fire Video" id_arme="1dcc2298-4138-40d4-8a9b-8471bd0c5c7a">
+    <if_comms_button text="Lt. Rockwell Report!"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Lt. Rockwell Report!"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0116" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0116.mp4"/>
+    <set_timer name="Music" seconds="7"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Lt. Rockwell">Weapons Fire! We are in pursuit</incoming_comms_text>
+    <set_variable name="Weapons_Fire" value="1.0"/>
+    <set_timer name="Weapons_Fire" seconds="60"/>
+    <set_damcon_members value="4" team_index="0"/>
+  </event>
+  <event name="Nothing" id_arme="1dcc2298-4138-40d4-8a9b-8471bd0c5c7a">
+    <if_comms_button text="Lt. Rockwell Report."/>
+    <clear_comms_button text="Lt. Rockwell Report."/>
+    <incoming_comms_text from="Lt. Rockwell">we found Nothing Unusual Here</incoming_comms_text>
+    <set_variable name="Dispatch_Marine" value="1.0"/>
+  </event>
+  <event name="Marines Find Sabetour" id_arme="86bf686b-48a8-4412-9111-37408414c2cb">
+    <if_variable name="Weapons_Fire" comparator="EQUALS" value="1.0"/>
+    <if_timer_finished name="Weapons_Fire"/>
+    <set_variable name="Weapons_Fire" value="0.0"/>
+    <set_variable name="Brig" value="1.0"/>
+    <set_variable name="Captured_Pirate" value="1.0"/>
+  </event>
+  <event name="Brig" id_arme="92fb8607-9a84-4560-88cd-06da07141bad">
+    <if_variable name="Brig" comparator="EQUALS" value="1.0"/>
+    <set_comms_button text="Message from Brig" sideValue="2"/>
+    <set_variable name="Brig" value="0.0"/>
+  </event>
+  <event name="Brig Video" id_arme="1df6519c-7a9b-479f-acd9-0e9a3445b0df">
+    <if_comms_button text="Message from Brig"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Message from Brig"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0119" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0119.mp4"/>
+    <set_timer name="Music" seconds="7"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Lt. Rockwell">Captain we have apprehended the Saboteur.</incoming_comms_text>
+  </event>
+  <event name="Dispatch Security to:" id_arme="481bfaa7-fc63-4fe5-9862-e817f3e9dda0">
+    <if_variable name="AT_Large" comparator="EQUALS" value="1"/>
+    <if_variable name="Dispatch_Marine" comparator="EQUALS" value="1.0"/>
+    <set_comms_button text="Dispatch Security to:" sideValue="2"/>
+    <set_variable name="Dispatch_Marine" value="0.0"/>
+  </event>
+  <event name="Choose Location" id_arme="acec4d0f-0b64-4a71-8bca-9e4c9d422ece">
+    <if_comms_button text="Dispatch Security to:"/>
+    <clear_comms_button text="Dispatch Security to:"/>
+    <set_comms_button text="Weapons Control" sideValue="2"/>
+    <set_comms_button text="Communications Array" sideValue="2"/>
+    <set_comms_button text="Warp Core" sideValue="2"/>
+    <set_comms_button text="Shield Generator" sideValue="2"/>
+    <set_comms_button text="Sensor Array" sideValue="2"/>
+  </event>
+  <event name="Location Weapons Control" id_arme="f59418b9-5b06-4b00-a11b-3feb36429d47">
+    <if_comms_button text="Weapons Control"/>
+    <clear_comms_button text="Weapons Control"/>
+    <clear_comms_button text="Communications Array"/>
+    <clear_comms_button text="Warp Core"/>
+    <clear_comms_button text="Shield Generator"/>
+    <clear_comms_button text="Sensor Array"/>
+    <set_variable name="Marine_Location" value="3.0"/>
+    <set_variable name="Marine_Report" value="1.0"/>
+    <set_timer name="Delay" seconds="50"/>
+    <incoming_comms_text from="Lt. Rockwell">We're on our way! We'll report back in a minute what we find!</incoming_comms_text>
+  </event>
+  <event name="Location Communications Array" id_arme="38633b75-bc7a-4ce6-99e4-28cb0a197780">
+    <if_comms_button text="Communications Array"/>
+    <clear_comms_button text="Weapons Control"/>
+    <clear_comms_button text="Communications Array"/>
+    <clear_comms_button text="Warp Core"/>
+    <clear_comms_button text="Shield Generator"/>
+    <clear_comms_button text="Sensor Array"/>
+    <set_variable name="Marine_Location" value="4.0"/>
+    <set_variable name="Marine_Report" value="1.0"/>
+    <set_timer name="Delay" seconds="50"/>
+    <incoming_comms_text from="Lt. Rockwell">We're on our way! We'll report back in a minute what we find!</incoming_comms_text>
+  </event>
+  <event name="Location Warp Core" id_arme="73c1a151-6b08-454c-ba52-89e824e952f3">
+    <if_comms_button text="Warp Core"/>
+    <clear_comms_button text="Weapons Control"/>
+    <clear_comms_button text="Communications Array"/>
+    <clear_comms_button text="Warp Core"/>
+    <clear_comms_button text="Shield Generator"/>
+    <clear_comms_button text="Sensor Array"/>
+    <set_variable name="Marine_Location" value="5.0"/>
+    <set_variable name="Marine_Report" value="1.0"/>
+    <set_timer name="Delay" seconds="50"/>
+    <incoming_comms_text from="Lt. Rockwell">We're on our way! We'll report back in a minute what we find!</incoming_comms_text>
+  </event>
+  <event name="Location Shield Generator" id_arme="07f09936-b3f4-406e-bedc-011ffda2b25f">
+    <if_comms_button text="Shield Generator"/>
+    <clear_comms_button text="Weapons Control"/>
+    <clear_comms_button text="Communications Array"/>
+    <clear_comms_button text="Warp Core"/>
+    <clear_comms_button text="Shield Generator"/>
+    <clear_comms_button text="Sensor Array"/>
+    <set_variable name="Marine_Location" value="6.0"/>
+    <set_variable name="Marine_Report" value="1.0"/>
+    <set_timer name="Delay" seconds="50"/>
+    <incoming_comms_text from="Lt. Rockwell">We're on our way! We'll report back in a minute what we find!</incoming_comms_text>
+  </event>
+  <event name="Location Sensor Array" id_arme="3e309cdc-71f4-46be-bd9a-f0e15642e5a2">
+    <if_comms_button text="Sensor Array"/>
+    <clear_comms_button text="Weapons Control"/>
+    <clear_comms_button text="Communications Array"/>
+    <clear_comms_button text="Warp Core"/>
+    <clear_comms_button text="Shield Generator"/>
+    <clear_comms_button text="Sensor Array"/>
+    <set_variable name="Marine_Location" value="3.0"/>
+    <set_variable name="Marine_Report" value="1.0"/>
+    <set_timer name="Delay" seconds="50"/>
+    <incoming_comms_text from="Lt. Rockwell">We're on our way! We'll report back in a minute what we find!</incoming_comms_text>
+  </event>
+  <event name="Broadcast Signal" id_arme="5ce88170-b993-45cf-bff1-38f8b9e7467e">
+    <if_exists name="Location Broadcast"/>
+    <copy_object_property property="positionZ" name1="Artemis" name2="Location Broadcast"/>
+    <copy_object_property property="positionX" name1="Artemis" name2="Location Broadcast"/>
+  </event>
+  <event name="Disable Broadcast Signal Button" id_arme="0bdddd5d-ddc2-45ad-83b5-91855d14fbb8">
+    <if_exists name="Location Broadcast"/>
+    <if_variable name="Hack_Beacon" comparator="EQUALS" value="1.0"/>
+    <set_comms_button text="Disable Location Broadcast" sideValue="2"/>
+    <set_variable name="Hack_Beacon" value="0.0"/>
+  </event>
+  <event name="Enter PassCode" id_arme="60c8eaf4-ce5b-44cd-a065-eaad4c746247">
+    <if_comms_button text="Disable Location Broadcast"/>
+    <clear_comms_button text="Disable Location Broadcast"/>
+    <set_comms_button text="Enter Passcode Phrase" sideValue="2"/>
+    <set_comms_button text="Blow the Communication Console" sideValue="2"/>
+  </event>
+  <event name="Blow Console" id_arme="60c8eaf4-ce5b-44cd-a065-eaad4c746247">
+    <if_comms_button text="Blow the Communication Console"/>
+    <clear_comms_button text="Blow the Communication Console"/>
+    <clear_comms_button text="Enter Passcode Phrase"/>
+    <destroy name="Location Broadcast"/>
+    <set_variable name="Coordinates_found" value="0.0"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="1" systemType="systemTactical" countFrom="front"/>
+    <set_player_grid_damage value="1.0" player_slot="0" index="0" systemType="systemTactical" countFrom="front"/>
+    <play_sound_now filename=".\dat\Missions\MISS_HereThereBeMonsters\hullHit.wav"/>
+    <incoming_comms_text from="Ensign Sadie">I guess thats one way to turn off the Broadcast Signal. The signal has been disabled. Now we just need to repair the damage you've caused.</incoming_comms_text>
+  </event>
+  <event name="Code Pad" id_arme="a6ea5d7a-4374-47fc-b3b1-a65b1b4600ba">
+    <if_comms_button text="Enter Passcode Phrase"/>
+    <clear_comms_button text="Enter Passcode Phrase"/>
+    <clear_comms_button text="Blow the Communication Console"/>
+    <set_comms_button text="A Pirate's" sideValue="2"/>
+    <set_comms_button text="Drink up" sideValue="2"/>
+    <set_comms_button text="No Prey" sideValue="2"/>
+    <set_comms_button text="Why's the" sideValue="2"/>
+    <set_comms_button text="Davy Jone's" sideValue="2"/>
+    <incoming_comms_text from="Ensign Sadie">I've narrowed to passord down to 5 phrases, but you are going to have to guess which phrase.</incoming_comms_text>
+    <warning_popup_message message="Enter Password phrase to Disable Location Broadcast" consoles="C" player_slot="0"/>
+  </event>
+  <event name="A Pirate's" id_arme="2c3e9023-e2a0-41bb-8c16-6688f7fef6a7">
+    <if_comms_button text="A Pirate's"/>
+    <clear_comms_button text="A Pirate's"/>
+    <clear_comms_button text="Drink up"/>
+    <clear_comms_button text="No Prey"/>
+    <clear_comms_button text="Why's the"/>
+    <clear_comms_button text="Davy Jone's"/>
+    <set_comms_button text="Me Hearties" sideValue="2"/>
+    <set_comms_button text="Rum Gone!" sideValue="2"/>
+    <set_comms_button text="Life For Me!" sideValue="2"/>
+    <set_comms_button text="Locker" sideValue="2"/>
+    <set_comms_button text="No Pay" sideValue="2"/>
+    <warning_popup_message message="A Pirate's..." consoles="C" player_slot="0"/>
+    <set_variable name="PasswordA" value="2.0"/>
+  </event>
+  <event name="Drink up" id_arme="c5f40c64-e9e5-475d-a796-6ec9d6ce8c2d">
+    <if_comms_button text="Drink up"/>
+    <clear_comms_button text="A Pirate's"/>
+    <clear_comms_button text="Drink up"/>
+    <clear_comms_button text="No Prey"/>
+    <clear_comms_button text="Why's the"/>
+    <clear_comms_button text="Davy Jone's"/>
+    <set_comms_button text="Me Hearties" sideValue="2"/>
+    <set_comms_button text="Rum Gone!" sideValue="2"/>
+    <set_comms_button text="Life For Me!" sideValue="2"/>
+    <set_comms_button text="Locker" sideValue="2"/>
+    <set_comms_button text="No Pay" sideValue="2"/>
+    <warning_popup_message message="Drink up..." consoles="C" player_slot="0"/>
+    <set_variable name="PasswordA" value="2.0"/>
+  </event>
+  <event name="No Prey" id_arme="1f917ed1-bc99-43f6-836f-0922edfc3fbb">
+    <if_comms_button text="No Prey"/>
+    <clear_comms_button text="A Pirate's"/>
+    <clear_comms_button text="Drink up"/>
+    <clear_comms_button text="No Prey"/>
+    <clear_comms_button text="Why's the"/>
+    <clear_comms_button text="Davy Jone's"/>
+    <set_comms_button text="Me Hearties" sideValue="2"/>
+    <set_comms_button text="Rum Gone!" sideValue="2"/>
+    <set_comms_button text="Life For Me!" sideValue="2"/>
+    <set_comms_button text="Locker" sideValue="2"/>
+    <set_comms_button text="No Pay" sideValue="2"/>
+    <warning_popup_message message="No Prey..." consoles="C" player_slot="0"/>
+    <set_variable name="PasswordA" value="1.0"/>
+  </event>
+  <event name="Why's the" id_arme="832a6a69-0bf7-4e05-ae1e-1f75cb6a1d4e">
+    <if_comms_button text="Why's the"/>
+    <clear_comms_button text="A Pirate's"/>
+    <clear_comms_button text="Drink up"/>
+    <clear_comms_button text="No Prey"/>
+    <clear_comms_button text="Why's the"/>
+    <clear_comms_button text="Davy Jone's"/>
+    <set_comms_button text="Me Hearties" sideValue="2"/>
+    <set_comms_button text="Rum Gone!" sideValue="2"/>
+    <set_comms_button text="Life For Me!" sideValue="2"/>
+    <set_comms_button text="Locker" sideValue="2"/>
+    <set_comms_button text="No Pay" sideValue="2"/>
+    <warning_popup_message message="Why's the..." consoles="C" player_slot="0"/>
+    <set_variable name="PasswordA" value="2.0"/>
+  </event>
+  <event name="Davy Jone's" id_arme="ebb45bf6-c148-4289-aeae-80c312348523">
+    <if_comms_button text="Davy Jone's"/>
+    <clear_comms_button text="A Pirate's"/>
+    <clear_comms_button text="Drink up"/>
+    <clear_comms_button text="No Prey"/>
+    <clear_comms_button text="Why's the"/>
+    <clear_comms_button text="Davy Jone's"/>
+    <set_comms_button text="Me Hearties" sideValue="2"/>
+    <set_comms_button text="Rum Gone!" sideValue="2"/>
+    <set_comms_button text="Life For Me!" sideValue="2"/>
+    <set_comms_button text="Locker" sideValue="2"/>
+    <set_comms_button text="No Pay" sideValue="2"/>
+    <warning_popup_message message="Davy Jone's..." consoles="C" player_slot="0"/>
+    <set_variable name="PasswordA" value="2.0"/>
+  </event>
+  <event name="Me Hearties" id_arme="b67037af-f944-466e-844e-2eab24bac7a1">
+    <if_comms_button text="Me Hearties"/>
+    <clear_comms_button text="Me Hearties"/>
+    <clear_comms_button text="Rum Gone!"/>
+    <clear_comms_button text="Life For Me!"/>
+    <clear_comms_button text="Locker"/>
+    <clear_comms_button text="No Pay"/>
+    <warning_popup_message message="...Me Hearties" consoles="C" player_slot="0"/>
+    <set_variable name="PasswordB" value="2.0"/>
+  </event>
+  <event name="Rum Gone!" id_arme="a710d104-4ed8-4df0-81c1-700932b8bba9">
+    <if_comms_button text="Rum Gone!"/>
+    <clear_comms_button text="Me Hearties"/>
+    <clear_comms_button text="Rum Gone!"/>
+    <clear_comms_button text="Life For Me!"/>
+    <clear_comms_button text="Locker"/>
+    <clear_comms_button text="No Pay"/>
+    <warning_popup_message message="...Rum Gone" consoles="C" player_slot="0"/>
+    <set_variable name="PasswordB" value="2.0"/>
+  </event>
+  <event name="Life For Me!" id_arme="25e94a87-4564-4fec-a99d-50cf22faca08">
+    <if_comms_button text="Life For Me!"/>
+    <clear_comms_button text="Me Hearties"/>
+    <clear_comms_button text="Rum Gone!"/>
+    <clear_comms_button text="Life For Me!"/>
+    <clear_comms_button text="Locker"/>
+    <clear_comms_button text="No Pay"/>
+    <warning_popup_message message="...Life For Me!" consoles="C" player_slot="0"/>
+    <set_variable name="PasswordB" value="2.0"/>
+  </event>
+  <event name="Locker" id_arme="53b498ba-7564-428e-b9c7-4b184c89d2e4">
+    <if_comms_button text="Locker"/>
+    <clear_comms_button text="Me Hearties"/>
+    <clear_comms_button text="Rum Gone!"/>
+    <clear_comms_button text="Life For Me!"/>
+    <clear_comms_button text="Locker"/>
+    <clear_comms_button text="No Pay"/>
+    <warning_popup_message message="...Locker" consoles="C" player_slot="0"/>
+    <set_variable name="PasswordB" value="2.0"/>
+  </event>
+  <event name="No Pay" id_arme="21901a35-b79b-486e-954b-72b33d53fb35">
+    <if_comms_button text="No Pay"/>
+    <clear_comms_button text="Me Hearties"/>
+    <clear_comms_button text="Rum Gone!"/>
+    <clear_comms_button text="Life For Me!"/>
+    <clear_comms_button text="Locker"/>
+    <clear_comms_button text="No Pay"/>
+    <warning_popup_message message="...No Pay" consoles="C" player_slot="0"/>
+    <set_variable name="PasswordB" value="1.0"/>
+  </event>
+  <event name="Password Cracked" id_arme="92fb8607-9a84-4560-88cd-06da07141bad">
+    <if_variable name="PasswordA" comparator="EQUALS" value="1.0"/>
+    <if_variable name="PasswordB" comparator="EQUALS" value="1.0"/>
+    <destroy name="Location Broadcast"/>
+    <set_variable name="Coordinates_found" value="0.0"/>
+    <set_variable name="PasswordA" value="0.0"/>
+    <set_variable name="PasswordB" value="0.0"/>
+    <warning_popup_message message="Password Accepted powering down beacon" consoles="C" player_slot="0"/>
+    <incoming_comms_text from="Ensign Sadie">Password accepted the beacon is powering down</incoming_comms_text>
+  </event>
+  <event name="Password Invalid" id_arme="92fb8607-9a84-4560-88cd-06da07141bad">
+    <if_variable name="PasswordA" comparator="EQUALS" value="2.0"/>
+    <if_variable name="PasswordB" comparator="EQUALS" value="1.0"/>
+    <set_variable name="PasswordA" value="0.0"/>
+    <set_variable name="PasswordB" value="0.0"/>
+    <set_variable name="Hack_Beacon" value="1.0"/>
+    <warning_popup_message message="Invalid Password" consoles="C" player_slot="0"/>
+    <play_sound_now filename=".\dat\Missions\MISS_HereThereBeMonsters\alarm2.wav"/>
+    <incoming_comms_text from="Ensign Sadie">That wasn't right try again.</incoming_comms_text>
+  </event>
+  <event name="Password Invalid" id_arme="92fb8607-9a84-4560-88cd-06da07141bad">
+    <if_variable name="PasswordA" comparator="EQUALS" value="1.0"/>
+    <if_variable name="PasswordB" comparator="EQUALS" value="2.0"/>
+    <set_variable name="PasswordA" value="0.0"/>
+    <set_variable name="PasswordB" value="0.0"/>
+    <set_variable name="Hack_Beacon" value="1.0"/>
+    <warning_popup_message message="Invalid Password" consoles="C" player_slot="0"/>
+    <play_sound_now filename=".\dat\Missions\MISS_HereThereBeMonsters\alarm2.wav"/>
+    <incoming_comms_text from="Ensign Sadie">That wasn't right try again.</incoming_comms_text>
+  </event>
+  <event name="Password Invalid" id_arme="92fb8607-9a84-4560-88cd-06da07141bad">
+    <if_variable name="PasswordA" comparator="EQUALS" value="2.0"/>
+    <if_variable name="PasswordB" comparator="EQUALS" value="2.0"/>
+    <set_variable name="PasswordA" value="0.0"/>
+    <set_variable name="PasswordB" value="0.0"/>
+    <set_variable name="Hack_Beacon" value="1.0"/>
+    <warning_popup_message message="Invalid Password" consoles="C" player_slot="0"/>
+    <play_sound_now filename=".\dat\Missions\MISS_HereThereBeMonsters\alarm2.wav"/>
+    <incoming_comms_text from="Ensign Sadie">That wasn't right try again.</incoming_comms_text>
+  </event>
+  <event name="Triangulate Position" id_arme="9af5a53e-5a3e-4018-b400-049c5dd72209">
+    <if_exists name="Location Broadcast"/>
+    <if_variable name="Wolf_Spider_Introduction" comparator="EQUALS" value="1.0"/>
+    <set_timer name="Transmitting" seconds="100"/>
+    <set_variable name="Coordinates_found" value="1.0"/>
+  </event>
+  <event name="Wolf Spider Introduction Beacon" id_arme="1b81881e-9499-440f-84d6-dbca70fb7c48">
+    <if_variable name="Coordinates_found" comparator="EQUALS" value="1.0"/>
+    <if_variable name="Wolf_Spider_Introduction" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Location Broadcast"/>
+    <if_timer_finished name="Transmitting"/>
+    <set_timer name="Wolf Spider" seconds="90"/>
+    <set_variable name="Wolf_Spider_Introduction" value="2.0"/>
+  </event>
+  <event name="Wolf Spider Introduction Web Triggered" id_arme="9af5a53e-5a3e-4018-b400-049c5dd72209">
+    <if_variable name="Wolf_Spider_Introduction" comparator="EQUALS" value="1.0"/>
+    <if_variable name="Web" comparator="EQUALS" value="3.0"/>
+    <set_timer name="Wolf Spider" seconds="60"/>
+    <set_variable name="Wolf_Spider_Introduction" value="2.0"/>
+  </event>
+  <event name="Wolf Spider Introduction Station" id_arme="78844ed8-2247-4c29-b5ad-a0ebe78226c3">
+    <if_variable name="Wolf_Spider_Introduction" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Death's End Station"/>
+    <set_timer name="Wolf Spider" seconds="60"/>
+    <set_variable name="Wolf_Spider_Introduction" value="2.0"/>
+  </event>
+  <event name="Location Found" id_arme="6132f01a-e3e7-4ed7-9825-ae4435251c0e">
+    <if_timer_finished name="Wolf Spider"/>
+    <if_variable name="Wolf_Spider_Introduction" comparator="EQUALS" value="2.0"/>
+    <set_comms_button text="Mysterious Message" sideValue="2"/>
+    <set_variable name="Wolf_Spider_Introduction" value="0.0"/>
+    <set_timer name="Ignore" seconds="300"/>
+    <set_variable name="Ignore" value="1.0"/>
+  </event>
+  <event name="Ignore Mysterious Message" id_arme="82a058bc-3b78-4052-9a88-3739d1840efe">
+    <if_timer_finished name="Ignore"/>
+    <if_variable name="Ignore" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Ignore" value="0.0"/>
+    <clear_comms_button text="Mysterious Message"/>
+    <set_timer name="Wolf Spider Jump" seconds="20"/>
+    <set_variable name="Wolf Spider Jump" value="1.0"/>
+    <incoming_comms_text from="Wolf Spider">What Brings a TSN Patrol ship to our humble home? Have you come to study the various Creatures? Or maybe transporting some carge? Or is it that you are Just here to take in the sights? Unfortunately your trip comes to an end here. Here's hoping you can make ransom or else you'll spend the rest of your days mining ore for us.</incoming_comms_text>
+    <create type="enemy" x="10.0" y="10.0" z="10.0" name="Wolf Spider" raceKeys="Pirate" hullKeys="Strongbow" fleetnumber="1"/>
+    <set_special name="Wolf Spider" ship="0" captain="4" ability="Stealth"/>
+    <set_special name="Wolf Spider" ship="0" captain="4" ability="Teleport"/>
+    <set_special name="Wolf Spider" ship="0" captain="4" ability="Tractor"/>
+    <set_special name="Wolf Spider" ship="0" captain="4" ability="AntiMine"/>
+    <set_special name="Wolf Spider" ship="0" captain="4" ability="AntiTorp"/>
+    <set_object_property property="surrenderChance" value="0" name="Wolf Spider"/>
+    <set_variable name="Wolf_Spider_Created" value="1.0"/>
+  </event>
+  <event name="Wolf Spider Introduction " id_arme="cbdd2ecd-d1d7-4777-a42a-541805d14930">
+    <if_comms_button text="Mysterious Message"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Mysterious Message"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0105" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0105.mp4"/>
+    <set_timer name="Music" seconds="34"/>
+    <set_variable name="Music" value="1.0"/>
+    <set_timer name="Wolf Spider Jump" seconds="180"/>
+    <set_variable name="Wolf Spider Jump" value="1.0"/>
+    <incoming_comms_text from="Wolf Spider">What Brings a TSN Patrol ship to our humble home? Have you come to study the various Creatures? Or maybe transporting some carge? Or is it that you are Just here to take in the sights? Unfortunately your trip comes to an end here. Here's hoping you can make ransom or else you'll spend the rest of your days mining ore for us.</incoming_comms_text>
+    <create type="enemy" x="10.0" y="10.0" z="10.0" name="Wolf Spider" raceKeys="Pirate" hullKeys="Strongbow" fleetnumber="1"/>
+    <set_special name="Wolf Spider" ship="0" captain="4" ability="Stealth"/>
+    <set_special name="Wolf Spider" ship="0" captain="4" ability="Teleport"/>
+    <set_special name="Wolf Spider" ship="0" captain="4" ability="Tractor"/>
+    <set_special name="Wolf Spider" ship="0" captain="4" ability="AntiMine"/>
+    <set_special name="Wolf Spider" ship="0" captain="4" ability="AntiTorp"/>
+    <set_object_property property="surrenderChance" value="0" name="Wolf Spider"/>
+    <set_variable name="Wolf_Spider_Created" value="1.0"/>
+    <set_variable name="Ignore" value="0.0"/>
+  </event>
+  <event name="Wolf Spider Appears" id_arme="f4ca5cb0-89f9-436c-8a30-172f62663ded">
+    <if_variable name="Wolf Spider Jump" comparator="EQUALS" value="1.0"/>
+    <if_timer_finished name="Wolf Spider Jump"/>
+    <set_relative_position name2="Wolf Spider" distance="1000" angle="180" name1="Artemis"/>
+    <set_variable name="Wolf Spider Jump" value="0.0"/>
+    <set_comms_button text="Contact TSN Command about Wolf Spider" sideValue="2"/>
+  </event>
+  <event name="Mission Update Wolf Spider" id_arme="6585e0de-a1c3-4405-a8da-946772038071">
+    <if_comms_button text="Contact TSN Command about Wolf Spider"/>
+    <clear_comms_button text="Contact TSN Command about Wolf Spider"/>
+    <incoming_comms_text from="TSN Command">A pirate ship! This explains what has been happening to those ships. Destroy Wolf Spider if you can. Pirating will not be tolerated.</incoming_comms_text>
+  </event>
+  <event name="Saboteur Escape" id_arme="0ddfe578-5005-47ff-9c63-0805a1bc9552">
+    <if_distance name1="Wolf Spider" name2="Artemis" comparator="LESS_EQUAL" value="8000.0"/>
+    <if_variable name="AT_Large" comparator="EQUALS" value="1.0"/>
+    <create type="enemy" x="0.0" y="10.0" z="0.0" name="Stolen Shuttle" raceKeys="TSN" hullKeys="TSN LR Shuttle" sideValue="1"/>
+    <set_variable name="Escape" value="1.0"/>
+    <set_timer name="Escape" seconds="5"/>
+    <set_variable name="AT_Large" value="0.0"/>
+  </event>
+  <event name="Escape" id_arme="9dc21ef1-dcfd-4cd5-bf64-a6f00ccaf144">
+    <if_timer_finished name="Escape"/>
+    <if_variable name="Escape" comparator="EQUALS" value="1.0"/>
+    <set_relative_position name2="Stolen Shuttle" distance="100" angle="180" name1="Artemis"/>
+    <incoming_comms_text from="Deck 5">Unauthorized Shuttle launched!</incoming_comms_text>
+    <set_variable name="Escape" value="2.0"/>
+    <set_timer name="Damaged_Docking_Tractor" seconds="180"/>
+    <add_ai type="TARGET_THROTTLE" value1="1.0" targetName="Wolf Spider" name="Stolen Shuttle"/>
+    <incoming_comms_text from="Shuttle_Bay">Our docking Tractor beam has been damaged. We cannot bring in the escape pod. Give us 3 minutes to repair it then we can capture the escape pod.</incoming_comms_text>
+  </event>
+  <event name="Wolf Spider Shuttle" id_arme="aa4d43ca-553f-4599-a22a-c2387e33e27c">
+    <if_variable name="Escape" comparator="EQUALS" value="2.0"/>
+    <if_distance name1="Stolen Shuttle" name2="Wolf Spider" comparator="LESS_EQUAL" value="200.0"/>
+    <destroy name="Stolen Shuttle"/>
+    <set_variable name="Rescued_Pirate" value="1.0"/>
+    <set_variable name="Escape" value="0.0"/>
+  </event>
+  <event name="Wolf Spider Attack" id_arme="3fc1e931-c71e-460d-ad16-77646446e6f9">
+    <if_distance name1="Wolf Spider" name2="Artemis" comparator="LESS_EQUAL" value="9000.0"/>
+    <if_variable name="Wolf Spider" comparator="EQUALS" value="1.0"/>
+    <add_ai type="ATTACK" targetName="Artemis" value1="1.0" name="Wolf Spider"/>
+    <set_variable name="Wolf Spider" value="2.0"/>
+  </event>
+  <event name="Wolf Spider to Base" id_arme="a9cf7b28-85ff-4cdc-810f-ad58f133e55a">
+    <if_distance name1="Wolf Spider" name2="Artemis" comparator="GREATER_EQUAL" value="15000.0"/>
+    <if_exists name="Death's End Station"/>
+    <if_variable name="Wolf Spider" comparator="EQUALS" value="2.0"/>
+    <add_ai type="TARGET_THROTTLE" value1="1.0" targetName="Death's End Station" name="Wolf Spider"/>
+    <set_variable name="Wolf Spider" value="1.0"/>
+  </event>
+  <event name="Rescued Pirate" id_arme="f6c8bb68-7266-40a6-bd5a-d2cdcf36315a">
+    <if_variable name="Rescued_Pirate" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Wolf Spider"/>
+    <if_distance name1="Wolf Spider" name2="Artemis" comparator="LESS_EQUAL" value="2000.0"/>
+    <incoming_comms_text from="Wolf Spider">Now that I've collected my fellow comrade here is a "Parting Gift". We'll be back to pick up the pieces.  Assuming anything is left.</incoming_comms_text>
+    <set_variable name="Eggs" value="1.0"/>
+    <set_variable name="Rescued_Pirate" value="0.0"/>
+    <set_timer name="Taunt_Still_Alive" seconds="240"/>
+    <set_variable name="Taunt_Still_Alive" value="1.0"/>
+  </event>
+  <event name="ReCapture Damaged Shuttle" id_arme="84cffbbe-3c00-4e7e-a767-f5be1391a9a9">
+    <if_timer_finished name="Damaged_Docking_Tractor"/>
+    <if_distance name1="Stolen Shuttle" name2="Artemis" comparator="LESS_EQUAL" value="150.0"/>
+    <if_variable name="Escape" comparator="EQUALS" value="2.0"/>
+    <destroy name="Stolen Shuttle"/>
+    <set_variable name="Captured_Pirate" value="1.0"/>
+    <set_variable name="Escape" value="0.0"/>
+    <set_variable name="Brig" value="1.0"/>
+  </event>
+  <event name="Captured Comrade" id_arme="287f9a87-9987-4bb6-b0f3-f0e3b63205ac">
+    <if_variable name="Captured_Pirate" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Wolf Spider"/>
+    <if_distance name1="Wolf Spider" name2="Artemis" comparator="LESS_EQUAL" value="2000.0"/>
+    <set_variable name="Eggs" value="1.0"/>
+    <incoming_comms_text from="Wolf Spider">My comrade understood the risks their job entailed. Enjoy this "Parting Gift". We'll be back to pick up the pieces.  Assuming anything is left.</incoming_comms_text>
+    <set_variable name="Captured_Pirate" value="0.0"/>
+    <set_timer name="Taunt_Still_Alive" seconds="240"/>
+    <set_variable name="Taunt_Still_Alive" value="1.0"/>
+  </event>
+  <event name="Fallen Comrade" id_arme="4c3a5d05-c2e5-49a5-b025-c04c4f265efa">
+    <if_variable name="Escape" comparator="EQUALS" value="2.0"/>
+    <if_exists name="Wolf Spider"/>
+    <if_not_exists name="Stolen Shuttle"/>
+    <if_distance name1="Wolf Spider" name2="Artemis" comparator="LESS_EQUAL" value="2000.0"/>
+    <set_variable name="Eggs" value="1.0"/>
+    <incoming_comms_text from="Wolf Spider">My comrade understood the risks their job entailed. Enjoy this "Parting Gift". We'll be back to pick up the pieces.  Assuming anything is left.</incoming_comms_text>
+    <set_variable name="Escape" value="0.0"/>
+    <set_timer name="Taunt_Still_Alive" seconds="240"/>
+    <set_variable name="Taunt_Still_Alive" value="1.0"/>
+  </event>
+  <event name="Piranha Egg Spawn" id_arme="62392453-98c5-4dff-a775-e1627587d57b">
+    <if_variable name="Eggs" comparator="EQUALS" value="1.0"/>
+    <create type="genericMesh" x="0.0" y="100.0" z="0.0" name="Object" meshFileName="dat\mine.dxs" textureFileName="dat\asteroidTexture.png"/>
+    <create type="genericMesh" x="0.0" y="100.0" z="100.0" name="Object2" meshFileName="dat\mine.dxs" textureFileName="dat\asteroidTexture.png"/>
+    <create type="genericMesh" x="100.0" y="100.0" z="100.0" name="Object3" meshFileName="dat\mine.dxs" textureFileName="dat\asteroidTexture.png"/>
+    <create type="genericMesh" x="100.0" y="-100.0" z="100.0" name="Object4" meshFileName="dat\mine.dxs" textureFileName="dat\asteroidTexture.png"/>
+    <set_timer name="Egg" seconds="5"/>
+    <set_variable name="Eggs" value="2.0"/>
+  </event>
+  <event name="Egg Launched" id_arme="6af0eeec-6be3-43ed-9c4a-b8856c8cf8e8">
+    <if_variable name="Eggs" comparator="EQUALS" value="2.0"/>
+    <if_timer_finished name="Egg"/>
+    <set_variable name="Eggs" value="3.0"/>
+    <set_relative_position name2="Object" distance="500" angle="0" name1="Wolf Spider"/>
+    <set_relative_position name2="Object2" distance="500" angle="180" name1="Wolf Spider"/>
+    <set_relative_position name2="Object3" distance="500" angle="90" name1="Wolf Spider"/>
+    <set_relative_position name2="Object4" distance="500" angle="270" name1="Wolf Spider"/>
+    <set_timer name="Egg Hatch" seconds="30"/>
+    <create type="monster" monsterType="4" podnumber="3" x="0.0" y="100.0" z="600.0" name="Piranha..."/>
+    <create type="monster" monsterType="4" podnumber="3" x="0.0" y="100.0" z="400.0" name="Piranha.."/>
+    <create type="monster" monsterType="4" podnumber="3" x="0.0" y="100.0" z="200.0" name="Piranha."/>
+    <create type="monster" monsterType="4" podnumber="3" x="0.0" y="100.0" z="800.0" name="Piranha,"/>
+    <add_ai type="ATTACK" targetName="Artemis" value1="1.0" name="Piranha..."/>
+    <add_ai type="ATTACK" targetName="Artemis" value1="1.0" name="Piranha.."/>
+    <add_ai type="ATTACK" targetName="Artemis" value1="1.0" name="Piranha."/>
+    <add_ai type="ATTACK" targetName="Artemis" value1="1.0" name="Piranha,"/>
+    <set_object_property property="pushRadius" value="0.0" name="Object3"/>
+    <set_object_property property="pushRadius" value="0.0" name="Object2"/>
+    <set_object_property property="pushRadius" value="0.0" name="Object4"/>
+    <set_object_property property="pushRadius" value="0.0" name="Object"/>
+  </event>
+  <event name="Egg Hatched" id_arme="7521b58d-f02f-401e-9f14-7e6850c73b3d">
+    <if_timer_finished name="Egg Hatch"/>
+    <if_variable name="Eggs" comparator="EQUALS" value="3.0"/>
+    <set_variable name="Eggs" value="4.0"/>
+    <copy_object_property property="positionZ" name1="Object3" name2="Piranha..."/>
+    <copy_object_property property="positionX" name1="Object3" name2="Piranha..."/>
+    <copy_object_property property="positionZ" name1="Object2" name2="Piranha.."/>
+    <copy_object_property property="positionX" name1="Object2" name2="Piranha.."/>
+    <copy_object_property property="positionZ" name1="Object" name2="Piranha."/>
+    <copy_object_property property="positionX" name1="Object" name2="Piranha."/>
+    <copy_object_property property="positionZ" name1="Object4" name2="Piranha,"/>
+    <copy_object_property property="positionX" name1="Object4" name2="Piranha,"/>
+    <set_variable name="Wolf Spider Jump" value="2.0"/>
+    <set_timer name="Wolf Spider Jump" seconds="3"/>
+    <set_timer name="Eggs_Reload" seconds="300"/>
+    <set_variable name="Eggs_Reload" value="1.0"/>
+  </event>
+  <event name="Remove Eggs" id_arme="8acc02f5-5ec0-4adc-8aa6-c48cd5ef9d57">
+    <if_variable name="Eggs" comparator="EQUALS" value="4.0"/>
+    <destroy name="Object3"/>
+    <destroy name="Object2"/>
+    <destroy name="Object4"/>
+    <destroy name="Object"/>
+  </event>
+  <event name="Reload Eggs" id_arme="4260382e-d5e0-430c-b981-62c6dcab0eb6">
+    <if_timer_finished name="Eggs_Reload"/>
+    <if_variable name="Eggs_Reload" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Eggs_Reload" value="0.0"/>
+    <set_variable name="Eggs" value="1.0"/>
+  </event>
+  <event name="Taunt Still Alive" id_arme="204324e6-7286-45f2-9c57-6fa2d917f251">
+    <if_variable name="Taunt_Still_Alive" comparator="EQUALS" value="1.0"/>
+    <if_timer_finished name="Taunt_Still_Alive"/>
+    <if_exists name="Wolf Spider"/>
+    <set_comms_button text="Message from Wolf Spider" sideValue="2"/>
+    <set_variable name="Taunt_Still_Alive" value="2.0"/>
+  </event>
+  <event name="Taunt Still Alive Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Message from Wolf Spider"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Taunt_Still_Alive" comparator="EQUALS" value="2.0"/>
+    <clear_comms_button text="Message from Wolf Spider"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0109" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0109.mp4"/>
+    <set_timer name="Music" seconds="12"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Wolf Spider">I see you are more resilient than a Shark's backside. It has been a while since I have had a good challenge.</incoming_comms_text>
+    <set_variable name="Taunt_Still_Alive" value="0.0"/>
+  </event>
+  <event name="Wolf Spider Front Damaged" id_arme="c7666cec-32d8-4f4d-9d92-d0bf986aec50">
+    <if_object_property property="shieldStateFront" name="Wolf Spider" comparator="LESS_EQUAL" value="20.0"/>
+    <if_variable name="Wolf_Spider_Health" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Wolf Spider"/>
+    <set_variable name="Wolf Spider Jump" value="2.0"/>
+    <set_timer name="Wolf Spider Jump" seconds="2"/>
+    <set_variable name="Wolf_Spider_Health" value="0.0"/>
+  </event>
+  <event name="Wolf Spider Rear Damaged" id_arme="d317ca05-2a0d-4e0e-8a15-80d1f6e13fe1">
+    <if_object_property property="shieldStateBack" name="Wolf Spider" comparator="LESS_EQUAL" value="20.0"/>
+    <if_variable name="Wolf_Spider_Health" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Wolf Spider"/>
+    <set_variable name="Wolf Spider Jump" value="2.0"/>
+    <set_timer name="Wolf Spider Jump" seconds="2"/>
+    <set_variable name="Wolf_Spider_Health" value="0.0"/>
+  </event>
+  <event name="Attrition" id_arme="50f9eb51-3612-4dd2-9508-6c1a01d75ed0">
+    <if_variable name="Attrition" comparator="EQUALS" value="10.0"/>
+    <if_exists name="Wolf Spider"/>
+    <set_comms_button text="Wolf Spider Hail." sideValue="2"/>
+    <set_variable name="Attrition" value="0.0"/>
+    <set_variable name="Attrition_Video" value="1.0"/>
+  </event>
+  <event name="Attrition Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Wolf Spider Hail."/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Attrition_Video" comparator="EQUALS" value="1.0"/>
+    <clear_comms_button text="Wolf Spider Hail."/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0111" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0111.mp4"/>
+    <set_timer name="Music" seconds="12"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Wolf Spider">I grow tired of these games, your ransom is not worth the trouble.  Leave or I will destroy you</incoming_comms_text>
+    <set_variable name="Attrition_Video" value="0.0"/>
+  </event>
+  <event name="Wolf Spider Jump safety" id_arme="3b6c4cc7-4b21-4462-83b5-1c9c1e30a030">
+    <if_variable name="Wolf Spider Jump" comparator="EQUALS" value="2.0"/>
+    <if_timer_finished name="Wolf Spider Jump"/>
+    <set_object_property property="positionX" value="98000" name="Wolf Spider"/>
+    <set_object_property property="positionY" value="500" name="Wolf Spider"/>
+    <set_object_property property="positionZ" value="5000" name="Wolf Spider"/>
+    <set_variable name="Wolf Spider Jump" value="0.0"/>
+    <set_variable name="Attrition" value="Attrition+1"/>
+    <set_timer name="Recover" seconds="180"/>
+    <set_variable name="Recover" value="1.0"/>
+  </event>
+  <event name="Return to Fray" id_arme="5227eb54-c0c0-4584-81f5-22cc84c4d8cd">
+    <if_variable name="Recover" comparator="EQUALS" value="1.0"/>
+    <if_timer_finished name="Recover"/>
+    <set_variable name="Recover" value="0.0"/>
+    <set_variable name="Wolf_Spider_Health" value="1.0"/>
+    <set_object_property property="positionY" value="10.0" name="Wolf Spider"/>
+    <set_relative_position name2="Wolf Spider" distance="1000" angle="120" name1="Artemis"/>
+  </event>
+  <event name="Defend Station" id_arme="b549b12a-04bc-4a27-a866-000de88c201d">
+    <if_distance name1="Death's End Station" name2="Artemis" comparator="LESS_EQUAL" value="9000.0"/>
+    <if_timer_finished name="Station_Defense"/>
+    <if_variable name="Station_Defense" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Death's End Station"/>
+    <create type="enemy" x="50000.0" y="-100.0" z="30000.0" name="Skull Defense 2" raceKeys="Pirate" hullKeys="Avenger" sideValue="1"/>
+    <create type="enemy" x="50000.0" y="0.0" z="29800.0" name="Skull Defense 4" raceKeys="Pirate" hullKeys="Avenger" sideValue="1"/>
+    <create type="enemy" x="50000.0" y="0.0" z="30200.0" name="Skull Defense 3" raceKeys="Pirate" hullKeys="Avenger" sideValue="1"/>
+    <create type="enemy" x="50000.0" y="100.0" z="30000.0" name="Skull Defense 1" raceKeys="Pirate" hullKeys="Avenger" sideValue="1"/>
+    <add_ai type="ATTACK" targetName="Artemis" value1="1.0" name="Skull Defense 2"/>
+    <add_ai type="ATTACK" targetName="Artemis" value1="1.0" name="Skull Defense 4"/>
+    <add_ai type="ATTACK" targetName="Artemis" value1="1.0" name="Skull Defense 3"/>
+    <add_ai type="ATTACK" targetName="Artemis" value1="1.0" name="Skull Defense 1"/>
+    <set_variable name="Skull_Defense_2" value="1.0"/>
+    <set_variable name="Skull_Defense_3" value="1.0"/>
+    <set_variable name="Skull_Defense_4" value="1.0"/>
+    <set_variable name="Skull_Defense_1" value="1.0"/>
+    <set_timer name="Station_Defense" seconds="240"/>
+    <set_variable name="Station_Defense" value="2.0"/>
+  </event>
+  <event name="Refuel_Fighters" id_arme="5ecf16fd-2ee3-4408-ba36-accd4239abc8">
+    <if_timer_finished name="Station_Defense"/>
+    <if_not_exists name="Skull Defense 1"/>
+    <if_not_exists name="Skull Defense 2"/>
+    <if_not_exists name="Skull Defense 3"/>
+    <if_not_exists name="Skull Defense 4"/>
+    <if_variable name="Station_Defense" comparator="EQUALS" value="2.0"/>
+    <set_variable name="Station_Defense" value="1.0"/>
+  </event>
+  <event name="Skull_Defense_1 Killed" id_arme="d9930214-de7e-413f-8794-f8d43e11b6bf">
+    <if_not_exists name="Skull Defense 1"/>
+    <if_variable name="Skull_Defense_1" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Skull_Defense_1" value="0.0"/>
+    <set_variable name="Attrition" value="Attrition+1"/>
+    <set_timer name="Station_Defense" seconds="120"/>
+  </event>
+  <event name="Skull_Defense_2 Killed" id_arme="5b7196fc-1c81-49f6-924f-63d044cb0942">
+    <if_not_exists name="Skull Defense 2"/>
+    <if_variable name="Skull_Defense_2" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Skull_Defense_2" value="0.0"/>
+    <set_variable name="Attrition" value="Attrition+1"/>
+    <set_timer name="Station_Defense" seconds="120"/>
+  </event>
+  <event name="Skull_Defense_3 Killed" id_arme="0a18515c-3f49-4e58-8635-fcee97693bb2">
+    <if_not_exists name="Skull Defense 3"/>
+    <if_variable name="Skull_Defense_3" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Skull_Defense_3" value="0.0"/>
+    <set_variable name="Attrition" value="Attrition+1"/>
+    <set_timer name="Station_Defense" seconds="120"/>
+  </event>
+  <event name="Skull_Defense_4 Killed" id_arme="af5e5590-d48b-4e81-86ce-71e97148a1c3">
+    <if_not_exists name="Skull Defense 4"/>
+    <if_variable name="Skull_Defense_4" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Skull_Defense_4" value="0.0"/>
+    <set_variable name="Attrition" value="Attrition+1"/>
+    <set_timer name="Station_Defense" seconds="120"/>
+  </event>
+  <event name="Launch Marine Shuttle" id_arme="f650c4ec-5ec4-42af-bd79-724b088ba481">
+    <if_comms_button text="Launch Marine One"/>
+    <if_distance name1="Artemis" name2="Death's End Station" comparator="LESS_EQUAL" value="4000.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Death's End Station"/>
+    <clear_comms_button text="Launch Marine One"/>
+    <create type="neutral" x="0.0" y="10.0" z="0.0" name="Marine One" raceKeys="TSN" hullKeys="TSN LR Shuttle" sideValue="2"/>
+    <set_relative_position name2="Marine One" distance="200" angle="45" name1="Artemis"/>
+    <add_ai type="POINT_THROTTLE" value1="50000.0" value2="0.0" value3="30000.0" value4="1.0" name="Marine One"/>
+    <incoming_comms_text from="Sgt. Stone">Marine One away. Wish us luck!</incoming_comms_text>
+    <set_variable name="Hostage_Mission" value="2.0"/>
+    <set_variable name="Launch_Marine_One_Button" value="0.0"/>
+  </event>
+  <event name="Launch Marine Shuttle to Far" id_arme="f650c4ec-5ec4-42af-bd79-724b088ba481">
+    <if_comms_button text="Launch Marine One"/>
+    <if_distance name1="Artemis" name2="Death's End Station" comparator="GREATER" value="4000.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Death's End Station"/>
+    <incoming_comms_text from="Lt. Rockwell">Are you Crazy? We are too far away! We'll never make it.</incoming_comms_text>
+  </event>
+  <event name="Launch Marine Shuttle Not Exist" id_arme="f650c4ec-5ec4-42af-bd79-724b088ba481">
+    <if_comms_button text="Launch Marine One"/>
+    <if_distance name1="Artemis" name2="Death's End Station" comparator="GREATER" value="4000.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="1.0"/>
+    <if_not_exists name="Death's End Station"/>
+    <incoming_comms_text from="Lt. Rockwell">We don't have the station on our sensors.</incoming_comms_text>
+  </event>
+  <event name="Land at Station" id_arme="e990ea28-24ff-4111-b9d0-df88fc5541d4">
+    <if_distance name1="Marine One" name2="Death's End Station" comparator="LESS_EQUAL" value="400.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="2.0"/>
+    <if_exists name="Death's End Station"/>
+    <set_comms_button text="Marines Landed" sideValue="2"/>
+    <destroy name="Marine One"/>
+  </event>
+  <event name="Cannot Land at Station" id_arme="e990ea28-24ff-4111-b9d0-df88fc5541d4">
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="2.0"/>
+    <if_not_exists name="Death's End Station"/>
+    <add_ai type="TARGET_THROTTLE" value1="1.0" targetName="Artemis" name="Marine One"/>
+    <incoming_comms_text from="Lt. Rockwell">Station has been destroyed we are on our way back!</incoming_comms_text>
+    <set_variable name="Hostage_Mission" value="3.0"/>
+  </event>
+  <event name="Redocked with Artemis" id_arme="e990ea28-24ff-4111-b9d0-df88fc5541d4">
+    <if_distance name1="Marine One" name2="Artemis" comparator="LESS_EQUAL" value="300.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="3.0"/>
+    <if_not_exists name="Death's End Station"/>
+    <incoming_comms_text from="Lt. Rockwell">We have returned. To bad we couldn't save those Hostages.</incoming_comms_text>
+    <destroy name="Marine One"/>
+    <set_variable name="Hostage_Mission" value="0.0"/>
+  </event>
+  <event name="Landed at Station Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Marines Landed"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="2.0"/>
+    <if_exists name="Death's End Station"/>
+    <clear_comms_button text="Marines Landed"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0124" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0124.mp4"/>
+    <incoming_comms_text from="Lt. Rockwell">We've Landed Captain and secured the shuttle.  We'll find those hostages just hold those ships off for as long as possible.</incoming_comms_text>
+    <set_timer name="Music" seconds="10"/>
+    <set_variable name="Music" value="1.0"/>
+    <set_timer name="Hostage_Mission" seconds="200"/>
+    <set_variable name="Hostage_Mission" value="3.0"/>
+  </event>
+  <event name="Secured the Hostages" id_arme="af34d842-46fc-4044-a70a-19688803afe6">
+    <if_timer_finished name="Hostage_Mission"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="3.0"/>
+    <if_exists name="Death's End Station"/>
+    <set_comms_button text="Marines Update 1" sideValue="2"/>
+  </event>
+  <event name="Secured the Hostages Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Marines Update 1"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="3.0"/>
+    <if_exists name="Death's End Station"/>
+    <clear_comms_button text="Marines Update 1"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0125" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0125.mp4"/>
+    <incoming_comms_text from="Lt. Rockwell">Captain we have the hostages and our heading back to our shuttle now.</incoming_comms_text>
+    <incoming_comms_text from="Sgt. Stone">We have freed 10 Hostages</incoming_comms_text>
+    <set_timer name="Music" seconds="8"/>
+    <set_variable name="Music" value="1.0"/>
+    <set_variable name="Hostage_Mission" value="4.0"/>
+    <set_timer name="Hostage_Mission" seconds="200"/>
+  </event>
+  <event name="Secured the Docking Bay" id_arme="2fa2b1dc-a489-4cd3-a910-0b6b8c0f13be">
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="4.0"/>
+    <if_timer_finished name="Hostage_Mission"/>
+    <if_exists name="Death's End Station"/>
+    <set_side_value value="2" name="Death's End Station"/>
+    <set_comms_button text="Marines Update 2" sideValue="2"/>
+  </event>
+  <event name="Secured the Docking Bay Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Marines Update 2"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="4.0"/>
+    <if_exists name="Death's End Station"/>
+    <clear_comms_button text="Marines Update 2"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0127" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0127.mp4"/>
+    <set_timer name="Music" seconds="8"/>
+    <set_variable name="Music" value="1.0"/>
+    <set_timer name="Hurry_up" seconds="180"/>
+    <incoming_comms_text from="Lt. Rockwell">Captain the shuttle's been Damaged!! We have secured the Docking Port though. Dock with the Station and pick us up!</incoming_comms_text>
+    <set_variable name="Too_Late" value="1.0"/>
+    <set_timer name="Too_Late" seconds="600"/>
+    <set_variable name="Hurry_up" value="1.0"/>
+    <set_variable name="Hostage_Mission" value="5.0"/>
+    <set_variable name="Hostage_Alive" value="10.0"/>
+    <set_timer name="Hostage_Survival" seconds="60"/>
+  </event>
+  <event name="Hostages Dying" id_arme="73c5f67b-07da-4fc9-b8d3-f20d550c49d4">
+    <if_timer_finished name="Hostage_Survival"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="5.0"/>
+    <if_variable name="Hostage_Alive" comparator="GREATER" value="0.0"/>
+    <if_exists name="Death's End Station"/>
+    <set_variable name="Hostage_Alive" value="Hostage_Alive-1"/>
+    <set_timer name="Hostage_Survival" seconds="60"/>
+    <incoming_comms_text from="Lt. Rockwell">Hostage down! We only have |Hostage_Alive| left!</incoming_comms_text>
+  </event>
+  <event name="Waiting" id_arme="9dffcff6-97a6-40a8-8683-5d5b2e8d3df7">
+    <if_timer_finished name="Hurry_up"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="5.0"/>
+    <if_variable name="Hurry_up" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Death's End Station"/>
+    <set_comms_button text="Marines Help!" sideValue="2"/>
+  </event>
+  <event name="Waiting Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Marines Help!"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Hurry_up" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Death's End Station"/>
+    <clear_comms_button text="Marines Help!"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0129" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0129.mp4"/>
+    <set_timer name="Music" seconds="10"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Sgt. Stone">Artemis Where are you? We Need Pick up! Now!</incoming_comms_text>
+    <incoming_comms_text from="Lt. Rockwell">Hostages down! We only have |Hostage_Alive| left!</incoming_comms_text>
+    <set_variable name="Hurry_up" value="0.0"/>
+  </event>
+  <event name="Too Late" id_arme="288f9ae5-1695-4ced-9887-48827ceb9a6e">
+    <if_variable name="Too_Late" comparator="EQUALS" value="1.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="5.0"/>
+    <if_timer_finished name="Too_Late"/>
+    <if_exists name="Death's End Station"/>
+    <set_comms_button text="Marines Help!!!" sideValue="2"/>
+  </event>
+  <event name="Too Late Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Marines Help!!!"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Too_Late" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Death's End Station"/>
+    <clear_comms_button text="Marines Help!!!"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0133" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0133.mp4"/>
+    <set_timer name="Music" seconds="10"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Sgt. Stone">Artemis Where are you? We are out of Time!!</incoming_comms_text>
+    <set_variable name="Too_Late" value="0.0"/>
+    <set_comms_button text="Contact TSN Command Failure about to Rescue Hostages" sideValue="2"/>
+  </event>
+  <event name="Mission Update Too Late" id_arme="b40e3bca-1feb-4738-a830-d69278f063c5">
+    <if_comms_button text="Contact TSN Command Failure about to Rescue Hostages"/>
+    <clear_comms_button text="Contact TSN Command Failure about to Rescue Hostages"/>
+    <incoming_comms_text from="TSN Command">It's Unfortunate we could not save the hostages. Avenge them by destroying Death's End Station and Wolf Spider.</incoming_comms_text>
+  </event>
+  <event name="Dock with Station" id_arme="ef6b0886-824d-44ab-a82c-958479a75320">
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="5.0"/>
+    <if_docked name="Death's End Station"/>
+    <if_exists name="Death's End Station"/>
+    <set_comms_button text="Marines Update 3" sideValue="2"/>
+    <set_variable name="Hostage_Mission" value="6.0"/>
+    <set_timer name="Pirate_Control" seconds="20"/>
+    <set_variable name="Pirate_Control" value="1.0"/>
+  </event>
+  <event name="Dock with Station Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Marines Update 3"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="6.0"/>
+    <if_exists name="Death's End Station"/>
+    <clear_comms_button text="Marines Update 3"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0131" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0131.mp4"/>
+    <set_timer name="Music" seconds="7"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Lt. Rockwell">Captain Everyone's on Board and we have secured the Airlock. Lets get out of here!</incoming_comms_text>
+  </event>
+  <event name="Station Change Side" id_arme="6c9e1b2d-d9d0-4844-917c-3b7bbac92946">
+    <if_timer_finished name="Pirate_Control"/>
+    <if_variable name="Pirate_Control" comparator="EQUALS" value="1.0"/>
+    <if_exists name="Death's End Station"/>
+    <set_side_value value="1" name="Death's End Station"/>
+    <set_variable name="Pirate_Control" value="0.0"/>
+  </event>
+  <event name="Contact TSN Command" id_arme="8d471d04-3b5e-4805-b30b-5e17d4cf1c40">
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="6.0"/>
+    <set_comms_button text="Contact TSN Command" sideValue="2"/>
+  </event>
+  <event name="Contact TSN Command Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Contact TSN Command"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="6.0"/>
+    <clear_comms_button text="Contact TSN Command"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0071" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0071.mp4"/>
+    <set_timer name="Music" seconds="10"/>
+    <set_variable name="Music" value="1.0"/>
+    <create type="genericMesh" x="5000.0" y="5" z="95000.0" name="Rendevous" meshFileName="dat\mine.dxs" textureFileName="dat\mineGlow2.png"/>
+    <incoming_comms_text from="TSN Command">We will send reinforcements, meet us at these coordinates. It is imperative you get these hostages to safety. </incoming_comms_text>
+    <set_variable name="Hostage_Mission" value="7.0"/>
+  </event>
+  <event name="Escape" id_arme="bb95e5bd-f2b2-47c7-84e3-36de938fcb45">
+    <if_distance name1="Artemis" name2="Rendevous" comparator="LESS_EQUAL" value="1000.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="7.0"/>
+    <set_comms_button text="Wolf Spider HAIL!" sideValue="2"/>
+    <set_variable name="Hostage_Mission" value="8.0"/>
+    <create type="neutral" x="6000.0" y="1.0" z="98000.0" name="Alpha Prime" raceKeys="Terran" hullKeys="Destroyer" sideValue="2"/>
+    <create type="neutral" x="3000.0" y="1.0" z="98000.0" name="Shield 1" raceKeys="Terran" hullKeys="Escort" sideValue="2"/>
+  </event>
+  <event name="Wolf Spider HAIL! Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Wolf Spider HAIL!"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="8.0"/>
+    <clear_comms_button text="Wolf Spider HAIL!"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0113" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0113.mp4"/>
+    <set_timer name="Music" seconds="12"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Wolf Spider">You may have won this time, Terran Scum, but we will meet again.</incoming_comms_text>
+    <set_timer name="Mission_Report" seconds="30"/>
+  </event>
+  <event name="Station Destroyed" id_arme="2fdb3caf-3cb4-4b30-ab45-e46ec10444fe">
+    <if_not_exists name="Death's End Station"/>
+    <if_variable name="Station" comparator="EQUALS" value="2.0"/>
+    <if_variable name="Hostage_Mission" comparator="LESS_EQUAL" value="5.0"/>
+    <set_variable name="Hostage_Alive" value="0.0"/>
+    <set_variable name="Station" value="3.0"/>
+    <incoming_comms_text from="Sensors Array">Confirmed Death's End Station is Destroyed</incoming_comms_text>
+    <set_comms_button text="Contact TSN Command, Death's End Station Destroyed!" sideValue="2"/>
+  </event>
+  <event name="Death's End Station Destroyed" id_arme="b40e3bca-1feb-4738-a830-d69278f063c5">
+    <if_comms_button text="Contact TSN Command, Death's End Station Destroyed!"/>
+    <if_exists name="Wolf Spider"/>
+    <clear_comms_button text="Contact TSN Command, Death's End Station Destroyed!"/>
+    <incoming_comms_text from="TSN Command">It's Unfortunate we could not save the hostages. But you have Avenged them by destroying Death's End Station. Find and Destroy Wolf Spider!</incoming_comms_text>
+  </event>
+  <event name="Death's End Station Destroyed" id_arme="b40e3bca-1feb-4738-a830-d69278f063c5">
+    <if_comms_button text="Contact TSN Command, Death's End Station Destroyed!"/>
+    <if_not_exists name="Wolf Spider"/>
+    <clear_comms_button text="Contact TSN Command, Death's End Station Destroyed!"/>
+    <incoming_comms_text from="TSN Command">It's Unfortunate we could not save the hostages. But you have Avenged them by destroying Death's End Station and Wolf Spider!</incoming_comms_text>
+  </event>
+  <event name="Station Destroyed" id_arme="2fdb3caf-3cb4-4b30-ab45-e46ec10444fe">
+    <if_not_exists name="Death's End Station"/>
+    <if_variable name="Station" comparator="EQUALS" value="2.0"/>
+    <if_variable name="Hostage_Mission" comparator="GREATER" value="5.0"/>
+    <set_variable name="Station" value="3.0"/>
+    <incoming_comms_text from="Sensors Array">Confirmed Death's End Station is Destroyed</incoming_comms_text>
+    <set_comms_button text="Contact TSN Command, Death's End Station Destroyed." sideValue="2"/>
+  </event>
+  <event name="Death's End Station Destroyed" id_arme="b40e3bca-1feb-4738-a830-d69278f063c5">
+    <if_comms_button text="Contact TSN Command, Death's End Station Destroyed."/>
+    <if_exists name="Wolf Spider"/>
+    <clear_comms_button text="Contact TSN Command, Death's End Station Destroyed."/>
+    <incoming_comms_text from="TSN Command">Excellent you have destroyed Death's End Station. But you must get the Hostages to safety! Watch out Wolf Spider is still out there!</incoming_comms_text>
+  </event>
+  <event name="Death's End Station Destroyed" id_arme="b40e3bca-1feb-4738-a830-d69278f063c5">
+    <if_comms_button text="Contact TSN Command, Death's End Station Destroyed."/>
+    <if_not_exists name="Wolf Spider"/>
+    <clear_comms_button text="Contact TSN Command, Death's End Station Destroyed."/>
+    <incoming_comms_text from="TSN Command">Excellent, you have destroyed Death's End Station and Wolf Spider has been destroyed. The sector is safe. Its time to bring those hostages home.</incoming_comms_text>
+  </event>
+  <event name="Wolf Spider Destroyed" id_arme="61edebc9-52f6-4cf8-a0b5-fece5803c8b1">
+    <if_not_exists name="Wolf Spider"/>
+    <if_variable name="Wolf_Spider_Created" comparator="EQUALS" value="1.0"/>
+    <set_comms_button text="Weak Signal" sideValue="2"/>
+    <set_variable name="Wolf_Spider_Created" value="2.0"/>
+    <incoming_comms_text from="Sensors Array">Confirmed Wolf Spider is Destroyed</incoming_comms_text>
+  </event>
+  <event name="Wolf Spider Surrendered" id_arme="581d7200-bccd-46c3-b133-c90d61b4a528">
+    <if_object_property property="hasSurrendered" name="Wolf Spider" comparator="EQUALS" value="1.0"/>
+    <if_variable name="Surrender" comparator="EQUALS" value="1.0"/>
+    <set_variable name="Surrender" value="2.0"/>
+    <set_timer name="Surrender" seconds="90"/>
+  </event>
+  <event name="Duplicitous Wolf Spider" id_arme="3eea225f-8700-4577-afd3-8773e947dc28">
+    <if_variable name="Surrender" comparator="EQUALS" value="2.0"/>
+    <if_timer_finished name="Surrender"/>
+    <set_object_property property="hasSurrendered" value="0" name="Wolf Spider"/>
+    <set_variable name="Surrender" value="1.0"/>
+  </event>
+  <event name="Weak Signal Video" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
+    <if_comms_button text="Weak Signal"/>
+    <if_variable name="Music" comparator="NOT" value="1.0"/>
+    <clear_comms_button text="Weak Signal"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD01C0114" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD01C0114.mp4"/>
+    <set_timer name="Music" seconds="12"/>
+    <set_variable name="Music" value="1.0"/>
+    <incoming_comms_text from="Wolf Spider">Did you think it would be that easy?</incoming_comms_text>
+  </event>
+  <event name="Mission Report" id_arme="796e0ab3-0863-4ea8-a48c-924de0ece9dc">
+    <if_timer_finished name="Mission_Report"/>
+    <if_variable name="Mission_Complete" comparator="EQUALS" value="1.0"/>
+    <if_variable name="Hostage_Mission" comparator="EQUALS" value="8.0"/>
+    <big_message title="Victory!" subtitle1="Hostages Saved: |Hostage_Alive|"/>
+    <set_timer name="Mission_End" seconds="240"/>
+    <set_variable name="Mission_Complete" value="0.0"/>
+    <set_timer name="Credits" seconds="10"/>
+    <set_variable name="Credits" value="1.0"/>
+    <set_timer name="Mission_Report" seconds="60"/>
+    <set_variable name="Mission_Report" value="1.0"/>
+  </event>
+  <event name="Mission Report Repeat" id_arme="796e0ab3-0863-4ea8-a48c-924de0ece9dc">
+    <if_timer_finished name="Mission_Report"/>
+    <if_variable name="Mission_Report" comparator="EQUALS" value="1.0"/>
+    <big_message title="Victory!" subtitle1="Hostages Saved: |Hostage_Alive|"/>
+    <set_timer name="Credits" seconds="10"/>
+    <set_variable name="Credits" value="1.0"/>
+    <set_timer name="Mission_Report" seconds="60"/>
+  </event>
+  <event name="Mission Report 2" id_arme="5ec62afd-0c8f-4613-93bd-fc633b3ba646">
+    <if_not_exists name="Wolf Spider"/>
+    <if_not_exists name="Death's End Station"/>
+    <if_variable name="Station" comparator="EQUALS" value="3.0"/>
+    <if_variable name="Hostage_Mission" comparator="LESS_EQUALS" value="5.0"/>
+    <if_variable name="Mission_Complete" comparator="EQUALS" value="1.0"/>
+    <big_message title="Missions Complete" subtitle1="Hostages Saved: |Hostage_Alive|"/>
+    <set_timer name="Mission_End" seconds="240"/>
+    <set_variable name="Mission_Complete" value="0.0"/>
+    <set_timer name="Credits" seconds="10"/>
+    <set_variable name="Credits" value="1.0"/>
+    <set_timer name="Mission_Report_2" seconds="60"/>
+    <set_variable name="Mission_Report_2" value="1.0"/>
+    <set_timer name="After_Message" seconds="60"/>
+    <set_variable name="After_Message" value="2.0"/>
+  </event>
+  <event name="Mission Report 2 Repeat" id_arme="796e0ab3-0863-4ea8-a48c-924de0ece9dc">
+    <if_timer_finished name="Mission_Report_2"/>
+    <if_variable name="Mission_Report_2" comparator="EQUALS" value="1.0"/>
+    <big_message title="Missions Complete" subtitle1="Hostages Saved: |Hostage_Alive|"/>
+    <set_timer name="Credits" seconds="10"/>
+    <set_variable name="Credits" value="1.0"/>
+    <set_timer name="Mission_Report_2" seconds="60"/>
+  </event>
+  <event name="Mission Report 3" id_arme="0a8e5ee1-0f79-4626-85b5-fff44e36732d">
+    <if_not_exists name="Artemis"/>
+    <if_variable name="Mission_Complete" comparator="EQUALS" value="1.0"/>
+    <big_message title="Mission Failed!" subtitle1="You are Dead"/>
+    <set_timer name="Mission_End" seconds="240"/>
+    <set_variable name="Mission_Complete" value="0.0"/>
+    <set_timer name="Mission_Report_3" seconds="10"/>
+    <set_variable name="Mission_Report_3" value="1.0"/>
+    <set_timer name="After_Message" seconds="60"/>
+    <set_variable name="After_Message" value="1.0"/>
+    <create type="player" player_slot="0" x="98000.0" y="0" z="98000.0" name="Artemis" raceKeys="TSN player" hullKeys="Light Cruiser" warp="yes"/>
+  </event>
+  <event name="After Message" id_arme="5929f0bc-0a67-4e94-955b-20beed83f9aa">
+    <if_timer_finished name="After_Message"/>
+    <if_variable name="After_Message" comparator="EQUALS" value="1.0"/>
+    <set_variable name="After_Message" value="0.0"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD02C0032" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD02C0032.mp4"/>
+    <set_timer name="Music" seconds="17"/>
+    <set_variable name="Music" value="1.0"/>
+  </event>
+  <event name="After Message 2" id_arme="f88a0da8-7a1f-4354-9f73-a0bd85dcbcfc">
+    <if_timer_finished name="After_Message"/>
+    <if_variable name="After_Message" comparator="EQUALS" value="2.0"/>
+    <if_variable name="After_Message" comparator="GREATER_EQUALS" value="3.0"/>
+    <set_variable name="After_Message" value="0.0"/>
+    <set_object_property property="musicObjectMasterVolume" value="0"/>
+    <spawn_external_program id="SD02C0032" name="dat/VLCPortable/VLCPortable.exe" arguments=" --no-video-title-show --play-and-exit --fullscreen dat/Missions/MISS_HereThereBeMonsters/SD02C0032.mp4"/>
+    <set_timer name="Music" seconds="17"/>
+    <set_variable name="Music" value="1.0"/>
+  </event>
+  <event name="Mission Report 3 Repeat" id_arme="796e0ab3-0863-4ea8-a48c-924de0ece9dc">
+    <if_timer_finished name="Mission_Report_3"/>
+    <if_variable name="Mission_Report_3" comparator="EQUALS" value="1.0"/>
+    <big_message title="Mission Failed!" subtitle1="You are Dead"/>
+    <set_timer name="Credits" seconds="10"/>
+    <set_variable name="Credits" value="1.0"/>
+    <set_timer name="Mission_Report_3" seconds="60"/>
+  </event>
+  <event name="Credits 1" id_arme="796e0ab3-0863-4ea8-a48c-924de0ece9dc">
+    <if_timer_finished name="Credits"/>
+    <if_variable name="Credits" comparator="EQUALS" value="1.0"/>
+    <big_message title="Cast" subtitle1="Admiral: Souvik Ghosh   Arvonian Captain: Max Clark" subtitle2="Dauntless Captain: Grant Hoskins   Dauntless Officer: Lauren Chaiken"/>
+    <set_timer name="Credits" seconds="10"/>
+    <set_variable name="Credits" value="2.0"/>
+  </event>
+  <event name="Credits 2" id_arme="796e0ab3-0863-4ea8-a48c-924de0ece9dc">
+    <if_timer_finished name="Credits"/>
+    <if_variable name="Credits" comparator="EQUALS" value="2.0"/>
+    <big_message title="Cast" subtitle1="Odessa Science Officer: Jacob Schleappi  Wolf Spider: Stephen Noreck" subtitle2="Hostage Voice: Katie Schaub"/>
+    <set_timer name="Credits" seconds="10"/>
+    <set_variable name="Credits" value="3.0"/>
+  </event>
+  <event name="Credits 3" id_arme="796e0ab3-0863-4ea8-a48c-924de0ece9dc">
+    <if_timer_finished name="Credits"/>
+    <if_variable name="Credits" comparator="EQUALS" value="3.0"/>
+    <big_message title="Cast" subtitle1="Lt. Stone, Marine: Thor Zednik   Sgt. Rockwell, Marine: Paul Rockwell"/>
+    <set_timer name="Credits" seconds="10"/>
+    <set_variable name="Credits" value="4.0"/>
+  </event>
+  <event name="Credits Crew" id_arme="b787c1e5-0dbe-4ffa-8c35-6fa531c36674">
+    <if_variable name="Credits" comparator="EQUALS" value="4.0"/>
+    <if_timer_finished name="Credits"/>
+    <big_message title="Video and Special Effects" subtitle1="Doug Reichard    Mark Bell"/>
+    <set_timer name="Credits" seconds="10"/>
+    <set_variable name="Credits" value="5.0"/>
+  </event>
+  <event name="Credits Critical Hit" id_arme="eb90d832-6ef0-438c-b9c2-fd92f92079d1">
+    <if_variable name="Credits" comparator="EQUALS" value="5.0"/>
+    <if_timer_finished name="Credits"/>
+    <big_message title="Special Thanks to Critical Hit Games!" subtitle1="Filmed on Location" subtitle2="In Cleveland, OH"/>
+    <set_timer name="Credits" seconds="10"/>
+    <set_variable name="Credits" value="6.0"/>
+  </event>
+  <event name="End Mission" id_arme="a3a2e2e4-3430-49a8-81fa-0377227db3ee">
+    <if_timer_finished name="Mission_End"/>
+    <end_mission/>
+  </event>
+</mission_data>
+

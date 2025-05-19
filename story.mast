@@ -1,17 +1,38 @@
 import map_art.mast
 
+# This script defines the player ship
+PLAYER_CREATE_DEFAULT = False
+shared artemis_id = None
+shared command_face = random_terran()
+shared ensign_rachel = random_terran()
+
+
+# Mission setting for playing audio files
+HTBM_AUDIO_FILE_ENABLED = False #True
+
+//shared/signal/create_player_ships
+# Script creates the player ships
+### TODO: Why do I have to put shared here, why did it not find the right scope
+    shared artemis_id = to_id(player_spawn(98000, 0, 98000, "Artemis", "tsn", "tsn_light_cruiser"))
+# Call this to enable docking on the player
+# Are there any stations?
+    #docking_set_docking_logic(player.id, role(player.side) & role("station"), docking_dock_with_friendly_station)
+    ->END
+
 
 # Use for startup logic
 @map/here_there_be_monsters "Here there be Monsters"
-" Here there be Monster
-
+" Investigate a remote sector of space with no station support in a TSN Light Cruiser. 
+" Ships have gone missing here and you were sent to investigate. 
+" Keep an eye out and find out whats happening to those ships.
 
 
 # 
 # Random stations, Add these first
+#TODO: Remove these stations They aren't in the original mission
 #
 # This layer is 25_000 x 25_000 grid i.e. 4 x 4 
-    tile_map = maps_tile_map_create(-50_000, 50_000, 25_000) 
+    tile_map = maps_tile_map_create(0, 100_000, 25_000) 
 
 # Future the station deck could have a budget
 # to balance out the station that are spawned
@@ -36,18 +57,19 @@ import map_art.mast
 # an ID or set of IDs of important things created
 # fill will collect all these and have a set of all these
 # fill returns a promise so it needs to await the results
-    test = await tile_map.fill(station_string, x_count=4)
-# So test has all the stations created
-    
+    stations_friendly = await tile_map.fill(station_string, x_count=4)
+# The variable test a set the IDs of the stations created
+    link(artemis_id,"extra_scan_source" ,stations_friendly)
+
 
 
 # A tile map can be any size of the map
 # and you can use it to fill 
-    tile_map = maps_tile_map_create(-50_000, 50_000, 1_000) 
+    tile_map = maps_tile_map_create(0, 100_000, 1_000) 
 
 # Using nebula as cards in a deck
     nebula_deck = maps_deck_create()
-    nebula_deck.add_card(prefab_terrain_nebula_sphere, {"cluster_color": 1})
+    nebula_deck.add_card(prefab_terrain_nebula_sphere, {"density_scale": 1, "cluster_color": 1})
 # Draw the skull and cross bones    
     tile_map.map_deck("n", nebula_deck)
 # This will draw the art as is
@@ -58,7 +80,7 @@ import map_art.mast
 # Random asteroids
 #
 # This layer is 10_000 x 10_0000 grid
-    tile_map = maps_tile_map_create(-50_000, 50_000, 10_000) 
+    tile_map = maps_tile_map_create(0, 100_000, 10_000) 
 # Using asteroid as cards in a deck
     asteroid_deck = maps_deck_create()
     asteroid_deck.add_card(prefab_terrain_asteroid_sphere)
@@ -73,5 +95,109 @@ import map_art.mast
 
 
     task_schedule(spawn_players)
+    sub_task_schedule(scene_mission_briefing_start)
+    
 
 
+/*  Mission structure
+
+- Mission Briefing
+- Systems check in
+- Distress call
+
+
+
+*/
+
+
+=== scene_mission_briefing_start
+    
+--- need_comms_console
+
+## Wait for a comms console to be around
+    await delay_sim(5)
+    cc = gui_console_clients("comms")
+    jump need_comms_console if len(cc)==0
+    await delay_sim(10)
+
+--- send_comms_console_message
+
+    cc = gui_console_clients("comms")
+    jump send_comms_console_message if len(cc)==0
+
+# Debug lets yu jump directly to 
+# a different scene just change the false to True
+    jump distress_call if False
+
+    for cid in cc:
+        gui_info_panel_send_message(cid, message="Message from TSN Command", banner="Incoming message", button="Play message", button_label=play_message_C070, history=False, time=0)
+## TODO: This is confusing
+## doing and ->END here kills the task
+## The button later tries to run and the delay_sim gets stuck?
+    yield idle
+    
+#
+# This is triggered by a message button in the info panel on COMMS
+#
+=== play_message_C070
+    message = """This is the "Skulls Refuge Nebula" and looks like you've drawn the short straw for tonights patrol. You are on the outskirts of Terran space, and the twin black holes cause havoc with our long range sensors so we don't know much about this sector.  Several ships traversing this sector have gone missing the last few months. Be on alert and find out whats happen to our ships."""
+
+    with comms_override(artemis_id, artemis_id,command_face, "TSN Command"):
+        comms_receive(message)
+
+# Clear the info panel message on comms
+    cc = gui_console_clients("comms")
+    for cid in cc:
+        gui_info_panel_send_message(cid,path="message")
+        gui_info_panel_send_message(cid,path="ship_data", time=0)
+
+# show message on the mains screens
+    main_screen = gui_console_clients(artemis_id, "mainscreen")
+    main_screen.add(0)
+    gui_info_panel_send_message(main_screen, message=message, face=command_face, history=False, time=32)
+# play Audio file
+    if HTBM_AUDIO_FILE_ENABLED:
+        sbs.play_audio_file(0, get_mission_audio_file("audio/SD01C070"), 1.0,1.0)
+
+
+
+=== scene_distress_call
+    await delay_sim(60)
+    
+# Create a luxury liner
+    ll_id = to_id(npc_spawn(90_000, 10, 60_000, "Whale Watcher 1", "arvonian", "luxury_liner", "behav_do_nothing"))
+    set_face(ll_id, random_arvonian())
+# Let us see it?
+    link(artemis_id,"extra_scan_source" ,ll_id)
+
+    # message = """This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
+
+    with comms_override(artemis_id, ll_id):
+        <<[red] "Distress Call!"
+            " This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!.....
+--- approach
+    await delay_sim(3)
+    ->END if to_object(artemis_id) is None or to_object(ll_id) is None
+    d = sbs.distance_id(artemis_id, ll_id)
+# Keep waiting until artemis is close to the luxury liner    
+    jump approach if d > 6000
+# It is now close enough
+
+    #<create type="genericMesh" x="90000.0" y="0.0" z="61000.0" name="Damaged Shuttle" meshFileName="dat\TSNShuttle.dxs" textureFileName="dat\LightCruiser_Diffuse.png"/>
+    npc_spawn(90000.0,0.0,61000.0, "Damaged Shuttle", "arvonian", "tsn_shuttle", "npc_no_nothing")
+
+# 
+    consoles = linked_to(artemis_id, "consoles")
+    gui_info_panel_send_message(consoles, "Ensign Rachel Reporting: Damaged Shuttle located. One life sign onboard. Vitals are weak.", face = ensign_rachel, time = 20)
+    await delay_sim(20)
+
+    #<incoming_comms_text from="Ensign Rachel Reporting">We scanned the ship and were able to salvage a captains log recording from the wreckage  </incoming_comms_text>
+    
+    consoles = linked_to(artemis_id, "consoles") & all_roles("console, comms")
+    gui_info_panel_send_message(consoles, "Ensign Rachel Reporting: Damaged Shuttle located. One life sign onboard. Vitals are weak.", button="Recover Recording", button_label=retrieve_recording, time=20)
+    #<set_comms_button text="Recovered Whale Watcher 1 Recording" sideValue="2"/>
+    yield idle
+
+=== retrieve_recording
+    print("RECORDING ")
+    

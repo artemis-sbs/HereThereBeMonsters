@@ -1,4 +1,9 @@
 import map_art.mast
+#
+# This has a few python functions
+# that group command code
+#
+import here_helpers.py
 
 # This script defines the player ship
 PLAYER_CREATE_DEFAULT = False
@@ -8,7 +13,11 @@ shared artemis_id = None
 shared whale_watcher_face = random_arvonian()
 shared whale_watcher_id = None
 shared whale_watcher_name = "Distress Signal"
-shared fred = 0
+
+shared dauntless_face = random_terran(civilian=True)
+shared dauntless_id = None
+shared dauntless_name = "Distress Signal"
+
 
 shared ensign_rachel = random_terran_female()
 shared ensign_rachel_title = "Ensign Rachel Reporting"
@@ -21,7 +30,7 @@ shared command_title = "TSN Command"
 
 
 # Mission setting for playing audio files
-HTBM_AUDIO_FILE_ENABLED = True
+shared HTBM_AUDIO_FILE_ENABLED = True
 
 //shared/signal/create_player_ships
 # Script creates the player ships
@@ -121,6 +130,7 @@ HTBM_AUDIO_FILE_ENABLED = True
 -- retrieve shuttle
 -- medical bay one
 -- Update TSN Command
+- distress_call_two
 
 - medical bay two (escape)
 */
@@ -146,23 +156,21 @@ HTBM_AUDIO_FILE_ENABLED = True
 # a different scene just uncomment 
 # to skip to that part of the script
 #
-#    jump scene_distress_call
+#    jump scene_distress_call_one
+#    jump medical_bay_update_one
+    jump scene_distress_call_two
+#    jump shuttle
 
-    jump medical_bay_update_one
 
 
-    with comms_override(artemis_id, artemis_id,command_face, "TSN Command"):
-        comms_receive("See the message Panel to play message", "Incoming Message")
-#Display a Message 
-
-    choice = gui_info_panel_send_message(cc, message="Message from TSN Command", banner="Incoming message", button="Play message",  history=False, time=0)
+    choice = here_comms_incoming_info_message("Message from TSN Command", artemis_id, face=command_face, title="Incoming message", button="Play Message", time=10)
 
 # The variable choice is a "Promise" that will
 # get a result when the button is pressed
 # 
     pressed = await choice
-    print(pressed.value)
-    print(pressed.client_id)
+    # print(pressed.value)
+    # print(pressed.client_id)
 #
 # This is triggered by a message button in the info panel on COMMS
 #
@@ -171,21 +179,8 @@ HTBM_AUDIO_FILE_ENABLED = True
 #######################################
     message = """This is the "Skulls Refuge Nebula" and looks like you've drawn the short straw for tonights patrol. You are on the outskirts of Terran space, and the twin black holes cause havoc with our long range sensors so we don't know much about this sector.  Several ships traversing this sector have gone missing the last few months. Be on alert and find out whats happen to our ships."""
 
-    with comms_override(artemis_id, artemis_id,command_face, "TSN Command"):
-        comms_receive(message)
+    here_receive_info_message(message, artemis_id, face=command_face, title=command_title, time=32, audio="audio/SD01C0070")
 
-# Clear the info panel message on comms
-    cc = gui_console_clients("comms")
-    gui_info_panel_send_message(cc,path="message")
-    gui_info_panel_send_message(cc,path="ship_data", time=0)
-
-# show message on the mains screens
-    main_screen = gui_console_clients(artemis_id, "mainscreen")
-    main_screen.add(0)
-    gui_info_panel_send_message(main_screen, message=message, face=command_face, history=False, time=32)
-# play Audio file
-    if HTBM_AUDIO_FILE_ENABLED:
-        sbs.play_audio_file(0, get_mission_audio_file("audio/SD01C0070"), 1.0,1.0)
 
 ##########################################################################################
 # Distress Call One
@@ -193,20 +188,23 @@ HTBM_AUDIO_FILE_ENABLED = True
 # delay until the next scene
     await delay_sim(60)
 #######################################
---- scene_distress_call
+--- scene_distress_call_one
 #######################################
-    
+
+    message = "Incoming Distress Signal. Check with captain to view on main screen."    
+    choice = here_comms_incoming_info_message(message, artemis_id, selected_id=dauntless_id, title="Distress Call", button="Accept Message", time=12)
+# Wait for button press
+    pressed = await choice
 # Create a luxury liner
+
     shared whale_watcher_id = to_id(npc_spawn(90_000, 10, 60_000, whale_watcher_name, "arvonian", "luxury_liner", "behav_do_nothing"))
     set_face(whale_watcher_id, whale_watcher_face)
-# Let us see it?
+# Let us see it? Or should science see it
     link(artemis_id,"extra_scan_source" ,whale_watcher_id)
 
-    # message = """This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
+    message = """This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
+    here_receive_info_message(message, artemis_id, title="Distress Signal", face=whale_watcher_face, time=10, audio="audio/SD01C0139")
 
-    with comms_override(artemis_id, whale_watcher_id):
-        <<[red] "Distress Call!"
-            " This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!.....
 #######################################
 # --- approach_whale_watcher
 #######################################
@@ -227,50 +225,30 @@ HTBM_AUDIO_FILE_ENABLED = True
         ww.name = whale_watcher_name
 
     message = "Damaged Shuttle located. One life sign onboard. Vitals are weak."
-    with comms_override(artemis_id, artemis_id, ensign_rachel, ensign_rachel_title):
-        comms_receive(message)
-
-# This goes to all consoles
-    consoles = linked_to(artemis_id, "consoles")
-    gui_info_panel_send_message(consoles, message, title=ensign_rachel_title,face = ensign_rachel, time = 20)
+    here_comms_incoming_info_message(message, artemis_id, face=ensign_rachel, title=ensign_rachel_title, time=20)
     await delay_sim(20)
 
 # Engin Rachel reports recovery
     message = "We scanned the ship and were able to salvage a captains log recording from the wreckage"
-    with comms_override(artemis_id, artemis_id, ensign_rachel, ensign_rachel_title):
-        comms_receive(message)
-
-    # This goes to just comms
-    consoles = linked_to(artemis_id, "consoles") & all_roles("console, comms")
-    choice = gui_info_panel_send_message(consoles, message , title=ensign_rachel_title, face=ensign_rachel, button="Recover Recording", time=20)
+    choice = here_comms_incoming_info_message(message,artemis_id,face=ensign_rachel,title=ensign_rachel_title, button="Recover Recording", time=20)
 
     pressed = await choice
 #######################################
 #--- retrieve_recording
 #######################################
+--- shuttle
     message = "Such a wondrous sight these space whales are so majestic. <static>  You there I don't believe we met."
-    with comms_override(artemis_id, whale_watcher_id, from_name=whale_watcher_name):
-        comms_receive(message)
-            
+    here_receive_info_message(message, artemis_id, whale_watcher_id, time=12, audio="audio/SD01C0135")
     
-    if ww is not None:
-        consoles = linked_to(artemis_id, "consoles")
-        gui_info_panel_send_message(consoles, message, title=whale_watcher_name,face = whale_watcher_face, time = 12)
-# play Audio file
-    if HTBM_AUDIO_FILE_ENABLED:
-        sbs.play_audio_file(0, get_mission_audio_file("audio/SD01C0135"), 1.0,1.0)
-    
-    await delay_sim(10)
-    message = "We scanned the ship and were able to salvage a captains log recording from the wreckage"
-    with comms_override(artemis_id, artemis_id, ensign_rachel, ensign_rachel_title):
-        comms_receive(message)
-# This goes to just comms
-    consoles = linked_to(artemis_id, "consoles") & all_roles("console, comms")
-    choice = gui_info_panel_send_message(consoles, message, title=ensign_rachel_title, face=ensign_rachel, button="Contact TSN Command", time=20)
+    await delay_sim(13)
+
+    message = "Salavage complete suggest we report it to TSN Command"
+    choice = here_comms_incoming_info_message(message,artemis_id, button="Contact TSN COmmand", face=ensign_rachel, title=ensign_rachel_title, time=20)
 
 # Wait for button press
     pressed = await choice
 
+    here_info_panel_clear_comms()
 # Delay the response from TSN Command
     await delay_sim(10)
 #######################################
@@ -283,9 +261,7 @@ HTBM_AUDIO_FILE_ENABLED = True
 #######################################
 #--- retrieve_shuttle
 #######################################
-    cc = gui_console_clients("comms")
-    gui_info_panel_send_message(cc,path="message")
-    gui_info_panel_send_message(cc,path="ship_data", time=0)
+
     d = 2000
 ## scene_pick up shuttle
 ## This should maybe be enhanced to have Weapons tractor beam the shuttle
@@ -311,25 +287,13 @@ HTBM_AUDIO_FILE_ENABLED = True
 #############################
 # This goes to just comms
     message = "Incoming message from medical bay"
-    with comms_override(artemis_id, artemis_id,medical_bay_doctor_face, medical_bay_doctor_title):
-        comms_receive(message + " see info panel for interaction.")
-
-    consoles = linked_to(artemis_id, "consoles") & all_roles("console, comms")
-    choice = gui_info_panel_send_message(consoles, message, title=medical_bay_doctor_title, face=medical_bay_doctor_face, button="Accept Message", time=12)
+    choice = here_comms_incoming_info_message(message,artemis_id, button="Accept Message", face=medical_bay_doctor_face, title=medical_bay_doctor_title, time = 12)
 
 # Wait for button press
     pressed = await choice
 # medical bay update 1
     message = "We have retrieved 1 Arvonian surviver from the Escape Pod.  They are undergoing medical treatment now. "
-    with comms_override(artemis_id, artemis_id, medical_bay_doctor_face, medical_bay_doctor_title):
-        comms_receive(message)
-# All Stations
-    consoles = linked_to(artemis_id, "consoles")
-    choice = gui_info_panel_send_message(consoles, message, title=medical_bay_doctor_title, face=medical_bay_doctor_face, time=12)
-
-# play Audio file
-    if HTBM_AUDIO_FILE_ENABLED:
-        sbs.play_audio_file(0, get_mission_audio_file("audio/SD02C0166"), 1.0,1.0)
+    here_receive_info_message(message, artemis_id, title=medical_bay_doctor_title, face=medical_bay_doctor_face, time=12, audio="audio/SD02C0166")
 
     await delay_sim(13)
 
@@ -339,9 +303,7 @@ HTBM_AUDIO_FILE_ENABLED = True
         
     pressed = await choice
 ## Clear message panel    
-    cc = gui_console_clients("comms")
-    gui_info_panel_send_message(cc,path="message")
-    gui_info_panel_send_message(cc,path="ship_data", time=0)
+    here_info_panel_clear_comms()
 
     await delay_sim(10)
 # TSN Update survivor
@@ -349,5 +311,30 @@ HTBM_AUDIO_FILE_ENABLED = True
     with comms_override(artemis_id, artemis_id, command_face, command_title):
         comms_receive(message)
 
+# AND.....SCENE
+
+    await delay_sim(200)
 ##########################################################################################
 # Distress Call Two
+############################
+--- scene_distress_call_two
+############################
+
+    message = "Incoming Distress Signal. Check with captain to view on main screen"
+    choice = here_comms_incoming_info_message(message, artemis_id, selected_id=dauntless_id, title="Distress Call", button="Accept Message", time=12)
+
+# Wait for button press
+    pressed = await choice
+
+
+# create the 
+    #x="48000.0" y="10.0" z="70000.0"
+    shared dauntless_id = to_id(npc_spawn(48_000, 10, 70_000, whale_watcher_name, "civ", "cargo_ship", "behav_do_nothing"))
+    set_face(dauntless_id, dauntless_face)
+    link(artemis_id, "extra_scan_source", dauntless_id)
+
+
+
+    message = """This is the Terran Bulk Cargo "Dauntless".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
+    here_receive_info_message(message, artemis_id, title="Distress Call", face=dauntless_face, time=14, audio="audio/SD01C0037")
+

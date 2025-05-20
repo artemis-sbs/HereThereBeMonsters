@@ -256,6 +256,9 @@
     <set_variable name="Music" value="1.0"/>
     <incoming_comms_text from="Distress Call">This is the Terran Bulk Cargo "Dauntless".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!.....</incoming_comms_text>
   </event>
+
+
+  
   <event name="Dauntless Investigation" id_arme="23469071-72f7-49e1-b96e-47d48a5a9469">
     <if_variable name="Mission_Brief" comparator="EQUALS" value="4.0"/>
     <if_distance name1="Artemis" name2="Distress Call" comparator="LESS_EQUAL" value="6000.0"/>
@@ -278,6 +281,9 @@
     <set_object_property property="pitch" value="20.0" name="Strange Object"/>
     <warning_popup_message message="Ensign Rachel Reporting: That Strange Object could give us clues to what happen to the Dauntless" consoles="S" player_slot="0"/>
   </event>
+
+
+  
   <event name="Dauntless Recording" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
     <if_comms_button text="Recovered Dauntless Bridge Log"/>
     <if_variable name="Music" comparator="NOT" value="1.0"/>
@@ -300,6 +306,10 @@
     <clear_comms_button text="Contact TSN Command about the Web Generator"/>
     <incoming_comms_text from="TSN Command">Intriguing. It seems like the local wildlife must not be the root cause of all these ships disappearing. And someone is in posession of some unique technology. Continue searching the sector we need more information.</incoming_comms_text>
   </event>
+
+
+
+
   <event name="Distress Call 3" id_arme="6d488aae-8376-48db-a470-2df8413987e5">
     <if_timer_finished name="Distress_Call"/>
     <if_variable name="Mission_Brief" comparator="EQUALS" value="5.0"/>
@@ -1756,4 +1766,3 @@
     <end_mission/>
   </event>
 </mission_data>
-

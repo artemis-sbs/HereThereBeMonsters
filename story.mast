@@ -1,4 +1,5 @@
 import map_art.mast
+import debug.mast
 #
 # This has a few python functions
 # that group command code
@@ -19,18 +20,20 @@ shared dauntless_id = None
 shared dauntless_name = "Distress Signal"
 
 
-shared ensign_rachel = random_terran_female()
-shared ensign_rachel_title = "Ensign Rachel Reporting"
 
-shared medical_bay_doctor_face = random_terran_male()
-shared medical_bay_doctor_title = "Doctor Grison Reporting"
+shared ensign_rachel = lifeform_spawn("Ensign Rachel", random_terran_female(), "crew", None)
+shared medical_bay_doctor = lifeform_spawn("Doctor Grison", random_terran_male(), "crew", None)
+shared tsn_command = lifeform_spawn("TSN Command", random_terran(), "command", None)
 
-shared command_face = random_terran()
-shared command_title = "TSN Command"
 
 
 # Mission setting for playing audio files
 shared HTBM_AUDIO_FILE_ENABLED = True
+#
+# This is a variable hold the task running main story
+# debug.mast adds buttons to comms 
+# to help debug by jumping to that part of the story
+shared main_story_task = None
 
 //shared/signal/create_player_ships
 # Script creates the player ships
@@ -48,7 +51,8 @@ shared HTBM_AUDIO_FILE_ENABLED = True
 " Ships have gone missing here and you were sent to investigate. 
 " Keep an eye out and find out whats happening to those ships.
 
-
+# This is used in debugging to allow testing to jump 
+    shared main_story_task = mast_task
 # 
 # Random stations, Add these first
 #TODO: Remove these stations They aren't in the original mission
@@ -120,19 +124,25 @@ shared HTBM_AUDIO_FILE_ENABLED = True
 
 /*  Mission structure
 
-- Mission Briefing
+* Mission Briefing
 
-- Systems check in
+* Systems check in
 
-- Distress call One
+* Distress call One
 -- arrive at luxury liner
 -- retrieve recording
 -- retrieve shuttle
 -- medical bay one
 -- Update TSN Command
-- distress_call_two
+* distress_call_two
+-- arrive at dauntless
+-- retrieve log
+-- Strange Object
 
-- medical bay two (escape)
+
+
+* medical bay two (escape)
+
 */
 
 #######################################
@@ -152,18 +162,7 @@ shared HTBM_AUDIO_FILE_ENABLED = True
     cc = gui_console_clients("comms")
     jump send_comms_console_message if len(cc)==0
 
-# Debug area this lets you jump directly to 
-# a different scene just uncomment 
-# to skip to that part of the script
-#
-#    jump scene_distress_call_one
-#    jump medical_bay_update_one
-#    jump scene_distress_call_two
-#    jump shuttle
-
-
-
-    choice = here_comms_incoming_info_message("Message from TSN Command", artemis_id, face=command_face, title="Incoming message", button="Play Message", time=10)
+    choice = here_comms_incoming_info_message("Message from TSN Command", artemis_id, tsn_command, button="Play Message", time=10)
 
 # The variable choice is a "Promise" that will
 # get a result when the button is pressed
@@ -179,7 +178,7 @@ shared HTBM_AUDIO_FILE_ENABLED = True
 #######################################
     message = """This is the "Skulls Refuge Nebula" and looks like you've drawn the short straw for tonights patrol. You are on the outskirts of Terran space, and the twin black holes cause havoc with our long range sensors so we don't know much about this sector.  Several ships traversing this sector have gone missing the last few months. Be on alert and find out whats happen to our ships."""
 
-    here_receive_info_message(message, artemis_id, face=command_face, title=command_title, time=32, audio="audio/SD01C0070")
+    here_receive_info_message(message, artemis_id, tsn_command, time=32, audio="audio/SD01C0070")
 
 
 ##########################################################################################
@@ -197,8 +196,18 @@ shared HTBM_AUDIO_FILE_ENABLED = True
     pressed = await choice
 # Create a luxury liner
 
-    shared whale_watcher_id = to_id(npc_spawn(90_000, 10, 60_000, whale_watcher_name, "arvonian", "luxury_liner", "behav_do_nothing"))
+    whale_watcher_sd = to_id(npc_spawn(90_000, 10, 60_000, whale_watcher_name, "arvonian", "luxury_liner", "behav_do_nothing"))
+    shared whale_watcher_id = to_id(whale_watcher_sd)
+    ww_obj = to_object(whale_watcher_sd)
     set_face(whale_watcher_id, whale_watcher_face)
+    #
+    # Make it spin and blink
+    #
+
+    ww_obj.engine_object.steer_yaw =  0.003
+    ww_obj.engine_object.steer_pitch = -0.002
+    ww_obj.engine_object.steer_roll =  0.001
+    ww_obj.engine_object.blink_state = -5
 # Let us see it? Or should science see it
     link(artemis_id,"extra_scan_source" ,whale_watcher_id)
 
@@ -216,21 +225,10 @@ shared HTBM_AUDIO_FILE_ENABLED = True
 # Keep waiting until artemis is close to the luxury liner    
     #jump approach if d > 6000
 # It is now close enough
-
-    #<create type="genericMesh" x="90000.0" y="0.0" z="61000.0" name="Damaged Shuttle" meshFileName="dat\TSNShuttle.dxs" textureFileName="dat\LightCruiser_Diffuse.png"/>
-    shared damaged_shuttle_id = to_id(npc_spawn(90000.0,0.0,61000.0, "Damaged Shuttle", "arvonian", "tsn_shuttle", "npc_no_nothing"))
-    whale_watcher_name = "Whale Watcher 1"
-    ww = to_object(whale_watcher_id)
-    if ww is not None:
-        ww.name = whale_watcher_name
-
-    message = "Damaged Shuttle located. One life sign onboard. Vitals are weak."
-    here_comms_incoming_info_message(message, artemis_id, face=ensign_rachel, title=ensign_rachel_title, time=20)
-    await delay_sim(20)
-
+--- salvage
 # Engin Rachel reports recovery
     message = "We scanned the ship and were able to salvage a captains log recording from the wreckage"
-    choice = here_comms_incoming_info_message(message,artemis_id,face=ensign_rachel,title=ensign_rachel_title, button="Recover Recording", time=20)
+    choice = here_comms_incoming_info_message(message,artemis_id,ensign_rachel, button="Recover Recording", time=20)
 
     pressed = await choice
 #######################################
@@ -242,21 +240,40 @@ shared HTBM_AUDIO_FILE_ENABLED = True
     
     await delay_sim(13)
 
-    message = "Salavage complete suggest we report it to TSN Command"
-    choice = here_comms_incoming_info_message(message,artemis_id, button="Contact TSN COmmand", face=ensign_rachel, title=ensign_rachel_title, time=20)
 
-# Wait for button press
-    pressed = await choice
+    #<create type="genericMesh" x="90000.0" y="0.0" z="61000.0" name="Damaged Shuttle" meshFileName="dat\TSNShuttle.dxs" textureFileName="dat\LightCruiser_Diffuse.png"/>
+    shared damaged_shuttle_id = to_id(npc_spawn(90000.0,0.0,61000.0, "Damaged Shuttle", "arvonian", "tsn_shuttle", "npc_no_nothing"))
+    whale_watcher_name = "Whale Watcher 1"
+    ww = to_object(whale_watcher_id)
+    if ww is not None:
+        ww.name = whale_watcher_name
+
+    await delay_sim(10)
+    message = "Damaged Shuttle located. One life sign onboard. Vitals are weak."
+    here_comms_incoming_info_message(message, artemis_id, ensign_rachel, time=20)
+    await delay_sim(20)
 
     here_info_panel_clear_comms()
 # Delay the response from TSN Command
     await delay_sim(10)
-#######################################
-#--- contact_tsn_command_recording
-#######################################
+
+    message = "Salavage complete suggest we report it to TSN Command"
+    choice = here_comms_incoming_info_message(message,artemis_id, ensign_rachel, button="Contact TSN Command",  time=20)
+
+    pressed = await choice
+    here_info_panel_clear_comms()
+
+    message = "Artemis to TSN Command, we are sending you the Whale Watcher Log. We have also discovered a shuttle with one life sign. Please Advise."
+    with comms_override(artemis_id,tsn_command):
+        comms_transmit(message)
+
+    await delay_sim(10)
+
     message = "Such a shame Tourism is very risky in this sector of space. Retrieve the shuttle and check for Survivors."
-    with comms_override(artemis_id, artemis_id,command_face, "TSN Command"):
+    with comms_override(artemis_id, tsn_command):
         comms_receive(message)
+
+
 
 #######################################
 #--- retrieve_shuttle
@@ -287,13 +304,13 @@ shared HTBM_AUDIO_FILE_ENABLED = True
 #############################
 # This goes to just comms
     message = "Incoming message from medical bay"
-    choice = here_comms_incoming_info_message(message,artemis_id, button="Accept Message", face=medical_bay_doctor_face, title=medical_bay_doctor_title, time = 12)
+    choice = here_comms_incoming_info_message(message,artemis_id, medical_bay_doctor, button="Accept Message", time = 12)
 
 # Wait for button press
     pressed = await choice
 # medical bay update 1
     message = "We have retrieved 1 Arvonian surviver from the Escape Pod.  They are undergoing medical treatment now. "
-    here_receive_info_message(message, artemis_id, title=medical_bay_doctor_title, face=medical_bay_doctor_face, time=12, audio="audio/SD02C0166")
+    here_receive_info_message(message, artemis_id, medical_bay_doctor,  time=12, audio="audio/SD02C0166")
 
     await delay_sim(13)
 
@@ -305,10 +322,15 @@ shared HTBM_AUDIO_FILE_ENABLED = True
 ## Clear message panel    
     here_info_panel_clear_comms()
 
+    message = "Artemis to TSN Command, We have recovered one life form alive and they are in our medical bay receiving treatment."
+    with comms_override(artemis_id, tsn_command):
+        comms_transmit(message)
+
+
     await delay_sim(10)
 # TSN Update survivor
     message = "Good Work. At least we saved one poor soul. Keep a look out try and find out what happen. "
-    with comms_override(artemis_id, artemis_id, command_face, command_title):
+    with comms_override(artemis_id, tsn_command):
         comms_receive(message)
 
 # AND.....SCENE
@@ -321,7 +343,7 @@ shared HTBM_AUDIO_FILE_ENABLED = True
 ############################
 
     message = "Incoming Distress Signal. Check with captain to view on main screen"
-    choice = here_comms_incoming_info_message(message, artemis_id, selected_id=dauntless_id, title="Distress Call", button="Accept Message", time=12)
+    choice = here_comms_incoming_info_message(message, artemis_id, title="Distress Call", button="Accept Message", time=12)
 
 # Wait for button press
     pressed = await choice
@@ -329,12 +351,67 @@ shared HTBM_AUDIO_FILE_ENABLED = True
 
 # create the 
     #x="48000.0" y="10.0" z="70000.0"
-    shared dauntless_id = to_id(npc_spawn(48_000, 10, 70_000, whale_watcher_name, "civ", "cargo_ship", "behav_do_nothing"))
+    dauntless_sd = npc_spawn(48_000, 10, 70_000, whale_watcher_name, "civ", "cargo_ship", "behav_do_nothing")
+    shared dauntless_id = to_id(dauntless_sd)
+    dauntless_obj = to_object(dauntless_sd)
     set_face(dauntless_id, dauntless_face)
     link(artemis_id, "extra_scan_source", dauntless_id)
-
-
+    #
+    # Make it spin and blink
+    #
+    dauntless_obj.engine_object.steer_yaw =  0.003
+    dauntless_obj.engine_object.steer_pitch = -0.002
+    dauntless_obj.engine_object.steer_roll =  0.001
+    dauntless_obj.engine_object.blink_state = -5
+    #
+    # <create type="Anomaly" pickupType="2" x="49000.0" y="50.0" z="70000.0"/>
+    # <create type="Anomaly" pickupType="0" x="47000.0" y="-50.0" z="70000.0"/>
+    #
 
     message = """This is the Terran Bulk Cargo "Dauntless".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
-    here_receive_info_message(message, artemis_id, title="Distress Call", face=dauntless_face, time=14, audio="audio/SD01C0037")
+    here_receive_info_message(message, artemis_id, dauntless_id, title="Distress Call", time=14, audio="audio/SD01C0037")
+
+## Loop until close to dauntless
+    d = 100_000
+    for x while d>6000:
+        ->END if to_object(artemis_id) is None or to_object(dauntless_id) is None
+        d = sbs.distance_id(artemis_id, dauntless_id)
+        await delay_sim(3)
+
+## Maybe enhancement that weapons or science needs to scan
+
+    await delay_sim(5)
+
+    message = "We scanned the ship and were are able to salvage a recording from the wreckage"
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, button="Recover Dauntless Log", time=12)
+
+    pressed = await choice
+
+    message = """What is it? Not sure sir it looks like a beacon of some sort. Take us in for a closer look, there might be some salvage worth gathering?. Engineering, why did we lose power to engines? Captain, unknown vessel appeared behind us. Get us out of here! Can?t sir, something is draining our engines."""
+    here_receive_info_message(message, artemis_id, dauntless_id, title="Log playback", time=14, audio="audio/SD01C0035")
+
+
+    await delay_sim(6)
+--- strange_object
+    # x="48500.0" y="150.0" z="69500.0"
+    strange_object_sd = npc_spawn(48_500, 150, 69_500, "Strange Object", None, "alien3lod_a", "behav_pickup")
+    shared strange_object_id = to_id(strange_object_sd)
+    strange_object_obj = to_object(strange_object_sd)
+    #
+    # Make it spin and blink
+    #
+    strange_object_obj.engine_object.steer_yaw =  0.003
+    strange_object_obj.engine_object.steer_pitch = -0.002
+    strange_object_obj.engine_object.steer_roll =  0.001
+    strange_object_obj.engine_object.blink_state = -5
+
+    message = "Ensign Rachel Reporting: That Strange Object could give us clues to what happen to the Dauntless"
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, time=12)
+
+## Loop until close to dauntless
+    for x while sbs.distance_id(artemis_id, strange_object_id ) > 1000:
+        ->END if to_object(artemis_id) is None or to_object(strange_object_id ) is None
+        await delay_sim(3)
+
+    
 

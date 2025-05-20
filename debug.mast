@@ -1,0 +1,49 @@
+#
+#
+# The Game master console is used for debugging the script
+#
+GAMEMASTER_CONSOLE_ENABLED = is_dev_build()
+
+
+//enable/comms if is_dev_build() and has_any_role(COMMS_SELECTED_ID, "ship,cockpit")
+#
+#
+# Add comms buttons to help debug this script
+#
+//comms if is_dev_build()
+
+    + "Jump to selection":
+        artemis_obj = to_object(artemis_id)
+        if artemis_obj and COMMS_SELECTED:
+            pos = COMMS_SELECTED.pos
+            pos.x = pos.x + 1000
+            artemis_obj.pos = pos
+    + "Jump to chapter" //comms/chapters
+
+
+#
+# Add the ability to jump to test a specific part
+#
+# Note the labels are sub labels, so they need to be string
+#
+//comms/chapters
+    + "scene_distress_call_one":
+        if main_story_task:
+            main_story_task.jump("scene_distress_call_one")
+    + "shuttle":
+        if main_story_task:
+            main_story_task.jump("shuttle")
+    + "medical_bay_update_one":
+        if main_story_task:
+            main_story_task.jump("medical_bay_update_one")
+    + "scene_distress_call_two":
+        if main_story_task:
+            main_story_task.jump("scene_distress_call_two")
+    + "salvage":
+        if main_story_task:
+            main_story_task.jump("salvage")
+    + "strange_object":
+        if main_story_task:
+            main_story_task.jump("strange_object")
+
+

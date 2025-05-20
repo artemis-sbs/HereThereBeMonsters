@@ -158,7 +158,7 @@ shared HTBM_AUDIO_FILE_ENABLED = True
 #
 #    jump scene_distress_call_one
 #    jump medical_bay_update_one
-    jump scene_distress_call_two
+#    jump scene_distress_call_two
 #    jump shuttle
 
 

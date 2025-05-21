@@ -39,14 +39,13 @@ def here_comms_incoming_info_message(message, origin_id, selected_id=None, butto
     so = to_object(selected_id)
     if face is None:
         face = get_face(selected_id)
-    if title is None and so is None:
-        title = so.name
+    
 
-    with comms_override(origin_id, selected_id,face, title):
+    with comms_override(origin_id, selected_id,face):
         msg = message
         if button is not None:
             msg = message  + " see info panel for interaction."
-        comms_receive(msg)
+        comms_receive(msg, title=title)
 
     consoles = linked_to(origin_id, "consoles") & all_roles("console, comms")
 
@@ -72,8 +71,8 @@ def here_receive_info_message(message, origin_id, selected_id=None, face=None, t
     if title is None and so is None:
         title = so.name
 
-    with comms_override(origin_id, selected_id, face, title):
-        comms_receive(message)
+    with comms_override(origin_id, selected_id, face):
+        comms_receive(message, title)
     # All Stations
     consoles = linked_to(origin_id, "consoles")
     choice = gui_info_panel_send_message(consoles, message, title=title, face=face, time=time)

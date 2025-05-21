@@ -13,11 +13,11 @@ shared artemis_id = None
 
 shared whale_watcher_face = random_arvonian()
 shared whale_watcher_id = None
-shared whale_watcher_name = "Distress Signal"
+shared whale_watcher_name = "Unknown ship"
 
 shared dauntless_face = random_terran(civilian=True)
 shared dauntless_id = None
-shared dauntless_name = "Distress Signal"
+
 
 
 
@@ -39,6 +39,9 @@ shared main_story_task = None
 # Script creates the player ships
 ### TODO: Why do I have to put shared here, why did it not find the right scope
     shared artemis_id = to_id(player_spawn(98000, 0, 98000, "Artemis", "tsn", "tsn_light_cruiser"))
+# This puts NPC crew on the Artemis
+    ensign_rachel.host = artemis_id
+    medical_bay_doctor.host = artemis_id
 # Call this to enable docking on the player
 # Are there any stations?
     #docking_set_docking_logic(player.id, role(player.side) & role("station"), docking_dock_with_friendly_station)
@@ -54,41 +57,6 @@ shared main_story_task = None
 # This is used in debugging to allow testing to jump 
     shared main_story_task = mast_task
 # 
-# Random stations, Add these first
-#TODO: Remove these stations They aren't in the original mission
-#
-# This layer is 25_000 x 25_000 grid i.e. 4 x 4 
-    tile_map = maps_tile_map_create(0, 100_000, 25_000) 
-
-# Future the station deck could have a budget
-# to balance out the station that are spawned
-#
-# Using stations as cards in a deck
-    station_deck = maps_deck_create()
-    station_deck.add_card(prefab_station_command)
-    station_deck.add_card(prefab_station_civil)
-    station_deck.add_card(prefab_station_industry)
-    station_deck.add_card(prefab_station_science)
-
-    
-    
-# create a string that is  values
-# . means empty space
-    station_string = "s"* 4 + "."* 12
-# shuffle sting randomize it
-    station_string = shuffle_string(station_string)
-# Place them on the grid 
-    tile_map.map_deck("s", station_deck)
-# Prefabs sometimes will set the results as 
-# an ID or set of IDs of important things created
-# fill will collect all these and have a set of all these
-# fill returns a promise so it needs to await the results
-    stations_friendly = await tile_map.fill(station_string, x_count=4)
-# The variable test a set the IDs of the stations created
-    link(artemis_id,"extra_scan_source" ,stations_friendly)
-
-
-
 # A tile map can be any size of the map
 # and you can use it to fill 
     tile_map = maps_tile_map_create(0, 100_000, 1_000) 
@@ -98,8 +66,18 @@ shared main_story_task = None
     nebula_deck.add_card(prefab_terrain_nebula_sphere, {"density_scale": 1, "cluster_color": 1})
 # Draw the skull and cross bones    
     tile_map.map_deck("n", nebula_deck)
+
+    black_hole_deck = maps_deck_create()
+    black_hole_deck.add_card(prefab_black_hole, {"gravity_radius": 10_000})
+# Draw the skull and cross bones    
+    tile_map.map_deck("B", black_hole_deck)
 # This will draw the art as is
-    tile_map.fill(map_art, x_count=100)
+    res = await tile_map.fill(map_art, x_count=100)
+# the res should just be the black holes
+# but just in case, make sure its just black holes
+    res &= role("black_hole")
+
+    link(artemis_id,"extra_scan_source" ,res)    
 
 
 #
@@ -162,7 +140,7 @@ shared main_story_task = None
     cc = gui_console_clients("comms")
     jump send_comms_console_message if len(cc)==0
 
-    choice = here_comms_incoming_info_message("Message from TSN Command", artemis_id, tsn_command, button="Play Message", time=10)
+    choice = here_comms_incoming_info_message("Message from TSN Command", artemis_id, tsn_command, title="Incoming message", button="Play Message", time=10)
 
 # The variable choice is a "Promise" that will
 # get a result when the button is pressed
@@ -178,7 +156,7 @@ shared main_story_task = None
 #######################################
     message = """This is the "Skulls Refuge Nebula" and looks like you've drawn the short straw for tonights patrol. You are on the outskirts of Terran space, and the twin black holes cause havoc with our long range sensors so we don't know much about this sector.  Several ships traversing this sector have gone missing the last few months. Be on alert and find out whats happen to our ships."""
 
-    here_receive_info_message(message, artemis_id, tsn_command, time=32, audio="audio/SD01C0070")
+    here_receive_info_message(message, artemis_id, tsn_command, title="Mission Briefing", time=32, audio="audio/SD01C0070")
 
 
 ##########################################################################################
@@ -189,13 +167,6 @@ shared main_story_task = None
 #######################################
 --- scene_distress_call_one
 #######################################
-
-    message = "Incoming Distress Signal. Check with captain to view on main screen."    
-    choice = here_comms_incoming_info_message(message, artemis_id, selected_id=dauntless_id, title="Distress Call", button="Accept Message", time=12)
-# Wait for button press
-    pressed = await choice
-# Create a luxury liner
-
     whale_watcher_sd = to_id(npc_spawn(90_000, 10, 60_000, whale_watcher_name, "arvonian", "luxury_liner", "behav_do_nothing"))
     shared whale_watcher_id = to_id(whale_watcher_sd)
     ww_obj = to_object(whale_watcher_sd)
@@ -211,9 +182,24 @@ shared main_story_task = None
 # Let us see it? Or should science see it
     link(artemis_id,"extra_scan_source" ,whale_watcher_id)
 
-    message = """This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
-    here_receive_info_message(message, artemis_id, title="Distress Signal", face=whale_watcher_face, time=10, audio="audio/SD01C0139")
 
+    message = "Incoming Distress Signal. Check with captain to view on main screen."    
+    choice = here_comms_incoming_info_message(message, artemis_id, whale_watcher_id, title="Distress Call", button="Accept Message", time=12)
+# Wait for button press
+    pressed = await choice
+# Create a luxury liner
+
+
+    message = """This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
+    here_receive_info_message(message, artemis_id, whale_watcher_id, title="Distress Signal", time=10, audio="audio/SD01C0139")
+
+    await delay_sim(10)
+    here_info_panel_clear_comms()
+
+    whale_watcher_name = "Whale Watcher 1"
+    ww = to_object(whale_watcher_id)
+    if ww is not None:
+        ww.name = whale_watcher_name
 #######################################
 # --- approach_whale_watcher
 #######################################
@@ -228,7 +214,7 @@ shared main_story_task = None
 --- salvage
 # Engin Rachel reports recovery
     message = "We scanned the ship and were able to salvage a captains log recording from the wreckage"
-    choice = here_comms_incoming_info_message(message,artemis_id,ensign_rachel, button="Recover Recording", time=20)
+    choice = here_comms_incoming_info_message(message,artemis_id,ensign_rachel, title="Report on scan", button="Recover Recording", time=20)
 
     pressed = await choice
 #######################################
@@ -236,42 +222,31 @@ shared main_story_task = None
 #######################################
 --- shuttle
     message = "Such a wondrous sight these space whales are so majestic. <static>  You there I don't believe we met."
-    here_receive_info_message(message, artemis_id, whale_watcher_id, time=12, audio="audio/SD01C0135")
+    here_receive_info_message(message, artemis_id, whale_watcher_id, title="Log playback", time=12, audio="audio/SD01C0135")
     
     await delay_sim(13)
 
 
     #<create type="genericMesh" x="90000.0" y="0.0" z="61000.0" name="Damaged Shuttle" meshFileName="dat\TSNShuttle.dxs" textureFileName="dat\LightCruiser_Diffuse.png"/>
     shared damaged_shuttle_id = to_id(npc_spawn(90000.0,0.0,61000.0, "Damaged Shuttle", "arvonian", "tsn_shuttle", "npc_no_nothing"))
-    whale_watcher_name = "Whale Watcher 1"
-    ww = to_object(whale_watcher_id)
-    if ww is not None:
-        ww.name = whale_watcher_name
+    
 
     await delay_sim(10)
-    message = "Damaged Shuttle located. One life sign onboard. Vitals are weak."
-    here_comms_incoming_info_message(message, artemis_id, ensign_rachel, time=20)
-    await delay_sim(20)
-
-    here_info_panel_clear_comms()
-# Delay the response from TSN Command
-    await delay_sim(10)
-
-    message = "Salavage complete suggest we report it to TSN Command"
-    choice = here_comms_incoming_info_message(message,artemis_id, ensign_rachel, button="Contact TSN Command",  time=20)
-
+    message = "Damaged Shuttle located. One life sign onboard. Vitals are weak. Suggest we report it to TSN Command"
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, title="Shuttle located", button="Contact TSN Command", time=20)
+    
     pressed = await choice
     here_info_panel_clear_comms()
 
     message = "Artemis to TSN Command, we are sending you the Whale Watcher Log. We have also discovered a shuttle with one life sign. Please Advise."
     with comms_override(artemis_id,tsn_command):
-        comms_transmit(message)
+        comms_transmit(message, "Update on shuttle")
 
     await delay_sim(10)
 
     message = "Such a shame Tourism is very risky in this sector of space. Retrieve the shuttle and check for Survivors."
     with comms_override(artemis_id, tsn_command):
-        comms_receive(message)
+        comms_receive(message, "Orders")
 
 
 
@@ -304,13 +279,13 @@ shared main_story_task = None
 #############################
 # This goes to just comms
     message = "Incoming message from medical bay"
-    choice = here_comms_incoming_info_message(message,artemis_id, medical_bay_doctor, button="Accept Message", time = 12)
+    choice = here_comms_incoming_info_message(message,artemis_id, medical_bay_doctor,title="Report on shuttle", button="Accept Message", time = 12)
 
 # Wait for button press
     pressed = await choice
 # medical bay update 1
-    message = "We have retrieved 1 Arvonian surviver from the Escape Pod.  They are undergoing medical treatment now. "
-    here_receive_info_message(message, artemis_id, medical_bay_doctor,  time=12, audio="audio/SD02C0166")
+    message = "We have retrieved 1 Arvonian survivor from the Escape Pod.  They are undergoing medical treatment now. "
+    here_receive_info_message(message, artemis_id, medical_bay_doctor,  title="Report on lifeform", time=12, audio="audio/SD02C0166")
 
     await delay_sim(13)
 
@@ -324,14 +299,14 @@ shared main_story_task = None
 
     message = "Artemis to TSN Command, We have recovered one life form alive and they are in our medical bay receiving treatment."
     with comms_override(artemis_id, tsn_command):
-        comms_transmit(message)
+        comms_transmit(message, "Update on Lifeform.")
 
 
     await delay_sim(10)
 # TSN Update survivor
     message = "Good Work. At least we saved one poor soul. Keep a look out try and find out what happen. "
     with comms_override(artemis_id, tsn_command):
-        comms_receive(message)
+        comms_receive(message, "Response on Lifeform")
 
 # AND.....SCENE
 
@@ -341,17 +316,9 @@ shared main_story_task = None
 ############################
 --- scene_distress_call_two
 ############################
-
-    message = "Incoming Distress Signal. Check with captain to view on main screen"
-    choice = here_comms_incoming_info_message(message, artemis_id, title="Distress Call", button="Accept Message", time=12)
-
-# Wait for button press
-    pressed = await choice
-
-
-# create the 
+    # create the 
     #x="48000.0" y="10.0" z="70000.0"
-    dauntless_sd = npc_spawn(48_000, 10, 70_000, whale_watcher_name, "civ", "cargo_ship", "behav_do_nothing")
+    dauntless_sd = npc_spawn(48_000, 10, 70_000, "Unknown Ship", "civ", "cargo_ship", "behav_do_nothing")
     shared dauntless_id = to_id(dauntless_sd)
     dauntless_obj = to_object(dauntless_sd)
     set_face(dauntless_id, dauntless_face)
@@ -368,9 +335,27 @@ shared main_story_task = None
     # <create type="Anomaly" pickupType="0" x="47000.0" y="-50.0" z="70000.0"/>
     #
 
+
+
+    message = "Incoming Distress Signal. Check with captain to view on main screen"
+    choice = here_comms_incoming_info_message(message, artemis_id, dauntless_id, title="Distress Call", button="Accept Message", time=12)
+
+# Wait for button press
+    pressed = await choice
+
+
+
     message = """This is the Terran Bulk Cargo "Dauntless".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
     here_receive_info_message(message, artemis_id, dauntless_id, title="Distress Call", time=14, audio="audio/SD01C0037")
 
+    daunt = to_object(dauntless_id)
+    if daunt is not None:
+        daunt.name = "Dauntless"
+
+    await delay_sim(14)
+    here_info_panel_clear_comms()
+
+    
 ## Loop until close to dauntless
     d = 100_000
     for x while d>6000:
@@ -383,18 +368,18 @@ shared main_story_task = None
     await delay_sim(5)
 
     message = "We scanned the ship and were are able to salvage a recording from the wreckage"
-    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, button="Recover Dauntless Log", time=12)
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, title="Scan report", button="Recover Dauntless Log", time=12)
 
     pressed = await choice
 
     message = """What is it? Not sure sir it looks like a beacon of some sort. Take us in for a closer look, there might be some salvage worth gathering?. Engineering, why did we lose power to engines? Captain, unknown vessel appeared behind us. Get us out of here! Can?t sir, something is draining our engines."""
-    here_receive_info_message(message, artemis_id, dauntless_id, title="Log playback", time=14, audio="audio/SD01C0035")
+    here_receive_info_message(message, artemis_id, dauntless_id, title="Log playback", time=20, audio="audio/SD01C0035")
+    await delay_sim(20)
+    here_info_panel_clear_comms()
 
-
-    await delay_sim(6)
 --- strange_object
     # x="48500.0" y="150.0" z="69500.0"
-    strange_object_sd = npc_spawn(48_500, 150, 69_500, "Strange Object", None, "alien3lod_a", "behav_pickup")
+    strange_object_sd = npc_spawn(48_500, 150, 69_500, "Strange Object", None, "alien_small_3b", "behav_pickup")
     shared strange_object_id = to_id(strange_object_sd)
     strange_object_obj = to_object(strange_object_sd)
     #
@@ -403,15 +388,46 @@ shared main_story_task = None
     strange_object_obj.engine_object.steer_yaw =  0.003
     strange_object_obj.engine_object.steer_pitch = -0.002
     strange_object_obj.engine_object.steer_roll =  0.001
-    strange_object_obj.engine_object.blink_state = -5
+    strange_object_obj.engine_object.blink_state = -3
 
     message = "Ensign Rachel Reporting: That Strange Object could give us clues to what happen to the Dauntless"
-    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, time=12)
+    here_comms_incoming_info_message(message, artemis_id, ensign_rachel, time=12)
 
-## Loop until close to dauntless
+    await delay_sim(12)
+    here_info_panel_clear_comms()
+
+## Loop until close to strange object
     for x while sbs.distance_id(artemis_id, strange_object_id ) > 1000:
         ->END if to_object(artemis_id) is None or to_object(strange_object_id ) is None
         await delay_sim(3)
 
+#
+# TODO: Tractor beam by weapons
+#       Science needs to scan it?
+#
+    for x while sbs.distance_id(artemis_id, strange_object_id)> 1000:
+        await delay_sim(4)
+        if to_object(artemis_id) is None or to_object(strange_object_id) is None:
+            # Probably signal end of game
+            ->END
+
+# OK now the shuttle is close, take it off the board
+    strange = to_object(strange_object_id)
+    if strange is not None:
+        strange.delete_object()
+
+--- strange_object_finish
+    message = """Upon further study this Beacon is some sort of Warp field disruptor. We call it a Web Generator. You cannot travel at warp near it but impulse power should be unaffected. Contact TSN Command about the Web Generator."""
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, title="Strange object Report", button="Contact TSN Command", time=12)
+    
+    pressed = await choice
+    here_info_panel_clear_comms()
+
+    with comms_override(ensign_rachel, tsn_command):
+        comms_transmit("This Beacon is some sort of Warp field disruptor. We call it a Web Generator. You cannot travel at warp near it but impulse power should be unaffected", "Important discovery")
+
+    await delay_sim(20)
+    START_TEXT = "To be Continued. You've reach the end of the story so far. More will be written"
+    signal_emit("show_game_results")
     
 

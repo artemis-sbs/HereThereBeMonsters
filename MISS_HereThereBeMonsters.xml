@@ -283,7 +283,7 @@
   </event>
 
 
-  
+
   <event name="Dauntless Recording" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
     <if_comms_button text="Recovered Dauntless Bridge Log"/>
     <if_variable name="Music" comparator="NOT" value="1.0"/>
@@ -294,6 +294,8 @@
     <set_variable name="Music" value="1.0"/>
     <incoming_comms_text from="Dauntless Bridge Log">What is it? Not sure sir it looks like a beacon of some sort. Take us in for a closer look, there might be some salvage worth gathering?. Engineering, why did we lose power to engines? Captain, unknown vessel appeared behind us. Get us out of here! Can?t sir, something is draining our engines. </incoming_comms_text>
   </event>
+
+  
   <event name="Investigate Strange Object" id_arme="99130e53-9276-481e-b97e-881a2318c558">
     <if_distance name1="Strange Object" name2="Artemis" comparator="LESS_EQUAL" value="1000.0"/>
     <if_variable name="Info_Strange_Object" comparator="EQUALS" value="1.0"/>

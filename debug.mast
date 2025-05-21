@@ -45,5 +45,8 @@ GAMEMASTER_CONSOLE_ENABLED = is_dev_build()
     + "strange_object":
         if main_story_task:
             main_story_task.jump("strange_object")
+    + "strange_object_finish":
+        if main_story_task:
+            main_story_task.jump("strange_object_finish")
 
 

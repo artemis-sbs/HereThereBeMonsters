@@ -38,7 +38,9 @@ shared main_story_task = None
 //shared/signal/create_player_ships
 # Script creates the player ships
 ### TODO: Why do I have to put shared here, why did it not find the right scope
-    shared artemis_id = to_id(player_spawn(98000, 0, 98000, "Artemis", "tsn", "tsn_light_cruiser"))
+    
+    shared artemis_id = to_id(player_spawn( *Vec3.from2x_coord(98000, 0, 98000), "Artemis", "tsn", "tsn_light_cruiser"))
+    #shared artemis_id = to_id(player_spawn( 2000, 0, 2000, "Artemis", "tsn", "tsn_light_cruiser"))
 # This puts NPC crew on the Artemis
     ensign_rachel.host = artemis_id
     medical_bay_doctor.host = artemis_id
@@ -167,7 +169,7 @@ shared main_story_task = None
 #######################################
 --- scene_distress_call_one
 #######################################
-    whale_watcher_sd = to_id(npc_spawn(90_000, 10, 60_000, whale_watcher_name, "arvonian", "luxury_liner", "behav_do_nothing"))
+    whale_watcher_sd = to_id(npc_spawn(*Vec3.from2x_coord(90_000, 10, 60_000), whale_watcher_name, "arvonian", "luxury_liner", "behav_do_nothing"))
     shared whale_watcher_id = to_id(whale_watcher_sd)
     ww_obj = to_object(whale_watcher_sd)
     set_face(whale_watcher_id, whale_watcher_face)
@@ -228,7 +230,7 @@ shared main_story_task = None
 
 
     #<create type="genericMesh" x="90000.0" y="0.0" z="61000.0" name="Damaged Shuttle" meshFileName="dat\TSNShuttle.dxs" textureFileName="dat\LightCruiser_Diffuse.png"/>
-    shared damaged_shuttle_id = to_id(npc_spawn(90000.0,0.0,61000.0, "Damaged Shuttle", "arvonian", "tsn_shuttle", "npc_no_nothing"))
+    shared damaged_shuttle_id = to_id(npc_spawn(*Vec3.from2x_coord(90000.0,0.0,61000.0), "Damaged Shuttle", "arvonian", "tsn_shuttle", "npc_no_nothing"))
     
 
     await delay_sim(10)
@@ -318,7 +320,7 @@ shared main_story_task = None
 ############################
     # create the 
     #x="48000.0" y="10.0" z="70000.0"
-    dauntless_sd = npc_spawn(48_000, 10, 70_000, "Unknown Ship", "civ", "cargo_ship", "behav_do_nothing")
+    dauntless_sd = npc_spawn(*Vec3.from2x_coord(48_000, 10, 70_000), "Unknown Ship", "civ", "cargo_ship", "behav_do_nothing")
     shared dauntless_id = to_id(dauntless_sd)
     dauntless_obj = to_object(dauntless_sd)
     set_face(dauntless_id, dauntless_face)
@@ -379,7 +381,7 @@ shared main_story_task = None
 
 --- strange_object
     # x="48500.0" y="150.0" z="69500.0"
-    strange_object_sd = npc_spawn(48_500, 150, 69_500, "Strange Object", None, "alien_small_3b", "behav_pickup")
+    strange_object_sd = npc_spawn(*Vec3.from2x_coord(48_500, 150, 69_500), "Strange Object", None, "alien_small_3b", "behav_pickup")
     shared strange_object_id = to_id(strange_object_sd)
     strange_object_obj = to_object(strange_object_sd)
     #

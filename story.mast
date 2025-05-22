@@ -195,6 +195,17 @@ shared main_story_task = None
     brain_add(b2, ai_chase_player)
 
 
+
+# 0 = ITEMTYPE_ENERGY, //Anomaly
+# 1 = ITEMTYPE_RESTORE_DAMCON,//Vigoranium Nodule
+# 2 = ITEMTYPE_HEAT_BUFF, //Cetrocite Crystal
+# 3 = ITEMTYPE_SCAN_BUFF,//Lateral Array
+# 4 = ITEMTYPE_WEAP_BUFF,//Tauron Focusers
+# 5 = ITEMTYPE_SPEED_BUFF,//Infusion P-Coils
+# 6 = ITEMTYPE_SHIELD_BUFF,//Carapaction Coils
+# 7 = ITEMTYPE_COMM_BUFF,// secret code case
+# 8 = ITEMTYPE_BEACON // beacon that repels/attracts monsters
+
 # Energy HiDens
     pickup_spawn(*Vec3.from2x_coord(95000.0, 10.0, 50000.0), "hidens_powercell")
     pickup_spawn(*Vec3.from2x_coord(3000.0, 10.0, 50000.0), "hidens_powercell")
@@ -425,8 +436,10 @@ shared main_story_task = None
     dauntless_obj.engine_object.steer_roll =  0.001
     dauntless_obj.engine_object.blink_state = -5
     #
-    # <create type="Anomaly" pickupType="2" x="49000.0" y="50.0" z="70000.0"/>
-    # <create type="Anomaly" pickupType="0" x="47000.0" y="-50.0" z="70000.0"/>
+    # This has some candy
+    #
+    pickup_spawn(*Vec3.from2x_coord(47000.0, 50.0, 70000.0), "cetrocite_crystal")
+    pickup_spawn(*Vec3.from2x_coord(47000.0, -50.0, 70000.0), "hidens_powercell")
     #
 
 
@@ -473,7 +486,7 @@ shared main_story_task = None
 
 --- strange_object
     # x="48500.0" y="150.0" z="69500.0"
-    strange_object_sd = npc_spawn(*Vec3.from2x_coord(48_500, 150, 69_500), "Strange Object", None, "alien_small_3b", "behav_pickup")
+    strange_object_sd = npc_spawn(*Vec3.from2x_coord(48_500, 150, 69_500), "Strange Object", None, "alien_small_3b", "behav_do_nothing")
     shared strange_object_id = to_id(strange_object_sd)
     strange_object_obj = to_object(strange_object_sd)
     #

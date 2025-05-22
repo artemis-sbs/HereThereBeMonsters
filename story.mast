@@ -21,9 +21,9 @@ shared dauntless_id = None
 
 
 
-shared ensign_rachel = lifeform_spawn("Ensign Rachel", random_terran_female(), "crew", None)
-shared medical_bay_doctor = lifeform_spawn("Doctor Grison", random_terran_male(), "crew", None)
-shared tsn_command = lifeform_spawn("TSN Command", random_terran(), "command", None)
+shared ensign_rachel = lifeform_spawn("Ensign Rachel", random_terran_female(), "crew")
+shared medical_bay_doctor = lifeform_spawn("Doctor Grison", random_terran_male(), "crew")
+shared tsn_command = lifeform_spawn("TSN Command", random_terran(), "command")
 
 
 
@@ -124,6 +124,98 @@ shared main_story_task = None
 * medical bay two (escape)
 
 */
+
+
+# Whales
+#     <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="0.0" z="40000.0" angle="120"/>
+#     <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="100.0" z="40000.0" angle="120"/>
+#     <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="0.0" z="41000.0" angle="120"/>
+#     <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="100.0" z="41000.0" angle="120"/>
+#     <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="100.0" z="42000.0" angle="120"/>
+#     <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="0.0" z="42000.0" angle="120"/>
+#     <create type="monster" monsterType="1" podnumber="1" x="70000.0" y="0.0" z="42100.0" angle="120"/>
+
+# Dragons
+#     <create type="monster" monsterType="3" x="70000.0" y="0.0" z="10000.0" name="The Beheader"/>
+#     <create type="monster" monsterType="3" x="70000.0" y="10.0" z="20000.0" name="Kracon"/>
+
+# Piranha
+#     <create type="monster" monsterType="4" podnumber="2" x="30000.0" y="0.0" z="45000.0" name="Piranha "/>
+#     <create type="monster" monsterType="4" podnumber="2" x="31000.0" y="0.0" z="45000.0" name="Piranha  "/>
+#     <create type="monster" monsterType="4" podnumber="2" x="32000.0" y="0.0" z="45000.0" name="Piranha   "/>
+#     <create type="monster" monsterType="4" podnumber="2" x="30000.0" y="100.0" z="45000.0" name="Piranha    "/>
+#     <create type="monster" monsterType="4" podnumber="2" x="31000.0" y="100.0" z="45000.0" name="Piranha     "/>
+#     <create type="monster" monsterType="4" podnumber="2" x="31000.0" y="-100.0" z="45000.0" name="Piranha      "/>
+#     <create type="monster" monsterType="4" podnumber="2" x="32000.0" y="100.0" z="45000.0" name="Piranha       "/>
+
+# Shark
+#     <create type="monster" monsterType="2" x="20000.0" y="1.0" z="70000.0" name="Bruce"/>
+#     <create type="monster" monsterType="2" x="80000.0" y="1.0" z="50000.0" name="Saber"/>
+
+# Jellies
+#     <create type="monster" monsterType="7" x="70000.0" y="0.0" z="75000.0"/>
+
+# Bug
+#     <create type="monster" monsterType="6" x="10000.0" y="0.0" z="40000.0" name="Hornet"/>
+#     <create type="monster" monsterType="6" x="70000.0" y="10.0" z="40000.0" name="Wasp"/>
+
+# TUBE
+#     <create type="monster" monsterType="5" x="20000.0" y="0.0" z="90000.0" name="Doom"/>
+
+# Wrecks???
+#     <create type="monster" monsterType="8" x="50000.0" y="0.0" z="75000.0"/>
+#     <create type="monster" monsterType="8" x="60000.0" y="0.0" z="80000.0"/>
+#     <create type="monster" monsterType="8" x="50000.0" y="0.0" z="55000.0"/>
+#     <create type="monster" monsterType="8" x="50000.0" y="0.0" z="80000.0"/>
+#     <create type="monster" monsterType="8" x="20000.0" y="0.0" z="80000.0"/>
+#     <create type="monster" monsterType="8" x="20000.0" y="0.0" z="30000.0"/>
+#     <create type="monster" monsterType="8" x="20500.0" y="0.0" z="30500.0"/>
+#     <create type="monster" monsterType="8" x="70000.0" y="0.0" z="55000.0"/>
+
+# 2.8 Monster types
+
+# 0 = GMMONSTER_CLASSIC,
+# 1 = GMMONSTER_WHALE,
+# 2 = GMMONSTER_SHARK,
+# 3 = GMMONSTER_DRAGON,
+# 4 = GMMONSTER_PIRANHA,
+# 5 = GMMONSTER_TUBE,
+# 6 = GMMONSTER_BUG,
+# 7 = GMMONSTER_JELLY,       ! new for 2.7.0
+# 8 = GMMONSTER_DERELICT,
+
+
+#     <create type="enemy" x="50000.0" y="2.0" z="59000.0" raceKeys="BioMech" hullKeys="Stage 1"/>
+#     <create type="enemy" x="50000.0" y="2.0" z="59000.0" raceKeys="BioMech" hullKeys="Stage 1"/>
+
+# spawn two biomechs, and simply set their brain to chase player
+    b1 = npc_spawn(*Vec3.from2x_coord(50000, 2, 59000), None, "biomech", "biomech_a", "behav_npcship")
+    b2 = npc_spawn(*Vec3.from2x_coord(50000, 2, 59100), None, "biomech", "biomech_a", "behav_npcship")
+    brain_add(b1, ai_chase_player)
+    brain_add(b2, ai_chase_player)
+
+
+# Energy HiDens
+    pickup_spawn(*Vec3.from2x_coord(95000.0, 10.0, 50000.0), "hidens_powercell")
+    pickup_spawn(*Vec3.from2x_coord(3000.0, 10.0, 50000.0), "hidens_powercell")
+    pickup_spawn(*Vec3.from2x_coord(50000.0, 10.0, 65000.0), "hidens_powercell")
+    pickup_spawn(*Vec3.from2x_coord(70000.0, 10.0, 77000.0), "hidens_powercell")
+    pickup_spawn(*Vec3.from2x_coord(20000.0, 10.0, 77000.0), "hidens_powercell")
+    pickup_spawn(*Vec3.from2x_coord(80000.0, 10.0, 20000.0), "hidens_powercell")
+    pickup_spawn(*Vec3.from2x_coord(75000.0, 10.0, 55000.0), "hidens_powercell")
+    pickup_spawn(*Vec3.from2x_coord(24000.0, 10.0, 33000.0), "hidens_powercell")
+    pickup_spawn(*Vec3.from2x_coord(10000.0, 10.0, 90000.0), "hidens_powercell")
+    pickup_spawn(*Vec3.from2x_coord(50000, 10.0, 90000.0), "hidens_powercell")
+
+
+# Restore Damcons Vigoranium
+    pickup_spawn(*Vec3.from2x_coord(60000,10.0,85000.0), "vigoranium_nodule")
+    pickup_spawn(*Vec3.from2x_coord(5000,10.0,5500.0), "vigoranium_nodule")
+    pickup_spawn(*Vec3.from2x_coord(5000,10.0,91000.0), "vigoranium_nodule")
+    pickup_spawn(*Vec3.from2x_coord(10000,10.0,55000.0), "vigoranium_nodule")
+
+# Tauron Focusers
+    pickup_spawn(*Vec3.from2x_coord(30000,10.0, 5500.0), "tauron_focuser")
 
 #######################################
 # === scene_mission_briefing_start
@@ -432,4 +524,5 @@ shared main_story_task = None
     START_TEXT = "To be Continued. You've reach the end of the story so far. More will be written"
     signal_emit("show_game_results")
     
+
 

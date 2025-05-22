@@ -8,6 +8,7 @@
         "artemis-sbs.LegendaryMissions.consoles.v1.1.0.mastlib",
         "artemis-sbs.LegendaryMissions.damage.v1.1.0.mastlib",
         "artemis-sbs.LegendaryMissions.docking.v1.1.0.mastlib",
+        "artemis-sbs.LegendaryMissions.internal_comms.v1.1.0.mastlib",
         "artemis-sbs.LegendaryMissions.grid_comms.v1.1.0.mastlib",
         "artemis-sbs.LegendaryMissions.science_scans.v1.1.0.mastlib",
         "artemis-sbs.LegendaryMissions.upgrades.v1.1.0.mastlib",

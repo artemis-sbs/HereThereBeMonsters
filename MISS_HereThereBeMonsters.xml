@@ -365,6 +365,13 @@
     <clear_comms_button text="Contact TSN Command about Odessa"/>
     <incoming_comms_text from="TSN Command">Piranhas are a fearsome creature. But it doesn't look like Piranhas doomed the Odessa. Find out whats happening to these ships.</incoming_comms_text>
   </event>
+
+
+
+
+
+
+
   <event name="Web Trap" id_arme="9ac33670-1d16-4ea0-96c3-ebfde5cd9993">
     <if_timer_finished name="Web"/>
     <if_variable name="Mission_Brief" comparator="EQUALS" value="7.0"/>
@@ -372,6 +379,8 @@
     <set_variable name="Mission_Brief" value="8.0"/>
     <set_timer name="Hostage_Message" seconds="180"/>
   </event>
+
+
   <event name="Trap Sprung" id_arme="7102410a-df3c-4b09-b2f5-157846137e19">
     <if_variable name="Mission_Brief" comparator="EQUALS" value="8.0"/>
     <if_distance name1="Artemis" name2="Distress Call" comparator="LESS_EQUAL" value="1800.0"/>
@@ -390,6 +399,8 @@
     <direct name="Web Generator" targetName="Artemis" scriptThrottle="0.0"/>
     <set_relative_position name2="Artemis" distance="350" angle="0" name1="Web Generator"/>
   </event>
+
+
   <event name="Taunt Web" id_arme="cf3c23fd-fd2b-4554-9d1d-5cf9ddd8e2ad">
     <if_comms_button text="Call For Help"/>
     <if_variable name="Music" comparator="NOT" value="1.0"/>
@@ -400,6 +411,7 @@
     <set_variable name="Music" value="1.0"/>
     <incoming_comms_text from="Wolf Spider">Look who has stumbled into my little trap I'll be there soon to help you out</incoming_comms_text>
   </event>
+  
   <event name="Radio Signal" id_arme="b25ef1d0-4471-414d-852f-5d0dd1c09dfd">
     <if_timer_finished name="Hostage_Message"/>
     <if_variable name="Hostage_Message" comparator="EQUALS" value="1.0"/>
@@ -419,6 +431,7 @@
     <set_variable name="Music" value="1.0"/>
     <set_comms_button text="Contact TSN Command about the Radio Signal" sideValue="2"/>
   </event>
+
   <event name="Mission Update Radio Signal" id_arme="ca8c820b-6e4c-403c-93d0-2f348eed68da">
     <if_comms_button text="Contact TSN Command about the Radio Signal"/>
     <if_variable name="Launch_Marine_One_Button" comparator="NOT" value="1.0"/>
@@ -433,6 +446,10 @@
     <clear_comms_button text="Contact TSN Command about the Radio Signal"/>
     <incoming_comms_text from="TSN Command">A hostage situation! It is imperative that you rescue those hostages. Find where the hostages are located and launch marines to retrieve them.</incoming_comms_text>
   </event>
+
+
+
+
   <event name="Message from Sgt. Stone" id_arme="c47340c1-eb09-40a4-973b-de7cfcd84dd1">
     <if_comms_button text="Message from Sgt. Stone"/>
     <if_variable name="Music" comparator="NOT" value="1.0"/>

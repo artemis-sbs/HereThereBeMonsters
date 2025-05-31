@@ -1,8 +1,9 @@
-from sbs_utils.procedural.gui import gui_console_clients, gui_info_panel_send_message
+from sbs_utils.procedural.gui import gui_reroute_client, gui_info_panel_send_message
 from sbs_utils.procedural.comms import comms_override, comms_receive
 from sbs_utils.procedural.links import linked_to
-from sbs_utils.procedural.roles import all_roles
+from sbs_utils.procedural.roles import all_roles, role, any_role
 from sbs_utils.procedural.query import to_object
+from sbs_utils.procedural.grid import grid_objects
 from sbs_utils.procedural.execution import get_shared_variable
 from sbs_utils.faces import get_face
 from sbs_utils.fs import get_mission_audio_file
@@ -10,15 +11,15 @@ import sbs
 
 
 
-def here_info_panel_clear_comms():
+def here_info_panel_clear_comms(consoles="comms"):
     """ 
     This is helper function to clear the info panel message 
     """
-    cc = gui_console_clients("comms")
+    cc = role(f"console") & any_role(consoles)
     gui_info_panel_send_message(cc,path="message")
     gui_info_panel_send_message(cc,path="ship_data", time=0)
 
-def here_comms_incoming_info_message(message, origin_id, selected_id=None, button=None, face=None, title=None, time = 0):
+def here_comms_incoming_info_message(message, origin_id, selected_id=None, button=None, face=None, title=None, time = 0, consoles="comms"):
     """ This is a helper function to send a comms message as well as present a message in the info panel
 
     Args:
@@ -47,7 +48,7 @@ def here_comms_incoming_info_message(message, origin_id, selected_id=None, butto
             msg = message  + " see info panel for interaction."
         comms_receive(msg, title=title)
 
-    consoles = linked_to(origin_id, "consoles") & all_roles("console, comms")
+    consoles = linked_to(origin_id, "consoles") & role(f"console") & any_role(consoles)
 
     return gui_info_panel_send_message(consoles, message, title=title, face=face, button=button, time=time)
 
@@ -80,3 +81,5 @@ def here_receive_info_message(message, origin_id, selected_id=None, face=None, t
     # play Audio file
     if audio is not None and get_shared_variable("HTBM_AUDIO_FILE_ENABLED", False):
         sbs.play_audio_file(0, get_mission_audio_file(audio), 1.0,1.0)
+
+

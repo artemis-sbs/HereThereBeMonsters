@@ -10,7 +10,7 @@ GAMEMASTER_CONSOLE_ENABLED = is_dev_build()
 #
 # Add comms buttons to help debug this script
 #
-//comms if is_dev_build()
+//comms if is_dev_build() and is_space_object_id(COMMS_SELECTED_ID)
 
     + "Jump to selection":
         artemis_obj = to_object(artemis_id)
@@ -26,27 +26,32 @@ GAMEMASTER_CONSOLE_ENABLED = is_dev_build()
 #
 # Note the labels are sub labels, so they need to be string
 #
-//comms/chapters
+//comms/chapters if main_story_task
+
     + "scene_distress_call_one":
-        if main_story_task:
-            main_story_task.jump("scene_distress_call_one")
+        main_story_task.jump("scene_distress_call_one")
     + "shuttle":
-        if main_story_task:
-            main_story_task.jump("shuttle")
+        main_story_task.jump("shuttle")
     + "medical_bay_update_one":
-        if main_story_task:
-            main_story_task.jump("medical_bay_update_one")
+        main_story_task.jump("medical_bay_update_one")
     + "scene_distress_call_two":
-        if main_story_task:
-            main_story_task.jump("scene_distress_call_two")
+        main_story_task.jump("scene_distress_call_two")
     + "salvage":
-        if main_story_task:
-            main_story_task.jump("salvage")
+        main_story_task.jump("salvage")
     + "strange_object":
-        if main_story_task:
-            main_story_task.jump("strange_object")
+        main_story_task.jump("strange_object")
     + "strange_object_finish":
-        if main_story_task:
-            main_story_task.jump("strange_object_finish")
+        main_story_task.jump("strange_object_finish")
+    + "scene_distress_call_three":
+        main_story_task.jump("scene_distress_call_three")
+    + "scene_web_trap":
+        main_story_task.jump("scene_web_trap")
+    + "scene_hostage_message":
+        main_story_task.jump("scene_hostage_message")
+    + "side_quest_saboteur":
+        main_story_task.jump("side_quest_saboteur_skip")
+
+        
+        
 
 

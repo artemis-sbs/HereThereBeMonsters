@@ -18,12 +18,23 @@ shared whale_watcher_name = "Unknown ship"
 shared dauntless_face = random_terran(civilian=True)
 shared dauntless_id = None
 
+shared odessa_face = random_terran(civilian=False)
+shared odessa_id = None
+
+shared web_generator_face = random_terran(civilian=True)
+shared web_generator_id = None
+
+shared saboteur_state = "idle"
 
 
 
 shared ensign_rachel = lifeform_spawn("Ensign Rachel", random_terran_female(), "crew")
 shared medical_bay_doctor = lifeform_spawn("Doctor Grison", random_terran_male(), "crew")
 shared tsn_command = lifeform_spawn("TSN Command", random_terran(), "command")
+shared wolf_spider = lifeform_spawn("Wolf Spider", random_terran(), "pirate")
+
+shared marine_stone = lifeform_spawn("Marine Stone", random_terran(), "crew,marine")
+shared marine_rockwell = lifeform_spawn("Marine Rockwell", random_terran(), "crew,marine")
 
 
 
@@ -35,6 +46,8 @@ shared HTBM_AUDIO_FILE_ENABLED = True
 # to help debug by jumping to that part of the story
 shared main_story_task = None
 
+@media/skybox/sky-delight "Sailor's delight"
+
 //shared/signal/create_player_ships
 # Script creates the player ships
 ### TODO: Why do I have to put shared here, why did it not find the right scope
@@ -44,6 +57,7 @@ shared main_story_task = None
 # This puts NPC crew on the Artemis
     ensign_rachel.host = artemis_id
     medical_bay_doctor.host = artemis_id
+    marine_stone.host = artemis_id
 # Call this to enable docking on the player
 # Are there any stations?
     #docking_set_docking_logic(player.id, role(player.side) & role("station"), docking_dock_with_friendly_station)
@@ -58,10 +72,16 @@ shared main_story_task = None
 
 # This is used in debugging to allow testing to jump 
     shared main_story_task = mast_task
+
+    # corner1 = npc_spawn(*Vec3(0, 0, 0), "C 00", "corner", "starbase_command", "behav_do_nothing")
+    # corner2 = npc_spawn(*Vec3(0, 0, 100_000), "C 01", "corner", "starbase_civil", "behav_do_nothing")
+    # corner3 = npc_spawn(*Vec3(100_000, 0, 0), "C 10", "corner", "starbase_command", "behav_do_nothing")
+    # corner4 = npc_spawn(*Vec3(100_000, 0, 100_000), "C 11", "corner", "starbase_command", "behav_do_nothing")
+    # link(artemis_id,"extra_scan_source" ,role("corner"))    
 # 
 # A tile map can be any size of the map
 # and you can use it to fill 
-    tile_map = maps_tile_map_create(0, 100_000, 1_000) 
+    tile_map = maps_tile_map_create(0, 100_000, 1_000,2_000) 
 
 # Using nebula as cards in a deck
     nebula_deck = maps_deck_create()
@@ -196,7 +216,7 @@ shared main_story_task = None
 
 
 
-# 0 = ITEMTYPE_ENERGY, //Anomaly
+# 0 = ITEMTYPE_ENERGY, //Anomaly==hiDens Energy
 # 1 = ITEMTYPE_RESTORE_DAMCON,//Vigoranium Nodule
 # 2 = ITEMTYPE_HEAT_BUFF, //Cetrocite Crystal
 # 3 = ITEMTYPE_SCAN_BUFF,//Lateral Array
@@ -272,7 +292,7 @@ shared main_story_task = None
 #######################################
 --- scene_distress_call_one
 #######################################
-    whale_watcher_sd = to_id(npc_spawn(*Vec3.from2x_coord(90_000, 10, 60_000), whale_watcher_name, "arvonian", "luxury_liner", "behav_do_nothing"))
+    whale_watcher_sd = to_id(npc_spawn(*Vec3.from2x_coord(90_000, 10, 60_000), whale_watcher_name, "arvonian", "unknown", "behav_do_nothing"))
     shared whale_watcher_id = to_id(whale_watcher_sd)
     ww_obj = to_object(whale_watcher_sd)
     set_face(whale_watcher_id, whale_watcher_face)
@@ -285,7 +305,7 @@ shared main_story_task = None
     ww_obj.engine_object.steer_roll =  0.001
     ww_obj.engine_object.blink_state = -5
 # Let us see it? Or should science see it
-    link(artemis_id,"extra_scan_source" ,whale_watcher_id)
+    
 
 
     message = "Incoming Distress Signal. Check with captain to view on main screen."    
@@ -293,18 +313,15 @@ shared main_story_task = None
 # Wait for button press
     pressed = await choice
 # Create a luxury liner
-
-
     message = """This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
     here_receive_info_message(message, artemis_id, whale_watcher_id, title="Distress Signal", time=10, audio="audio/SD01C0139")
+
+    link(artemis_id,"extra_scan_source" ,whale_watcher_id)
 
     await delay_sim(10)
     here_info_panel_clear_comms()
 
-    whale_watcher_name = "Whale Watcher 1"
-    ww = to_object(whale_watcher_id)
-    if ww is not None:
-        ww.name = whale_watcher_name
+    
 #######################################
 # --- approach_whale_watcher
 #######################################
@@ -313,6 +330,12 @@ shared main_story_task = None
         ->END if to_object(artemis_id) is None or to_object(whale_watcher_id) is None
         d = sbs.distance_id(artemis_id, whale_watcher_id)
         await delay_sim(3)
+
+    whale_watcher_name = "Whale Watcher 1"
+    ww = to_object(whale_watcher_id)
+    if ww is not None:
+        ww.name = whale_watcher_name
+        ww.art_id = "luxury_liner"
 # Keep waiting until artemis is close to the luxury liner    
     #jump approach if d > 6000
 # It is now close enough
@@ -414,6 +437,8 @@ shared main_story_task = None
         comms_receive(message, "Response on Lifeform")
 
 # AND.....SCENE
+# RUN the saboteur side quest
+    task_schedule(side_quest_saboteur)
 
     await delay_sim(200)
 ##########################################################################################
@@ -423,7 +448,7 @@ shared main_story_task = None
 ############################
     # create the 
     #x="48000.0" y="10.0" z="70000.0"
-    dauntless_sd = npc_spawn(*Vec3.from2x_coord(48_000, 10, 70_000), "Unknown Ship", "civ", "cargo_ship", "behav_do_nothing")
+    dauntless_sd = npc_spawn(*Vec3.from2x_coord(48_000, 10, 70_000), "Unknown Ship", "civ", "unknown", "behav_do_nothing")
     shared dauntless_id = to_id(dauntless_sd)
     dauntless_obj = to_object(dauntless_sd)
     set_face(dauntless_id, dauntless_face)
@@ -455,9 +480,7 @@ shared main_story_task = None
     message = """This is the Terran Bulk Cargo "Dauntless".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
     here_receive_info_message(message, artemis_id, dauntless_id, title="Distress Call", time=14, audio="audio/SD01C0037")
 
-    daunt = to_object(dauntless_id)
-    if daunt is not None:
-        daunt.name = "Dauntless"
+ 
 
     await delay_sim(14)
     here_info_panel_clear_comms()
@@ -469,6 +492,12 @@ shared main_story_task = None
         ->END if to_object(artemis_id) is None or to_object(dauntless_id) is None
         d = sbs.distance_id(artemis_id, dauntless_id)
         await delay_sim(3)
+
+    daunt = to_object(dauntless_id)
+    if daunt is not None:
+        daunt.name = "Dauntless"
+        daunt.art_id = "cargo_ship"
+
 
 ## Maybe enhancement that weapons or science needs to scan
 
@@ -512,11 +541,6 @@ shared main_story_task = None
 # TODO: Tractor beam by weapons
 #       Science needs to scan it?
 #
-    for x while sbs.distance_id(artemis_id, strange_object_id)> 1000:
-        await delay_sim(4)
-        if to_object(artemis_id) is None or to_object(strange_object_id) is None:
-            # Probably signal end of game
-            ->END
 
 # OK now the shuttle is close, take it off the board
     strange = to_object(strange_object_id)
@@ -533,9 +557,254 @@ shared main_story_task = None
     with comms_override(ensign_rachel, tsn_command):
         comms_transmit("This Beacon is some sort of Warp field disruptor. We call it a Web Generator. You cannot travel at warp near it but impulse power should be unaffected", "Important discovery")
 
+
+##########################################################################################
+# Distress Call Three
+############################
+--- scene_distress_call_three
+############################
+    # create the 
+    #x="20000.0" y="10.0" z="50000.0"
+    odessa_sd = npc_spawn(*Vec3.from2x_coord(20_000, -200, 50_000), "Distress Call", "civ", "unknown", "behav_do_nothing")
+    shared odessa_id = to_id(odessa_sd)
+    odessa_obj = to_object(odessa_sd)
+    set_face(odessa_id, odessa_face)
+    link(artemis_id, "extra_scan_source", odessa_id)
+    #
+    # Make it spin and blink
+    #
+    odessa_obj.engine_object.steer_yaw =  0.003
+    odessa_obj.engine_object.steer_pitch = -0.002
+    odessa_obj.engine_object.steer_roll =  0.001
+    odessa_obj.engine_object.blink_state = -5
+    #odessa_sd.blob.set("local_scale_coeff", 3.0,0)
+    #
+    # This has some candy
+    #
+    #<create type="Anomaly" pickupType="2" x="21000.0" y="10.0" z="50000.0"/>
+    #<create type="Anomaly" pickupType="0" x="19000.0" y="-50.0" z="50000.0"/>
+    pickup_spawn(*Vec3.from2x_coord(21000.0, 10.0, 50000.0), "cetrocite_crystal")
+    pickup_spawn(*Vec3.from2x_coord(19000.0, -50.0, 50000.0), "hidens_powercell")
+    #
+    message = "Incoming Distress Signal. Check with captain to view on main screen"
+    choice = here_comms_incoming_info_message(message, artemis_id, dauntless_id, title="Distress Call", button="Accept Message", time=12)
+
+# Wait for button press
+    pressed = await choice
+
+# Message from Odessa
+    message = """This is the Terran Science Vessel "Odessa".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
+    here_receive_info_message(message, artemis_id, odessa_id, title="Distress Call", time=14, audio="audio/SD02C0165")
+
+    await delay_sim(14)
+    here_info_panel_clear_comms()
+
+    
+## Loop until close to odessa
+    d = 100_000
+    for x while d>6000:
+        ->END if to_object(artemis_id) is None or to_object(odessa_id) is None
+        d = sbs.distance_id(artemis_id, odessa_id)
+        await delay_sim(3)
+
+    odessa = to_object(odessa_id)
+    if odessa is not None:
+        odessa.name = "Odessa"
+        odessa.art_id = "science_ship"
+
+
+    message = "We scanned the ship and were are able to salvage a recording from the wreckage"
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, title="Scan report", button="Recover Odessa Science Log", time=12)
+
+    pressed = await choice
+
+    message = """Science officer's log 76.2. This sector of space has an unusually high concentration of stellar creatures. It is an ideal place to study their behaviors in more details.  The Piranhas in this sector have been exhibiting aggressive behavior.  More so than has ever been reported. I think this might be a breeding ground. There is not much known about the breeding habits of these piranhas. This is an excellent opportunity for research but I still need to convince the captain to let us take a closer look.   The last run in left our long range communication array slightly chewed."""
+    here_receive_info_message(message, artemis_id, dauntless_id, title="Log playback", time=35, audio="audio/SD02C0164")
+    await delay_sim(35)
+    here_info_panel_clear_comms()
+
+
+    message = """Contact TSN Command about Odessa sceince log."""
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, title="Update on Odessa", button="Contact TSN Command", time=12)
+    
+    pressed = await choice
+    here_info_panel_clear_comms()
+
+    with comms_override(ensign_rachel, tsn_command):
+        comms_transmit("Piranhas are a fearsome creature. But it doesn't look like Piranhas doomed the Odessa. Find out whats happening to these ships.", "Keep searching")
+
+    await delay_sim(100)
+
+
+--- scene_web_trap
+    # create the 
+    # x="22000.0" y="0.0" z="25000.0"
+    # web_generator_sd = npc_spawn(*Vec3.from2x_coord(22_000, 0, 25_000), "Distress Call", "civ", "unknown", "behav_do_nothing")
+    # shared web_generator_id = to_id(web_generator_sd)
+    # web_generator_obj = to_object(web_generator_sd)
+    # set_face(web_generator_id, web_generator_face)
+    # link(artemis_id, "extra_scan_source", web_generator_id)
+    
+# Disable Warp drive
+    obj = to_object(artemis_id)
+    obj.data_set.set("warp_drive_active",0,0)
+
+    await delay_sim(20)
+
+    message = "It's a Web Generator!! You cannot travel at warp near it but impulse power should be unaffected. Sceince or engineering need to acknoledge."
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, title="Ensign Rachel Reporting:", button="Acknowledge", time=0, consoles="science, engineering")
+# Awaits for the button press or the time out
+    pressed = await promise_any(choice, delay_sim(10))
+    here_info_panel_clear_comms("science,engineering")
+
+    await delay_sim(20)
+
+    message = "Incoming Distress Signal. Check with captain to view on main screen"
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, title="Distress Call", button="Accept Message", time=12)
+
+    pressed = await choice
+
+    message = """Look who has stumbled into my little trap I'll be there soon to help you out"""
+    here_receive_info_message(message, artemis_id, wolf_spider, title="Help Response", time=13, audio="audio/SD01C0110")
+    await delay_sim(13)
+    here_info_panel_clear_comms()
+
+    await delay_sim(180)
+
+
+
+--- scene_hostage_message
+    # create the 
+    # x="50000.0" y="15000.0" z="30000.0"
+    hostage_station_sd = npc_spawn(*Vec3.from2x_coord(50_000, 1000, 30_000), "Distress Call", "civ", "unknown", "behav_do_nothing")
+    shared hostage_station_id = to_id(hostage_station_sd)
+    hostage_station_obj = to_object(hostage_station_sd)
+    #set_face(web_generator_id, web_generator_face)
+    
+    
+
+    message = "Incoming Distress Signal. Check with captain to view on main screen"
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, title="Distress Call", button="Accept Message", time=12)
+
+    pressed = await choice
+
+    message = """Is there anyone out there? Help us they have us trapped here waiting for ransom.  And if no one pays we will be forced to work in the mines."""
+    here_receive_info_message(message, artemis_id, ensign_rachel, title="Help Response", time=13, audio="audio/A0001")
+    await delay_sim(13)
+    here_info_panel_clear_comms()
+
+    await delay_sim(23)
+
+    message = """We should notiify TSN command about this situation."""
+    choice = here_comms_incoming_info_message(message, artemis_id, ensign_rachel, title="Hostage situation", button="Contact TSN Command", time=12)
+    
+    pressed = await choice
+    here_info_panel_clear_comms()
+
+    with comms_override(ensign_rachel, tsn_command):
+        comms_transmit("A hostage situation! It is imperative that you rescue those hostages. Find where the hostages are located and launch marines to retrieve them.", "Rescue Hostages")
+
+    link(artemis_id, "extra_scan_source", hostage_station_id)
+
+    hostage_station_obj = to_object(hostage_station_sd)
+    hostage_station_obj.art_id = "starbase_science"
+
+--- temp_ending
     await delay_sim(20)
     START_TEXT = "To be Continued. You've reach the end of the story so far. More will be written"
     signal_emit("show_game_results")
+
+
+
+
+==== side_quest_saboteur
+    await delay_sim(220)
     
+==== side_quest_saboteur_skip
+    # This enables the Dr's comms badge
+    add_role(medical_bay_doctor, "comms_badge")
+    medical_bay_doctor.path = "doctor"
+    delay_time = 100
+
+
+    saboteur_state = "idle"
+# comms will change the state
+    for x in range(5):
+        break if saboteur_state != "idle"
+        with comms_override(artemis_id, medical_bay_doctor):
+            comms_receive("Ugrent I speak with you contact me on my comms badge", "Urgent message")
+        await delay_sim(20)
+
+    with comms_override(artemis_id, marine_stone):
+        comms_receive("There was a commotion by the Sensor Array console! We are on our way to investigate!", "Report on Sensor Array")
+
+    await delay_sim(delay_time)
+
+--- sensor_array_break
+    for x in range(4):
+        grid_damage_system(artemis_id, sbs.SHPSYS.SENSORS)
+    sbs.play_audio_file(0, get_mission_audio_file("audio/hullhit"), 1.0,1.0)
+
+    await delay_sim(20)
+    with comms_override(artemis_id, marine_stone):
+        comms_receive("Report from the Sensor Array: Someone has overloaded the forward Sensor Array. It's damaged now!", "Report on Sensor Array")
+    
+    await delay_sim(20)
+
+    with comms_override(artemis_id, marine_stone):
+        comms_receive("Unauthorized work in progress on the forward beam emmiters.", "Report from Weapons Control")
+    
+    await delay_sim(delay_time)
+--- weapons_break
+    for x in range(8):
+        grid_damage_system(artemis_id, sbs.SHPSYS.WEAPONS)
+    sbs.play_audio_file(0, get_mission_audio_file("audio/hullhit"), 1.0,1.0)
+
+    await delay_sim(20)
+
+    with comms_override(artemis_id, marine_stone):
+        comms_receive("The Forward Beam power regulators just blew. Someone bypassed the safeties.", "Report from Weapons Control")
+
+    await delay_sim(20)
+
+    with comms_override(artemis_id, marine_stone):
+        comms_receive("Unauthorize maintainance to the warp and impulse regulators in progress.", "Report from the Warp Core")
+
+    await delay_sim(delay_time)
+
+--- engine_break
+    for x in range(8):
+        grid_damage_system(artemis_id, sbs.SHPSYS.ENGINES)
+    sbs.play_audio_file(0, get_mission_audio_file("audio/hullhit"), 1.0,1.0)
+
+    await delay_sim(20)
+    with comms_override(artemis_id, marine_stone):
+        comms_receive("The Impulse Regulator was crossed with the warp power converter causing an overload.", "Report from the Warp Core" )
+    
+    await delay_sim(20)
+
+    with comms_override(artemis_id, marine_stone):
+        comms_receive("Unscheduled Maintainance to rear shield deflector control in progress", "RReport from the Shield Generators")
+
+    await delay_sim(delay_time)
+
+--- shields_break
+    for x in range(8):
+        grid_damage_system(artemis_id, sbs.SHPSYS.SHIELDS)
+    sbs.play_audio_file(0, get_mission_audio_file("audio/hullhit"), 1.0,1.0)
+
+    await delay_sim(20)
+    with comms_override(artemis_id, marine_stone):
+        comms_receive("Oh Dear the rear shield emitters just shorted out", "Report from the Shield Generators")
+
+//comms/doctor
+    +^1 "Back" //comms/comms_badge
+    +"Status":
+        saboteur_state = "missing"
+        message = """There was an incident in the Medbay and the Arvonian Survivor is missing!"""
+        here_receive_info_message(message, artemis_id, medical_bay_doctor, title="Update on Survivor", time=13, audio="audio/SD02C0167")
+        # Disable comms badge
+        remove_role(medical_bay_doctor, "comms_badge")
+        comms_navigate("//comms/")
 
 

@@ -36,8 +36,11 @@ shared wolf_spider = lifeform_spawn("Wolf Spider", random_terran(), "pirate")
 shared marine_stone = lifeform_spawn("Marine Stone", random_terran(), "crew,marine")
 shared marine_rockwell = lifeform_spawn("Marine Rockwell", random_terran(), "crew,marine")
 
-
-
+#
+# This may be obsolete in the future
+# but for now it is hiding the simple internal comms
+#
+shared SIMPLE_INTERNAL = False
 # Mission setting for playing audio files
 shared HTBM_AUDIO_FILE_ENABLED = True
 #

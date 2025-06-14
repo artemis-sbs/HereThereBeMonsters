@@ -50,6 +50,8 @@ GAMEMASTER_CONSOLE_ENABLED = is_dev_build()
         main_story_task.jump("scene_hostage_message")
     + "side_quest_saboteur":
         main_story_task.jump("side_quest_saboteur_skip")
+    + "test grid":
+        task_schedule(test_grid_promise)
 
         
         

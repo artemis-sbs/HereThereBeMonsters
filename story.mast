@@ -251,6 +251,12 @@ shared main_story_task = None
 # Tauron Focusers
     pickup_spawn(*Vec3.from2x_coord(30000,10.0, 5500.0), "tauron_focuser")
 
+
+
+    # Add game ending conditions
+    game_end_condition_add(destroyed_all(role("__player__")), "The TSN defenders have been destroyed.", False)
+
+
 #######################################
 # === scene_mission_briefing_start
 #######################################    
@@ -328,11 +334,7 @@ shared main_story_task = None
 #######################################
 # --- approach_whale_watcher
 #######################################
-    d = 100_000
-    for x while d>6000:
-        ->END if to_object(artemis_id) is None or to_object(whale_watcher_id) is None
-        d = sbs.distance_id(artemis_id, whale_watcher_id)
-        await delay_sim(3)
+    await distance_less(artemis_id, whale_watcher_id, 6000)
 
     whale_watcher_name = "Whale Watcher 1"
     ww = to_object(whale_watcher_id)
@@ -490,11 +492,7 @@ shared main_story_task = None
 
     
 ## Loop until close to dauntless
-    d = 100_000
-    for x while d>6000:
-        ->END if to_object(artemis_id) is None or to_object(dauntless_id) is None
-        d = sbs.distance_id(artemis_id, dauntless_id)
-        await delay_sim(3)
+    await distance_less(artemis_id, dauntless_id, 6000)
 
     daunt = to_object(dauntless_id)
     if daunt is not None:
@@ -536,9 +534,7 @@ shared main_story_task = None
     here_info_panel_clear_comms()
 
 ## Loop until close to strange object
-    for x while sbs.distance_id(artemis_id, strange_object_id ) > 1000:
-        ->END if to_object(artemis_id) is None or to_object(strange_object_id ) is None
-        await delay_sim(3)
+    await distance_less(artemis_id, strange_object_id, 1000)
 
 #
 # TODO: Tractor beam by weapons
@@ -604,11 +600,7 @@ shared main_story_task = None
 
     
 ## Loop until close to odessa
-    d = 100_000
-    for x while d>6000:
-        ->END if to_object(artemis_id) is None or to_object(odessa_id) is None
-        d = sbs.distance_id(artemis_id, odessa_id)
-        await delay_sim(3)
+    await distance_less(artemis_id, odessa_id, 6000)
 
     odessa = to_object(odessa_id)
     if odessa is not None:
@@ -683,7 +675,6 @@ shared main_story_task = None
     shared hostage_station_id = to_id(hostage_station_sd)
     hostage_station_obj = to_object(hostage_station_sd)
     #set_face(web_generator_id, web_generator_face)
-    
     
 
     message = "Incoming Distress Signal. Check with captain to view on main screen"
@@ -811,3 +802,23 @@ shared main_story_task = None
         comms_navigate("//comms/")
 
 
+=== test_grid_promise
+    consoles = linked_to(artemis_id, "consoles")
+    gui_info_panel_send_message(consoles, "message one", time=5)
+
+
+    sick_bay = list(grid_objects(artemis_id) & role("sickbay"))
+    warp = list(grid_objects(artemis_id) & role("warp"))
+    sick_bay = sick_bay[0]
+    warp_id = warp[0]
+
+    t = grid_pos_data(sick_bay)
+    x = t[0]
+    y = t[1]
+
+    sab = grid_spawn(artemis_id, "?", "SABT", x, y, 119, "red", "#")
+
+    grid_target(sab, warp_id)
+    
+    p = await grid_arrive_id(sab, warp_id) 
+    print(f" Got there {p}")

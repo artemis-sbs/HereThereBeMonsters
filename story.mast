@@ -88,7 +88,7 @@ shared main_story_task = None
 
 # Using nebula as cards in a deck
     nebula_deck = maps_deck_create()
-    nebula_deck.add_card(prefab_terrain_nebula_sphere, {"density_scale": 1, "cluster_color": 1})
+    nebula_deck.add_card(prefab_terrain_nebula_sphere, {"density_scale": 1, "cluster_color": None})
 # Draw the skull and cross bones    
     tile_map.map_deck("n", nebula_deck)
 

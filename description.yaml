@@ -1,0 +1,10 @@
+#Every mission should have this file included.  It describes the mission for the mission list screen of the server.
+format version: 1
+
+Category: Remastered  # category for the mission; used for sorting and filtering the mission list
+Category Priority: D  # letter grade for the category; A grade categories appear at the top of the list
+Visible Mission Name: Here there be Monsters  # name of the mission as it appears in the mission list
+Description: A Remastered version  Here there be Monsters originally by Paul Rockwell
+Keywords: remaster, XML port
+
+

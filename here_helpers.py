@@ -1,5 +1,5 @@
-from sbs_utils.procedural.gui import gui_reroute_client, gui_info_panel_send_message
-from sbs_utils.procedural.comms import comms_override, comms_receive
+from sbs_utils.procedural.gui import gui_reroute_client
+from sbs_utils.procedural.comms import comms_override, comms_receive, comms_info_card, comms_info_clear
 from sbs_utils.procedural.links import linked_to
 from sbs_utils.procedural.roles import all_roles, role, any_role
 from sbs_utils.procedural.query import to_object
@@ -16,8 +16,7 @@ def here_info_panel_clear_comms(consoles="comms"):
     This is helper function to clear the info panel message 
     """
     cc = role(f"console") & any_role(consoles)
-    gui_info_panel_send_message(cc,path="message")
-    gui_info_panel_send_message(cc,path="ship_data", time=0)
+    comms_info_clear(cc)
 
 def here_comms_incoming_info_message(message, origin_id, selected_id=None, button=None, face=None, title=None, time = 0, consoles="comms"):
     """ This is a helper function to send a comms message as well as present a message in the info panel
@@ -50,7 +49,7 @@ def here_comms_incoming_info_message(message, origin_id, selected_id=None, butto
 
     consoles = linked_to(origin_id, "consoles") & role(f"console") & any_role(consoles)
 
-    return gui_info_panel_send_message(consoles, message, title=title, face=face, button=button, time=time)
+    return comms_info_card(consoles, message, title=title, face=face, button=button, time=time)
 
 def here_receive_info_message(message, origin_id, selected_id=None, face=None, title=None, time=0, audio=None):
     """ Receive a message on the INfo panel in comms
@@ -76,7 +75,7 @@ def here_receive_info_message(message, origin_id, selected_id=None, face=None, t
         comms_receive(message, title)
     # All Stations
     consoles = linked_to(origin_id, "consoles")
-    choice = gui_info_panel_send_message(consoles, message, title=title, face=face, time=time)
+    choice = comms_info_card(consoles, message, title=title, face=face, time=time)
 
     # play Audio file
     if audio is not None and get_shared_variable("HTBM_AUDIO_FILE_ENABLED", False):

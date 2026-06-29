@@ -424,7 +424,7 @@ shared main_story_task = None
 
     consoles = linked_to(artemis_id, "consoles") & all_roles("console, comms")
     message = "Update TSN Command about the Arvonian survivor."
-    choice = gui_info_panel_send_message(consoles, message, title="Next steps", icon_index=1, button="Update TSN Command", time=0)
+    choice = comms_info_card(consoles, message, title="Next steps", icon_index=1, button="Update TSN Command", time=0)
         
     pressed = await choice
 ## Clear message panel    
@@ -804,7 +804,7 @@ shared main_story_task = None
 
 === test_grid_promise
     consoles = linked_to(artemis_id, "consoles")
-    gui_info_panel_send_message(consoles, "message one", time=5)
+    comms_info_card(consoles, "message one", time=5)
 
 
     sick_bay = list(grid_objects(artemis_id) & role("sickbay"))

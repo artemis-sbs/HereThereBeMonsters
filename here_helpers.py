@@ -1,5 +1,8 @@
 from sbs_utils.procedural.gui import gui_reroute_client
 from sbs_utils.procedural.comms import comms_override, comms_receive, comms_info_card, comms_info_clear
+from sbs_utils.procedural.gui.overlay import (
+    overlay_lower_third, overlay_hero, overlay_banner, overlay_flash, overlay_clear)
+from sbs_utils.procedural.announce import announce_headline
 from sbs_utils.procedural.links import linked_to
 from sbs_utils.procedural.roles import all_roles, role, any_role
 from sbs_utils.procedural.query import to_object
@@ -47,6 +50,14 @@ def here_comms_incoming_info_message(message, origin_id, selected_id=None, butto
             msg = message  + " see info panel for interaction."
         comms_receive(msg, title=title)
 
+    # The card (with its button/promise) is the RECORD - it has history and is
+    # reconnect-safe, so it stays exactly as it was. The overlay is the ATTENTION
+    # half: the whole bridge sees a hail arrive, not just the comms console that
+    # happens to be looking at the info panel.
+    overlay_lower_third("INCOMING TRANSMISSION",
+                        announce_headline(title or message, 70),
+                        to=origin_id, seconds=8)
+
     consoles = linked_to(origin_id, "consoles") & role(f"console") & any_role(consoles)
 
     return comms_info_card(consoles, message, title=title, face=face, button=button, time=time)
@@ -77,8 +88,31 @@ def here_receive_info_message(message, origin_id, selected_id=None, face=None, t
     consoles = linked_to(origin_id, "consoles")
     choice = comms_info_card(consoles, message, title=title, face=face, time=time)
 
+    # Subtitles. The audio plays over a main screen that otherwise shows nothing,
+    # so put the speaker + line over the live view for as long as the card lasts.
+    # The full text stays on the card; this is a headline.
+    overlay_lower_third(announce_headline(title or "", 40),
+                        announce_headline(message, 90),
+                        to=origin_id, seconds=(time if time and time > 0 else 12))
+
     # play Audio file
     if audio is not None and get_shared_variable("HTBM_AUDIO_FILE_ENABLED", False):
         sbs.play_audio_file(0, get_mission_audio_file(audio), 1.0,1.0)
+
+
+def here_scene(title, subtitle=None, ship=None, seconds=4):
+    """A chapter card for a scene beat - the hero slot on every console of the
+    player ship. Cinematic only: it carries no facts the comms log doesn't."""
+    overlay_hero(title, subtitle=subtitle,
+                 to=(ship if ship is not None else get_shared_variable("artemis_id")),
+                 seconds=seconds)
+
+
+def here_system_break(system_name, ship=None):
+    """Sabotage punctuation: a hull-hit colour wash plus a banner naming the system
+    that just went down. The damage itself is the record, so there is no twin."""
+    to = ship if ship is not None else get_shared_variable("artemis_id")
+    overlay_flash("#f006", to=to)
+    overlay_banner(f"{system_name} OFFLINE", color="#f44", to=to, seconds=6)
 
 

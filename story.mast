@@ -257,6 +257,7 @@ shared main_story_task = None
     game_end_condition_add(destroyed_all(role("__player__")), "The TSN defenders have been destroyed.", False)
 
 
+
 #######################################
 # === scene_mission_briefing_start
 #######################################    
@@ -301,6 +302,7 @@ shared main_story_task = None
 #######################################
 --- scene_distress_call_one
 #######################################
+    here_scene("DISTRESS CALL", "An Arvonian liner is under attack", artemis_id)
     whale_watcher_sd = to_id(npc_spawn(*Vec3.from2x_coord(90_000, 10, 60_000), whale_watcher_name, "arvonian", "unknown", "behav_do_nothing"))
     shared whale_watcher_id = to_id(whale_watcher_sd)
     ww_obj = to_object(whale_watcher_sd)
@@ -345,6 +347,7 @@ shared main_story_task = None
     #jump approach if d > 6000
 # It is now close enough
 --- salvage
+    here_scene("SALVAGE", "Recovering the captains log", artemis_id)
 # Engin Rachel reports recovery
     message = "We scanned the ship and were able to salvage a captains log recording from the wreckage"
     choice = here_comms_incoming_info_message(message,artemis_id,ensign_rachel, title="Report on scan", button="Recover Recording", time=20)
@@ -450,6 +453,7 @@ shared main_story_task = None
 # Distress Call Two
 ############################
 --- scene_distress_call_two
+    here_scene("DISTRESS CALL", "TSN Dauntless", artemis_id)
 ############################
     # create the 
     #x="48000.0" y="10.0" z="70000.0"
@@ -515,6 +519,7 @@ shared main_story_task = None
     here_info_panel_clear_comms()
 
 --- strange_object
+    here_scene("UNKNOWN CONTACT", "Sensors cannot classify it", artemis_id)
     # x="48500.0" y="150.0" z="69500.0"
     strange_object_sd = npc_spawn(*Vec3.from2x_coord(48_500, 150, 69_500), "Strange Object", None, "alien_small_3b", "behav_do_nothing")
     shared strange_object_id = to_id(strange_object_sd)
@@ -561,6 +566,7 @@ shared main_story_task = None
 # Distress Call Three
 ############################
 --- scene_distress_call_three
+    here_scene("DISTRESS CALL", "The Odessa has gone silent", artemis_id)
 ############################
     # create the 
     #x="20000.0" y="10.0" z="50000.0"
@@ -632,6 +638,7 @@ shared main_story_task = None
 
 
 --- scene_web_trap
+    here_scene("ENSNARED", "Something has us", artemis_id)
     # create the 
     # x="22000.0" y="0.0" z="25000.0"
     # web_generator_sd = npc_spawn(*Vec3.from2x_coord(22_000, 0, 25_000), "Distress Call", "civ", "unknown", "behav_do_nothing")
@@ -669,6 +676,7 @@ shared main_story_task = None
 
 
 --- scene_hostage_message
+    here_scene("HOSTAGES", "They are not alone out here", artemis_id)
     # create the 
     # x="50000.0" y="15000.0" z="30000.0"
     hostage_station_sd = npc_spawn(*Vec3.from2x_coord(50_000, 1000, 30_000), "Distress Call", "civ", "unknown", "behav_do_nothing")
@@ -735,6 +743,7 @@ shared main_story_task = None
     await delay_sim(delay_time)
 
 --- sensor_array_break
+    here_system_break("SENSOR ARRAY", artemis_id)
     for x in range(4):
         grid_damage_system(artemis_id, sbs.SHPSYS.SENSORS)
     sbs.play_audio_file(0, get_mission_audio_file("audio/hullhit"), 1.0,1.0)
@@ -750,6 +759,7 @@ shared main_story_task = None
     
     await delay_sim(delay_time)
 --- weapons_break
+    here_system_break("FORWARD BEAMS", artemis_id)
     for x in range(8):
         grid_damage_system(artemis_id, sbs.SHPSYS.WEAPONS)
     sbs.play_audio_file(0, get_mission_audio_file("audio/hullhit"), 1.0,1.0)
@@ -767,6 +777,7 @@ shared main_story_task = None
     await delay_sim(delay_time)
 
 --- engine_break
+    here_system_break("ENGINES", artemis_id)
     for x in range(8):
         grid_damage_system(artemis_id, sbs.SHPSYS.ENGINES)
     sbs.play_audio_file(0, get_mission_audio_file("audio/hullhit"), 1.0,1.0)
@@ -783,6 +794,7 @@ shared main_story_task = None
     await delay_sim(delay_time)
 
 --- shields_break
+    here_system_break("SHIELDS", artemis_id)
     for x in range(8):
         grid_damage_system(artemis_id, sbs.SHPSYS.SHIELDS)
     sbs.play_audio_file(0, get_mission_audio_file("audio/hullhit"), 1.0,1.0)

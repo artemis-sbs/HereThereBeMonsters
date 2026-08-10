@@ -11,7 +11,8 @@ from sbs_utils.procedural.execution import get_shared_variable
 from sbs_utils.faces import get_face
 from sbs_utils.procedural.amd_doc import amd_document, amd_section
 from sbs_utils.procedural.amd_mission import amd_mission_data
-from sbs_utils.procedural.amd_dialogue import dialogue_scenes
+from sbs_utils.procedural.amd_dialogue import (dialogue_register_scenes,
+                                               dialogue_scenes)
 from sbs_utils.procedural.hail import hail_set_speaker_resolver
 from sbs_utils import fs
 import io
@@ -134,4 +135,7 @@ def here_dialogue_load():
                        title="Here There Be Monsters")
     _here_cast = dialogue_scenes(amd_section(doc, "cast"))
     hail_set_speaker_resolver(here_hail_speaker)
-    return dialogue_scenes(amd_section(doc, "messages"))
+    # REGISTERED, not just returned: a registered scene can be found by key alone, so a
+    # beat names one and nothing has to carry the dict around. The cast above is not
+    # registered - those are character records, not scenes.
+    return dialogue_register_scenes(amd_section(doc, "messages"))

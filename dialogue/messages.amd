@@ -1,0 +1,247 @@
+# [Here There Be Monsters](htbm)
+= Every voice in the mission, in the order the patrol hears them.
+
+The mission's narrative is a chain of incoming hails: TSN Command briefs you, three ships
+call for help and are gone by the time you arrive, and their recovered logs tell you what
+took them. Each is a scene here, and `story.mast` names one when the beat arrives.
+
+`Audio:` is the recorded line that plays with the message. `Subject:` is the ship the
+crew sees if they put the hail on the main screen - the wreck that is calling.
+
+## [Cast](cast)
+= Who speaks. Declared so a scene's `Speaker:` resolves to something, and so the voices
+= of this mission are readable in one place rather than inferred from story.mast.
+
+### [TSN Command](tsn_command)
+Fleet command, a long way off and out of sensor range for most of the patrol.
+
+### [Ensign Rachel](ensign_rachel)
+The Artemis's own science officer. Most of the mission's reports are hers.
+
+### [Medical Bay](medical_bay)
+The Artemis's sick bay, reporting on the survivor pulled from the escape pod.
+
+### [Whale Watcher 1](whale_watcher)
+An Arvonian luxury liner. The first ship to call, and already boarded when it does.
+
+### [TSN Dauntless](dauntless)
+A Terran bulk cargo hauler. Its log is the first account of what drains a ship.
+
+### [Odessa](odessa)
+A Terran science vessel that came here deliberately, to study the creatures.
+
+### [Unknown Vessel](wolf_spider)
+The thing that has been taking the ships. It answers a distress call once.
+
+### [Trapped Miners](hostages)
+Held for ransom, and put to work in the mines if nobody pays.
+
+## [Messages](messages)
+
+### [Mission Briefing](mission_briefing)
+---
+Speaker: tsn_command
+Title: Mission Briefing
+Audio: audio/SD01C0070
+Presentation: portrait
+---
+This is the "Skulls Refuge Nebula" and looks like you've drawn the short straw for tonights patrol. You are on the outskirts of Terran space, and the twin black holes cause havoc with our long range sensors so we don't know much about this sector.  Several ships traversing this sector have gone missing the last few months. Be on alert and find out whats happen to our ships.
+
+- [Play Message]()
+
+### [Whale Watcher Distress](whale_watcher_distress)
+= The first one. A liner, already boarded.
+---
+Speaker: whale_watcher
+Title: Distress Signal
+Audio: audio/SD01C0139
+Presentation: portrait
+---
+This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!.....
+
+- [Accept Message]()
+
+### [Salvage Report](salvage_report)
+---
+Speaker: ensign_rachel
+Title: Report on scan
+Presentation: portrait
+---
+We scanned the ship and were able to salvage a captains log recording from the wreckage
+
+- [Recover Recording]()
+
+### [Whale Watcher Log](whale_watcher_log)
+= What the liner's captain was saying when it found them.
+---
+Speaker: whale_watcher
+Title: Log playback
+Audio: audio/SD01C0135
+Presentation: portrait
+---
+Such a wondrous sight these space whales are so majestic. <static>  You there I don't believe we met.
+
+### [Shuttle Located](shuttle_located)
+---
+Speaker: ensign_rachel
+Title: Shuttle located
+Presentation: portrait
+---
+Damaged Shuttle located. One life sign onboard. Vitals are weak. Suggest we report it to TSN Command
+
+- [Contact TSN Command]()
+
+### [Survivor Recovered](survivor_recovered)
+---
+Speaker: medical_bay
+Title: Report on lifeform
+Audio: audio/SD02C0166
+Presentation: portrait
+---
+We have retrieved 1 Arvonian survivor from the Escape Pod.  They are undergoing medical treatment now.
+
+- [Accept Message]()
+
+### [Report The Survivor](report_survivor)
+---
+Speaker: ensign_rachel
+Title: Next steps
+Presentation: portrait
+---
+Update TSN Command about the Arvonian survivor.
+
+- [Update TSN Command]()
+
+### [Dauntless Distress](dauntless_distress)
+---
+Speaker: dauntless
+Title: Distress Call
+Audio: audio/SD01C0037
+Presentation: portrait
+---
+This is the Terran Bulk Cargo "Dauntless".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!.....
+
+- [Accept Message]()
+
+### [Dauntless Scan](dauntless_scan)
+---
+Speaker: ensign_rachel
+Title: Scan report
+Presentation: portrait
+---
+We scanned the ship and were are able to salvage a recording from the wreckage
+
+- [Recover Dauntless Log]()
+
+### [Dauntless Log](dauntless_log)
+= The first account of how it takes a ship: it drains the engines.
+---
+Speaker: dauntless
+Title: Log playback
+Audio: audio/SD01C0035
+Presentation: portrait
+---
+What is it? Not sure sir it looks like a beacon of some sort. Take us in for a closer look, there might be some salvage worth gathering?. Engineering, why did we lose power to engines? Captain, unknown vessel appeared behind us. Get us out of here! Can?t sir, something is draining our engines.
+
+### [Strange Object Sighted](strange_object_sighted)
+= One-way: no answer authored, so the hail offers its own Close.
+---
+Speaker: ensign_rachel
+Title: Report
+Presentation: portrait
+---
+Ensign Rachel Reporting: That Strange Object could give us clues to what happen to the Dauntless
+
+### [Web Generator Identified](web_generator)
+---
+Speaker: ensign_rachel
+Title: Strange object Report
+Presentation: portrait
+---
+Upon further study this Beacon is some sort of Warp field disruptor. We call it a Web Generator. You cannot travel at warp near it but impulse power should be unaffected. Contact TSN Command about the Web Generator.
+
+- [Contact TSN Command]()
+
+### [Odessa Distress](odessa_distress)
+---
+Speaker: odessa
+Title: Distress Call
+Audio: audio/SD02C0165
+Presentation: portrait
+---
+This is the Terran Science Vessel "Odessa".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!.....
+
+- [Accept Message]()
+
+### [Odessa Scan](odessa_scan)
+---
+Speaker: ensign_rachel
+Title: Scan report
+Presentation: portrait
+---
+We scanned the ship and were are able to salvage a recording from the wreckage
+
+- [Recover Odessa Science Log]()
+
+### [Odessa Science Log](odessa_log)
+= The scientist who came here on purpose, and why.
+---
+Speaker: odessa
+Title: Log playback
+Audio: audio/SD02C0164
+Presentation: portrait
+---
+Science officer's log 76.2. This sector of space has an unusually high concentration of stellar creatures. It is an ideal place to study their behaviors in more details.  The Piranhas in this sector have been exhibiting aggressive behavior.  More so than has ever been reported. I think this might be a breeding ground. There is not much known about the breeding habits of these piranhas. This is an excellent opportunity for research but I still need to convince the captain to let us take a closer look.   The last run in left our long range communication array slightly chewed.
+
+### [Report The Odessa](report_odessa)
+---
+Speaker: ensign_rachel
+Title: Update on Odessa
+Presentation: portrait
+---
+Contact TSN Command about Odessa sceince log.
+
+- [Contact TSN Command]()
+
+### [The Trap](wolf_spider_trap)
+= Not a distress call. The thing that has been taking them, answering one.
+---
+Speaker: wolf_spider
+Title: Help Response
+Audio: audio/SD01C0110
+Presentation: portrait
+---
+Look who has stumbled into my little trap I'll be there soon to help you out
+
+- [Accept Message]()
+
+### [Hostage Call](hostage_call)
+---
+Speaker: hostages
+Title: Help Response
+Audio: audio/A0001
+Presentation: portrait
+---
+Is there anyone out there? Help us they have us trapped here waiting for ransom.  And if no one pays we will be forced to work in the mines.
+
+- [Accept Message]()
+
+### [Report The Hostages](report_hostages)
+---
+Speaker: ensign_rachel
+Title: Hostage situation
+Presentation: portrait
+---
+We should notiify TSN command about this situation.
+
+- [Contact TSN Command]()
+
+### [Survivor Update](survivor_update)
+= One-way, and the turn of the mission: the survivor was the saboteur.
+---
+Speaker: medical_bay
+Title: Update on Survivor
+Audio: audio/SD02C0167
+Presentation: portrait
+---
+There was an incident in the Medbay and the Arvonian Survivor is missing!

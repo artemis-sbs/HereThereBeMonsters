@@ -10,6 +10,12 @@ import here_helpers.py
 PLAYER_CREATE_DEFAULT = False
 shared artemis_id = None
 
+# Every message in the mission is a scene in dialogue/messages.amd. This loads it once
+# and registers the speaker resolver, so a hail below names a scene and a voice and
+# nothing else - the words, the title, the audio file and the display name all live in
+# the document.
+shared HTBM_SCENES = here_dialogue_load()
+
 
 shared whale_watcher_face = random_arvonian()
 shared whale_watcher_id = None
@@ -278,13 +284,12 @@ shared main_story_task = None
 #######################################
 #--- mission_briefing_message
 #######################################
-    message = """This is the "Skulls Refuge Nebula" and looks like you've drawn the short straw for tonights patrol. You are on the outskirts of Terran space, and the twin black holes cause havoc with our long range sensors so we don't know much about this sector.  Several ships traversing this sector have gone missing the last few months. Be on alert and find out whats happen to our ships."""
 
 # ONE hail, where there used to be a notification, an await, and a message. The
 # "Incoming message" card existed only to say a message had arrived - the Incoming
 # Hails list says that now - and the button that acknowledged it is the hail's answer.
 # `await` blocks the story here exactly as `await choice` did.
-    await hail_ask(artemis_id, speaker="tsn_command", name="TSN Command", title="Mission Briefing", face=get_face(tsn_command), lines=message, choices=["Play Message"], audio="audio/SD01C0070")
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="mission_briefing", speaker="tsn_command")
 
 
 ##########################################################################################
@@ -312,8 +317,7 @@ shared main_story_task = None
     
 
 
-    message = """This is the Arvonian luxury liner "Whale Watcher 1".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
-    await hail_ask(artemis_id, speaker="whale_watcher", name="Whale Watcher 1", title="Distress Signal", face=get_face(whale_watcher_id), subject=whale_watcher_id, lines=message, choices=["Accept Message"], audio="audio/SD01C0139")
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="whale_watcher_distress", speaker="whale_watcher", subject=whale_watcher_id)
 
     link(artemis_id,"extra_scan_source" ,whale_watcher_id)
 
@@ -334,14 +338,12 @@ shared main_story_task = None
 --- salvage
     here_scene("SALVAGE", "Recovering the captains log", artemis_id)
 # Engin Rachel reports recovery
-    message = "We scanned the ship and were able to salvage a captains log recording from the wreckage"
-    await hail_ask(artemis_id, speaker="ensign_rachel", name="Ensign Rachel", title="Report on scan", face=get_face(ensign_rachel), lines=message, choices=["Recover Recording"])
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="salvage_report", speaker="ensign_rachel")
 #######################################
 #--- retrieve_recording
 #######################################
 --- shuttle
-    message = "Such a wondrous sight these space whales are so majestic. <static>  You there I don't believe we met."
-    await hail_ask(artemis_id, speaker="whale_watcher", name="Whale Watcher 1", title="Log playback", face=get_face(whale_watcher_id), lines=message, audio="audio/SD01C0135")
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="whale_watcher_log", speaker="whale_watcher")
     
     await delay_sim(13)
 
@@ -351,8 +353,7 @@ shared main_story_task = None
     
 
     await delay_sim(10)
-    message = "Damaged Shuttle located. One life sign onboard. Vitals are weak. Suggest we report it to TSN Command"
-    await hail_ask(artemis_id, speaker="ensign_rachel", name="Ensign Rachel", title="Shuttle located", face=get_face(ensign_rachel), lines=message, choices=["Contact TSN Command"])
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="shuttle_located", speaker="ensign_rachel")
 
     message = "Artemis to TSN Command, we are sending you the Whale Watcher Log. We have also discovered a shuttle with one life sign. Please Advise."
     with comms_override(artemis_id,tsn_command):
@@ -395,13 +396,11 @@ shared main_story_task = None
 #############################
 # This goes to just comms
 # medical bay update 1
-    message = "We have retrieved 1 Arvonian survivor from the Escape Pod.  They are undergoing medical treatment now. "
-    await hail_ask(artemis_id, speaker="medical_bay", name="Medical Bay", title="Report on lifeform", face=get_face(medical_bay_doctor), lines=message, choices=["Accept Message"], audio="audio/SD02C0166")
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="survivor_recovered", speaker="medical_bay")
 
     await delay_sim(13)
 
-    message = "Update TSN Command about the Arvonian survivor."
-    await hail_ask(artemis_id, speaker="ensign_rachel", name="Ensign Rachel", title="Next steps", face=get_face(ensign_rachel), lines=message, choices=["Update TSN Command"])
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="report_survivor", speaker="ensign_rachel")
 
     message = "Artemis to TSN Command, We have recovered one life form alive and they are in our medical bay receiving treatment."
     with comms_override(artemis_id, tsn_command):
@@ -448,8 +447,7 @@ shared main_story_task = None
 
 
 
-    message = """This is the Terran Bulk Cargo "Dauntless".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
-    await hail_ask(artemis_id, speaker="dauntless", name="TSN Dauntless", title="Distress Call", face=get_face(dauntless_id), subject=dauntless_id, lines=message, choices=["Accept Message"], audio="audio/SD01C0037")
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="dauntless_distress", speaker="dauntless", subject=dauntless_id)
 
     
 ## Loop until close to dauntless
@@ -465,11 +463,9 @@ shared main_story_task = None
 
     await delay_sim(5)
 
-    message = "We scanned the ship and were are able to salvage a recording from the wreckage"
-    await hail_ask(artemis_id, speaker="ensign_rachel", name="Ensign Rachel", title="Scan report", face=get_face(ensign_rachel), lines=message, choices=["Recover Dauntless Log"])
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="dauntless_scan", speaker="ensign_rachel")
 
-    message = """What is it? Not sure sir it looks like a beacon of some sort. Take us in for a closer look, there might be some salvage worth gathering?. Engineering, why did we lose power to engines? Captain, unknown vessel appeared behind us. Get us out of here! Can?t sir, something is draining our engines."""
-    await hail_ask(artemis_id, speaker="dauntless", name="TSN Dauntless", title="Log playback", face=get_face(dauntless_id), lines=message, audio="audio/SD01C0035")
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="dauntless_log", speaker="dauntless")
 
 --- strange_object
     here_scene("UNKNOWN CONTACT", "Sensors cannot classify it", artemis_id)
@@ -485,10 +481,9 @@ shared main_story_task = None
     strange_object_obj.engine_object.steer_roll =  0.001
     strange_object_obj.engine_object.blink_state = -3
 
-    message = "Ensign Rachel Reporting: That Strange Object could give us clues to what happen to the Dauntless"
 # No button on the old card, so no answer here either - a one-way report. The hail
 # offers its own Close, and the story does not wait for it.
-    hail_offer(artemis_id, speaker="ensign_rachel", name="Ensign Rachel", title="Report", face=get_face(ensign_rachel), lines=message)
+    hail_offer(artemis_id, scenes=HTBM_SCENES, scene="strange_object_sighted", speaker="ensign_rachel")
     await delay_sim(12)
 
 ## Loop until close to strange object
@@ -505,8 +500,7 @@ shared main_story_task = None
         strange.delete_object()
 
 --- strange_object_finish
-    message = """Upon further study this Beacon is some sort of Warp field disruptor. We call it a Web Generator. You cannot travel at warp near it but impulse power should be unaffected. Contact TSN Command about the Web Generator."""
-    await hail_ask(artemis_id, speaker="ensign_rachel", name="Ensign Rachel", face=get_face(ensign_rachel), title="Strange object Report", lines=message, choices=["Contact TSN Command"])
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="web_generator", speaker="ensign_rachel")
 
     with comms_override(ensign_rachel, tsn_command):
         comms_transmit("This Beacon is some sort of Warp field disruptor. We call it a Web Generator. You cannot travel at warp near it but impulse power should be unaffected", "Important discovery")
@@ -542,8 +536,7 @@ shared main_story_task = None
     pickup_spawn(*Vec3.from2x_coord(19000.0, -50.0, 50000.0), "hidens_powercell")
     #
 # Message from Odessa
-    message = """This is the Terran Science Vessel "Odessa".  We are under attack from an Unknown vessel... Engines...Boarding... Please Help!....."""
-    await hail_ask(artemis_id, speaker="odessa", name="Odessa", title="Distress Call", face=get_face(odessa_id), subject=odessa_id, lines=message, choices=["Accept Message"], audio="audio/SD02C0165")
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="odessa_distress", speaker="odessa", subject=odessa_id)
 
     
 ## Loop until close to odessa
@@ -555,15 +548,12 @@ shared main_story_task = None
         odessa.art_id = "science_ship"
 
 
-    message = "We scanned the ship and were are able to salvage a recording from the wreckage"
-    await hail_ask(artemis_id, speaker="ensign_rachel", name="Ensign Rachel", face=get_face(ensign_rachel), title="Scan report", lines=message, choices=["Recover Odessa Science Log"])
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="odessa_scan", speaker="ensign_rachel")
 
-    message = """Science officer's log 76.2. This sector of space has an unusually high concentration of stellar creatures. It is an ideal place to study their behaviors in more details.  The Piranhas in this sector have been exhibiting aggressive behavior.  More so than has ever been reported. I think this might be a breeding ground. There is not much known about the breeding habits of these piranhas. This is an excellent opportunity for research but I still need to convince the captain to let us take a closer look.   The last run in left our long range communication array slightly chewed."""
-    await hail_ask(artemis_id, speaker="odessa", name="Odessa", title="Log playback", face=get_face(odessa_id), lines=message, audio="audio/SD02C0164")
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="odessa_log", speaker="odessa")
 
 
-    message = """Contact TSN Command about Odessa sceince log."""
-    await hail_ask(artemis_id, speaker="ensign_rachel", name="Ensign Rachel", face=get_face(ensign_rachel), title="Update on Odessa", lines=message, choices=["Contact TSN Command"])
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="report_odessa", speaker="ensign_rachel")
 
     with comms_override(ensign_rachel, tsn_command):
         comms_transmit("Piranhas are a fearsome creature. But it doesn't look like Piranhas doomed the Odessa. Find out whats happening to these ships.", "Keep searching")
@@ -595,8 +585,7 @@ shared main_story_task = None
 
     await delay_sim(20)
 
-    message = """Look who has stumbled into my little trap I'll be there soon to help you out"""
-    await hail_ask(artemis_id, speaker="wolf_spider", name="Unknown Vessel", title="Help Response", face=get_face(wolf_spider), lines=message, choices=["Accept Message"], audio="audio/SD01C0110")
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="wolf_spider_trap", speaker="wolf_spider")
 
     await delay_sim(180)
 
@@ -612,13 +601,11 @@ shared main_story_task = None
     #set_face(web_generator_id, web_generator_face)
     
 
-    message = """Is there anyone out there? Help us they have us trapped here waiting for ransom.  And if no one pays we will be forced to work in the mines."""
-    await hail_ask(artemis_id, speaker="hostages", name="Distress Call", title="Help Response", face=get_face(ensign_rachel), subject=hostage_station_id, lines=message, choices=["Accept Message"], audio="audio/A0001")
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="hostage_call", speaker="hostages", subject=hostage_station_id)
 
     await delay_sim(23)
 
-    message = """We should notiify TSN command about this situation."""
-    await hail_ask(artemis_id, speaker="ensign_rachel", name="Ensign Rachel", face=get_face(ensign_rachel), title="Hostage situation", lines=message, choices=["Contact TSN Command"])
+    await hail_ask(artemis_id, scenes=HTBM_SCENES, scene="report_hostages", speaker="ensign_rachel")
 
     with comms_override(ensign_rachel, tsn_command):
         comms_transmit("A hostage situation! It is imperative that you rescue those hostages. Find where the hostages are located and launch marines to retrieve them.", "Rescue Hostages")
@@ -724,8 +711,7 @@ shared main_story_task = None
     +^1 "Back" //comms/comms_badge
     +"Status":
         saboteur_state = "missing"
-        message = """There was an incident in the Medbay and the Arvonian Survivor is missing!"""
-        hail_offer(artemis_id, speaker="medical_bay", name="Medical Bay", title="Update on Survivor", face=get_face(medical_bay_doctor), lines=message, audio="audio/SD02C0167")
+        hail_offer(artemis_id, scenes=HTBM_SCENES, scene="survivor_update", speaker="medical_bay")
         # Disable comms badge
         remove_role(medical_bay_doctor, "comms_badge")
         comms_navigate("//comms/")
